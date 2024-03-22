@@ -1,0 +1,2 @@
+to run the project cd into your terminal and copy paste this
+mvn clean javafx:run
