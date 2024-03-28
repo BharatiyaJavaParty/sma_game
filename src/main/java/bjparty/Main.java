@@ -1,5 +1,6 @@
 package bjparty;
 
+import bjparty.utility.Location;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main extends Application {
 
@@ -34,6 +37,27 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Map<Location, Integer> visited = new HashMap<Location, Integer>();
+        LocationsConfig.CITY_GRAPH.forEach(((location, locations) -> {
+            visited.put(location, 0);
+        }));
+        Queue<Location> q = new LinkedList<Location>();
+        q.add(LocationsConfig.TALAUGHT);
+        AtomicBoolean flag = new AtomicBoolean(true);
+        while(!q.isEmpty() && flag.get()){
+            Location temp = q.remove();
+            System.out.print(temp.getLocationName()+"+>");
+            LocationsConfig.CITY_GRAPH.get(temp).forEach((neighbour)->{
+                if(neighbour.equals(LocationsConfig.POINT)) {
+                    System.out.println(neighbour.getLocationName());
+                    flag.set(false);
+                }
+                if(visited.get(neighbour)==0){
+                    visited.replace(neighbour, 1);
+                    q.add(neighbour);
+                }
+            });
+        }
         launch();
     }
 }
