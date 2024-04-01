@@ -27,7 +27,7 @@ public class LocationsConfig {
             add(TransportConfig.BUS);
             add(TransportConfig.BIKE);
         }});
-    public static final Location TALAUGHT = new Location("Talaught",
+    public static final Location TALLAGHT = new Location("Tallaght",
                 53.2889,
                 -6.3572,
             new ArrayList<>(){{
@@ -56,12 +56,13 @@ public class LocationsConfig {
                 add(TransportConfig.BIKE);
             }});
 
+    //this map basically tells which location is connected to what other locations
     public static final Map<Location, ArrayList<Location>> CITY_GRAPH = new HashMap<>(){{
-        put(TALAUGHT, new ArrayList<>(){{
+        put(TALLAGHT, new ArrayList<>(){{
             add(SMITHFIELD);
         }});
         put(SMITHFIELD, new ArrayList<>(){{
-            add(TALAUGHT);
+            add(TALLAGHT);
             add(POINT);
             add(UCD);
             add(SANDYFORD);

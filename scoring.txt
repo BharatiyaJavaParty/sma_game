@@ -1,0 +1,5 @@
+[{(1,2),environment points - 40, time taken - 10s},{(2,5,3),environment points - 40, time taken - 20s}]
+
+priority 1 - more environment points
+priority 2 - less time
+priority 3 - more distance gets more priority

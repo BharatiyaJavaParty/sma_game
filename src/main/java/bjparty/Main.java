@@ -42,7 +42,7 @@ public class Main extends Application {
             visited.put(location, 0);
         }));
         Queue<Location> q = new LinkedList<Location>();
-        q.add(LocationsConfig.TALAUGHT);
+        q.add(LocationsConfig.TALLAGHT);
         AtomicBoolean flag = new AtomicBoolean(true);
         while(!q.isEmpty() && flag.get()){
             Location temp = q.remove();
@@ -61,3 +61,9 @@ public class Main extends Application {
         launch();
     }
 }
+
+//variables which should be common to runtime of the game
+//gemCount
+//time / timer
+//score
+//level
