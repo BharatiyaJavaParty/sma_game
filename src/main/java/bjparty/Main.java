@@ -1,6 +1,7 @@
 package bjparty;
 
 import bjparty.utility.Location;
+import bjparty.utility.Util;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,29 +37,31 @@ public class Main extends Application {
         return fxmlLoader.load();
     }
 
+
     public static void main(String[] args) {
-        Map<Location, Integer> visited = new HashMap<Location, Integer>();
-        LocationsConfig.CITY_GRAPH.forEach(((location, locations) -> {
-            visited.put(location, 0);
-        }));
-        Queue<Location> q = new LinkedList<Location>();
-        q.add(LocationsConfig.TALLAGHT);
-        AtomicBoolean flag = new AtomicBoolean(true);
-        while(!q.isEmpty() && flag.get()){
-            Location temp = q.remove();
-            System.out.print(temp.getLocationName()+"+>");
-            LocationsConfig.CITY_GRAPH.get(temp).forEach((neighbour)->{
-                if(neighbour.equals(LocationsConfig.POINT)) {
-                    System.out.println(neighbour.getLocationName());
-                    flag.set(false);
-                }
-                if(visited.get(neighbour)==0){
-                    visited.replace(neighbour, 1);
-                    q.add(neighbour);
-                }
-            });
+        //player and pokemon loaction random select
+        Util util = new Util();
+        Map<String, Location> res = util.getSourceAndDestination();
+        Location source = res.get("source");
+        Location destination = res.get("destination");
+        boolean flag = true;
+        Location location = source;
+        while(flag){
+            if(location.equals(destination)){
+                flag = false;
+            }
+            ArrayList<Location> l = util.getNeighbour(source);
+            for( Location i : l){
+            if(i==destination){
+                System.out.println("Reached");
+                break;
+            }
+            location = l.get(0);
+            System.out.println(i.getLocationName()+"=>");
         }
         launch();
+        }
+        
     }
 }
 

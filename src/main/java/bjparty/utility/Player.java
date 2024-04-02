@@ -7,10 +7,10 @@ public class Player {
     private int carbonFootprintBudget;
     private Location currentLocation;
 
-    public Player(String name, int carbonBudget, Location spawningLocation)
+    public Player(String name, Location spawningLocation)
     {
         this.playerName = name;
-        this.carbonFootprintBudget = carbonBudget;
+        this.carbonFootprintBudget = 1000;
         this.currentLocation = spawningLocation;
     }
 

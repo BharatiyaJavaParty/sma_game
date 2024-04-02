@@ -1,0 +1,12 @@
+Display gem on the map
+display location pointers on the map
+display player location on the map
+add mouse click handlers to play the game
+implement scoreboard
+implement saving of score in separate file
+implement environmental popups
+improve appearance of overall game
+
+
+
+player will traverse using intermediate nodes(class:- Main.java)
