@@ -9,24 +9,14 @@ import java.util.Map;
 
 public class LocationsConfig {
     
-    //This map will store array of available transport modes at each node of the map/ graph
-    //location string to be later replaced with location class objects
-
-//    public static final Map<String, ArrayList<String>> availableTransport = new HashMap<>(){{
-//        put("Location1", new ArrayList<>() {{add("BIKE"); add("LUAS"); add("BUS");}});
-//        put("Location2", new ArrayList<>() {{add("BIKE"); add("BUS");}});
-//        put("Location3", new ArrayList<>() {{add("BIKE"); add("LUAS");}});
-//        put("Location4", new ArrayList<>() {{add("BIKE");}});
-//        put("Location5", new ArrayList<>() {{add("BIKE"); add("LUAS"); add("BUS");}});
-//    }};
-        public static final Location SMITHFIELD = new Location("Smithfield",
-                53.3496,
-                -6.2782,
+    public static final Location SMITHFIELD = new Location("Smithfield",
+            53.3496,
+            -6.2782,
         new ArrayList<>(){{
             add(TransportConfig.LUAS);
             add(TransportConfig.BUS);
             add(TransportConfig.BIKE);
-        }});
+    }});
     public static final Location TALLAGHT = new Location("Tallaght",
                 53.2889,
                 -6.3572,

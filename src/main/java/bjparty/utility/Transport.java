@@ -3,24 +3,17 @@ package bjparty.utility;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Transport {
+public abstract class Transport
+{
     private String transportName;
     private Integer co2Emissions;
     private Integer transportSpeed;
+
 
     public Transport(String transportName, Integer co2Emissions, Integer transportSpeed) {
         this.transportName = transportName;
         this.co2Emissions = co2Emissions;
         this.transportSpeed = transportSpeed;
-    }
-
-    @Override
-    public String toString() {
-        return "Transport{" +
-                "transportName='" + transportName + '\'' +
-                ", co2Emissions=" + co2Emissions +
-                ", transportSpeed=" + transportSpeed +
-                '}';
     }
 
     public String getTransportName() {

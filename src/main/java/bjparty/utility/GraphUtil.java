@@ -11,7 +11,7 @@ import bjparty.LocationsConfig;
 import java.util.Map;
 import java.util.Queue;
 
-public class Util {
+public class GraphUtil {
         /*
      * @return Map<String, Location>
      * @desc This function returns a map of source and destination. To get source key is "source"
@@ -58,4 +58,9 @@ public class Util {
         return LocationsConfig.CITY_GRAPH.get(location);
     }
 
+    public Double GetDistance(Location location1, Location location2)
+    {
+        //this function should calculate coordinate diistance between two locations
+        return 0.0;
+    }
 }

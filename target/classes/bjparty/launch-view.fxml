@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bjparty.controller.LaunchController">
+   <children>
+      <VBox spacing="20" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Button fx:id="newGameButton" text="New Game" onAction="#newGameButtonClicked"/>
+            <Button fx:id="scoreboardButton" text="Scoreboard" onAction="#scoreboardButtonClicked"/>
+         </children>
+      </VBox>
+   </children>
+</GridPane>

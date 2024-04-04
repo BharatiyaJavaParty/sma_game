@@ -1,7 +1,7 @@
 package bjparty;
 
 import bjparty.utility.Location;
-import bjparty.utility.Util;
+import bjparty.utility.GraphUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,7 +40,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         //player and pokemon loaction random select
-        Util util = new Util();
+        GraphUtil util = new GraphUtil();
         Map<String, Location> res = util.getSourceAndDestination();
         Location source = res.get("source");
         Location destination = res.get("destination");
