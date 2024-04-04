@@ -1,49 +1,22 @@
 package bjparty.utility;
 
-import java.util.ArrayList;
 
 public class Location {
     private String locationName;
-    private Double locationLat;
-    private Double locationLng;
-    private ArrayList<Transport> transportOptionList;
+    private int xOrdinate;
+    private int yOrdinate;
 
-    public ArrayList<Transport> getTransportOptionList() {
-        return transportOptionList;
-    }
-
-    public void setTransportOptionList(ArrayList<Transport> transportOptionList) {
-        this.transportOptionList = transportOptionList;
-    }
-
-    public Location(String locationName, Double locationLat, Double locationLng, ArrayList<Transport> transportOptionList) {
+    public Location(String locationName, int xOrdinate, int yOrdinate) {
         this.locationName = locationName;
-        this.locationLat = locationLat;
-        this.locationLng = locationLng;
-        this.transportOptionList = transportOptionList;
+        this.xOrdinate = xOrdinate;
+        this.yOrdinate = yOrdinate;
     }
 
-    public String getLocationName() {
-        return locationName;
+    public int getX() {
+        return xOrdinate;
     }
 
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
-    }
-
-    public Double getLocationLat() {
-        return locationLat;
-    }
-
-    public void setLocationLat(Double locationLat) {
-        this.locationLat = locationLat;
-    }
-
-    public Double getLocationLng() {
-        return locationLng;
-    }
-
-    public void setLocationLng(Double locationLng) {
-        this.locationLng = locationLng;
+    public int getY() {
+        return yOrdinate;
     }
 }

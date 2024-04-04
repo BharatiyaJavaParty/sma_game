@@ -1,2 +1,15 @@
 to run the project cd into your terminal and copy paste this
 mvn clean javafx:run
+
+
+sma_game
+└── src
+    ├── main
+    │   ├── java
+    │   │   ├── bjparty
+    │   │   │   ├── controller
+    │   │   │   ├── utility
+    │   │   │   └── main.java
+    │   │   └── module-info.java
+    │   └── resources
+    │       └── bjparty
