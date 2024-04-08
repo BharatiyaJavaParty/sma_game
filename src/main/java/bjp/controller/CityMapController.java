@@ -22,12 +22,12 @@ public class CityMapController {
     @FXML
     private void initialize() {
         generateGrid(ROWS, COLS);
-        Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);
         Bus.makeBusRoad(StaticTransportConfig.BUS1, StaticTransportConfig.BUS1_STOPS, cityMapGrid);
         Bus.makeBusRoad(StaticTransportConfig.BUS2, StaticTransportConfig.BUS2_STOPS, cityMapGrid);
+        Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);
         Gem.placeGem(cityMapGrid);
         Player.placePlayer(cityMapGrid);
-        cityMapGrid.setGridLinesVisible(true);
+        // cityMapGrid.setGridLinesVisible(true);
 
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();

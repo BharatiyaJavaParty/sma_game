@@ -3,12 +3,18 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.HashMap;
 
 import bjp.utility.Location;
 
 public class Bus extends StaticTransport{
+    private static final Image roadHori = new Image(Luas.class.getResourceAsStream("/img/road-hori.png"));
+    private static final Image roadConn = new Image(Luas.class.getResourceAsStream("/img/road-conn.png"));
+    private static final Image roadVerti = new Image(Luas.class.getResourceAsStream("/img/road-verti.png"));
+    private static final Image busStop = new Image(Luas.class.getResourceAsStream("/img/bus-stop.png"));
 
     public Bus(String transportName, double co2Emissions, double speed, HashMap<Location, Location> stops) {
         super(transportName, co2Emissions, speed, stops);
@@ -21,7 +27,7 @@ public class Bus extends StaticTransport{
         }
 
         for (Location stop : busStops.keySet()) {
-            bus.fillGridCell(grid, stop.getX(), stop.getY(), Color.BLACK);
+            bus.fillGridCellWithImage(grid, stop.getX(), stop.getY(), busStop);
         }
     }
 
@@ -37,14 +43,35 @@ public class Bus extends StaticTransport{
         int minY = Math.min(startY, endY);
         int maxY = Math.max(startY, endY);
 
-        Color roadColor = Color.YELLOW;
-
         for (int x = minX; x <= maxX; x++) {
-            fillGridCell(grid, x, startY, roadColor);
+            if (x == minX || x == maxX) {
+                fillGridCellWithImage(grid, x, startY, roadConn);
+            }
+            else{
+                fillGridCellWithImage(grid, x, startY, roadVerti);
+            }
         }
 
         for (int y = minY; y <= maxY; y++) {
-            fillGridCell(grid, endX, y, roadColor);
+            if (y == minY || y == maxY){
+                fillGridCellWithImage(grid, endX, y, roadConn);
+            }
+            else{
+                fillGridCellWithImage(grid, endX, y, roadHori);
+            }
+        }
+    }
+
+    public void fillGridCellWithImage(GridPane grid, int row, int col, Image roadImage) {
+        Node node = getNodeFromGridPane(grid, col, row);
+        if (node instanceof ImageView) {
+            ((ImageView) node).setImage(roadImage);
+        } else {
+            ImageView imageView = new ImageView(roadImage);
+            imageView.setFitWidth(20);
+            imageView.setFitHeight(20);
+            imageView.setSmooth(true);
+            grid.add(imageView, col, row);
         }
     }
 

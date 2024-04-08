@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/bjparty/CityMap.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/bjp/CityMap.fxml"));
         primaryStage.setTitle("City Map");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

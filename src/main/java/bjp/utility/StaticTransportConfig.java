@@ -11,9 +11,9 @@ public class StaticTransportConfig {
     public static final HashMap<Location, Location> LUAS_STOPS = new HashMap<Location, Location>() {{
         put(new Location("Phibsborough", 3, 3), new Location("Parnell", 9, 14));
         put(new Location("Parnell", 9, 14), new Location("Abbey Street", 14, 15));
-        put(new Location("Abbey Street", 14, 15), new Location("Trinity", 20, 15));
-        put(new Location("Trinity", 20, 15), new Location("Dawson", 25, 16));
-        put(new Location("Dawson", 25, 16), new Location("UCD", 27, 24));
+        put(new Location("Abbey Street", 14, 15), new Location("Trinity", 20, 16));
+        put(new Location("Trinity", 20, 16), new Location("Dawson", 25, 17));
+        put(new Location("Dawson", 25, 17), new Location("UCD", 27, 24));
         put(new Location("UCD", 27, 24), new Location("UCD", 27, 24));
     }};
 
