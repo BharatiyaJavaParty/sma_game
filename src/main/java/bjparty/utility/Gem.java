@@ -8,12 +8,14 @@ import javafx.scene.shape.Rectangle;
 import java.util.Random;
 
 public class Gem {
+    public static int gemX;
+    public static int gemY;
     public static void placeGem(GridPane cityMapGrid ) {
 
         // Generate random coordinates for the gem
         Random random = new Random();
-        int gemX = random.nextInt(CityMapController.COLS);
-        int gemY = random.nextInt(CityMapController.ROWS);
+        gemX = random.nextInt(CityMapController.COLS);
+        gemY = random.nextInt(CityMapController.ROWS);
 
         // Create a rectangle representing the gem
         Rectangle gemRect = new Rectangle(20, 20);

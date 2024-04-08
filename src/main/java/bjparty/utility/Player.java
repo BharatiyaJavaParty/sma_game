@@ -8,8 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Player {
-    private static int playerX;
-    private static int playerY;
+    public static int playerX;
+    public static int playerY;
     private static Rectangle playerRect;
 
     // Initialize the player on the grid

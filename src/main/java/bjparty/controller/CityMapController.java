@@ -6,6 +6,9 @@ import bjparty.utility.Luas;
 import bjparty.utility.Bus;
 import bjparty.utility.Gem;
 import bjparty.utility.Player;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -26,7 +29,7 @@ public class CityMapController {
         Bus.makeBusRoad(cityMapGrid, Bus.Bus2);
         Gem.placeGem(cityMapGrid);
         Player.placePlayer(cityMapGrid);
-        cityMapGrid.setGridLinesVisible(true);
+        cityMapGrid.setGridLinesVisible(false);
 
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
@@ -49,6 +52,13 @@ public class CityMapController {
                     break;
             }
             event.consume();
+        });
+
+        cityMapGrid.setOnKeyReleased(event->{
+            if(Player.playerX == Gem.gemX && Player.playerY== Gem.gemY){
+                System.out.println("Win");
+                System.exit(0);
+            }
         });
     }
 
