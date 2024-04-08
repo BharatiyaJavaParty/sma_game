@@ -5,6 +5,7 @@ import bjparty.utility.NonRandomSquare;
 import bjparty.utility.Luas;
 import bjparty.utility.Bus;
 import bjparty.utility.Gem;
+import bjparty.utility.Player;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -16,18 +17,39 @@ public class CityMapController {
 
     public static final int ROWS = 30;
     public static final int COLS = 30;
-
+    
     @FXML
     private void initialize() {
         generateGrid(ROWS, COLS);
-        // RandomSquare.colorRandomSquare(cityMapGrid, ROWS, COLS);
-        // NonRandomSquare.colorSpecificSquare(cityMapGrid, 5, 20);
         Luas.makeLuasLane(cityMapGrid);
         Bus.makeBusRoad(cityMapGrid, Bus.Bus1);
         Bus.makeBusRoad(cityMapGrid, Bus.Bus2);
         Gem.placeGem(cityMapGrid);
-        cityMapGrid.setGridLinesVisible(true); // Show grid lines
+        Player.placePlayer(cityMapGrid);
+        cityMapGrid.setGridLinesVisible(true);
 
+        cityMapGrid.setFocusTraversable(true);
+        cityMapGrid.requestFocus();
+    
+        cityMapGrid.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case UP:
+                    Player.movePlayer(cityMapGrid, 0, -1);
+                    break;
+                case DOWN:
+                    Player.movePlayer(cityMapGrid, 0, 1);
+                    break;
+                case LEFT:
+                    Player.movePlayer(cityMapGrid, -1, 0);
+                    break;
+                case RIGHT:
+                    Player.movePlayer(cityMapGrid, 1, 0);
+                    break;
+                default:
+                    break;
+            }
+            event.consume();
+        });
     }
 
     private void generateGrid(int rows, int cols) {
