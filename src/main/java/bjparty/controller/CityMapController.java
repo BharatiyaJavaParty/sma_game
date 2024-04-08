@@ -1,6 +1,7 @@
 package bjparty.controller;
 
 import bjparty.utility.RandomSquare;
+import bjparty.utility.StaticTransportConfig;
 import bjparty.utility.NonRandomSquare;
 import bjparty.utility.Luas;
 import bjparty.utility.Bus;
@@ -21,9 +22,9 @@ public class CityMapController {
     @FXML
     private void initialize() {
         generateGrid(ROWS, COLS);
-        Luas.makeLuasLane(cityMapGrid);
-        Bus.makeBusRoad(cityMapGrid, Bus.Bus1);
-        Bus.makeBusRoad(cityMapGrid, Bus.Bus2);
+        Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);
+        Bus.makeBusRoad(StaticTransportConfig.BUS1, StaticTransportConfig.BUS1_STOPS, cityMapGrid);
+        Bus.makeBusRoad(StaticTransportConfig.BUS2, StaticTransportConfig.BUS2_STOPS, cityMapGrid);
         Gem.placeGem(cityMapGrid);
         Player.placePlayer(cityMapGrid);
         cityMapGrid.setGridLinesVisible(true);
