@@ -1,4 +1,4 @@
-package bjparty.utility;
+package bjp.utility;
 
 
 public class Location {

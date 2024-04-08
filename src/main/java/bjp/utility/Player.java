@@ -1,8 +1,9 @@
-package bjparty.utility;
+package bjp.utility;
 
 
 import java.util.Random;
-import bjparty.controller.CityMapController;
+
+import bjp.controller.CityMapController;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

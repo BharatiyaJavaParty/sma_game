@@ -1,4 +1,4 @@
-package bjparty.utility;
+package bjp.utility;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;

@@ -1,14 +1,12 @@
-package bjparty.controller;
+package bjp.controller;
 
-import bjparty.utility.RandomSquare;
-import bjparty.utility.NonRandomSquare;
-import bjparty.utility.Luas;
-import bjparty.utility.Bus;
-import bjparty.utility.Gem;
-import bjparty.utility.Player;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
+import bjp.utility.Bus;
+import bjp.utility.Gem;
+import bjp.utility.Luas;
+import bjp.utility.NonRandomSquare;
+import bjp.utility.Player;
+import bjp.utility.RandomSquare;
+import bjp.utility.StaticTransportConfig;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -24,12 +22,12 @@ public class CityMapController {
     @FXML
     private void initialize() {
         generateGrid(ROWS, COLS);
-        Luas.makeLuasLane(cityMapGrid);
-        Bus.makeBusRoad(cityMapGrid, Bus.Bus1);
-        Bus.makeBusRoad(cityMapGrid, Bus.Bus2);
+        Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);
+        Bus.makeBusRoad(StaticTransportConfig.BUS1, StaticTransportConfig.BUS1_STOPS, cityMapGrid);
+        Bus.makeBusRoad(StaticTransportConfig.BUS2, StaticTransportConfig.BUS2_STOPS, cityMapGrid);
         Gem.placeGem(cityMapGrid);
         Player.placePlayer(cityMapGrid);
-        cityMapGrid.setGridLinesVisible(false);
+        cityMapGrid.setGridLinesVisible(true);
 
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
@@ -52,13 +50,6 @@ public class CityMapController {
                     break;
             }
             event.consume();
-        });
-
-        cityMapGrid.setOnKeyReleased(event->{
-            if(Player.playerX == Gem.gemX && Player.playerY== Gem.gemY){
-                System.out.println("Win");
-                System.exit(0);
-            }
         });
     }
 

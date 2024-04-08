@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjparty.controller.CityMapController">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjp.controller.CityMapController">
     <GridPane fx:id="cityMapGrid" hgap="0" vgap="0">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>

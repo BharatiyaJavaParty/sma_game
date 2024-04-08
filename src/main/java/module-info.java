@@ -1,8 +1,8 @@
-module bjparty {
+module bjp{
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
 
-    opens bjparty.controller to javafx.fxml;
-    exports bjparty;
+    opens bjp.controller to javafx.fxml;
+    exports bjp;
 }

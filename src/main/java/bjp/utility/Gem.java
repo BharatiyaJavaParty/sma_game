@@ -1,11 +1,12 @@
-package bjparty.utility;
+package bjp.utility;
 
-import bjparty.controller.CityMapController;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
+
+import bjp.controller.CityMapController;
 
 public class Gem {
     public static int gemX;

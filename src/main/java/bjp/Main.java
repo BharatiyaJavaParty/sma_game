@@ -1,4 +1,4 @@
-package bjparty;
+package bjp;
 
 import bjparty.utility.Gem;
 import bjparty.utility.Player;
