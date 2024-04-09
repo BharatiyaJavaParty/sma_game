@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Player {
@@ -40,8 +42,8 @@ public class Player {
         playerX += deltaX;
         playerY += deltaY;
 
-        playerX = Math.min(Math.max(playerX, 0), CityMapController.COLS - 1);
-        playerY = Math.min(Math.max(playerY, 0), CityMapController.ROWS - 1);
+        playerX = Math.min(Math.max(playerX, 0), CityMapController.COLS );
+        playerY = Math.min(Math.max(playerY, 0), CityMapController.ROWS );
         cityMapGrid.add(playerView, playerX, playerY);
     }
 
@@ -69,9 +71,24 @@ public class Player {
         }
     }
 
+// Sort the list of Location objects
+public static void sortLocationList(List<Location> myLocationList) {
+    Collections.sort(myLocationList, new Comparator<Location>() {
+        @Override
+        public int compare(Location o1, Location o2) {
+            int result = Double.compare(o1.getX(), o2.getX());
+            if (result == 0) {
+                result = Double.compare(o1.getY(), o2.getY());
+            }
+            return result;
+        }
+    });
+}
+
     public static  ArrayList<Location> checkTransportOptionsAndMove(GridPane cityMapGrid) {
         ArrayList<Location> res = new ArrayList<Location>();
         List<Location> keysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
+        Player.sortLocationList(keysAsList);
         final Location[] currentStation = {null};
         final Location[] nextStation = {null};
         final Location[] previousStation = {null};
