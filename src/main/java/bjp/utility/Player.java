@@ -132,10 +132,10 @@ public class Player {
                 if (key.getX() == playerX && key.getY() == playerY) {
                     currentStation = key;
                     if (i + 1 < luasKeysAsList.size()) {
-                        nextStation = StaticTransportConfig.LUAS_STOPS.get(key);
+                        nextStation = StaticTransportConfig.LUAS_STOPS.get(key).getValue();
                     }
                     if (i > 0) {
-                        previousStation = luasKeysAsList.get(i - 1);
+                        previousStation = StaticTransportConfig.LUAS_STOPS.get(key).getKey();
                     }
                     break;
                 }
@@ -166,10 +166,10 @@ public class Player {
                 if (key.getX() == playerX && key.getY() == playerY) {
                     currentStation = key;
                     if (i + 1 < bus1KeysAsList.size()) {
-                        nextStation = StaticTransportConfig.BUS1_STOPS.get(key);
+                        nextStation = StaticTransportConfig.BUS1_STOPS.get(key).getValue();
                     }
                     if (i > 0) {
-                        previousStation = bus1KeysAsList.get(i - 1);
+                        previousStation = StaticTransportConfig.BUS1_STOPS.get(key).getKey();
                     }
                     break;
                 }
@@ -199,10 +199,10 @@ public class Player {
                 if (key.getX() == playerX && key.getY() == playerY) {
                     currentStation = key;
                     if (i + 1 < bus2KeysAsList.size()) {
-                        nextStation = StaticTransportConfig.BUS2_STOPS.get(key);
+                        nextStation = StaticTransportConfig.BUS2_STOPS.get(key).getValue();
                     }
                     if (i > 0) {
-                        previousStation = bus2KeysAsList.get(i - 1);
+                        previousStation = StaticTransportConfig.BUS2_STOPS.get(key).getKey();
                     }
                     break;
                 }
