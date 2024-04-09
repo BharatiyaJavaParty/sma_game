@@ -1,7 +1,10 @@
 package bjp.controller;
 
+import java.util.ArrayList;
+
 import bjp.utility.Bus;
 import bjp.utility.Gem;
+import bjp.utility.Location;
 import bjp.utility.Luas;
 import bjp.utility.NonRandomSquare;
 import bjp.utility.Player;
@@ -46,6 +49,7 @@ public class CityMapController {
     }
 
     public static void mainEventHandler(GridPane cityMapGrid){
+        final ArrayList<Location> res = new ArrayList<>();
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
         cityMapGrid.setOnKeyPressed(event -> {
@@ -62,9 +66,20 @@ public class CityMapController {
                 case RIGHT:
                     Player.movePlayer(cityMapGrid, 1, 0);
                     break;
-                case KeyCode.ENTER:
+                case ENTER:
                     if (Player.foundTransport){
-                        Player.checkTransportOptionsAndMove(cityMapGrid);
+                        res.clear();
+                        res.addAll(Player.checkTransportOptionsAndMove(cityMapGrid));
+                    }
+                    break;
+                case N:
+                    if (!res.isEmpty() && res.get(0) != null) {
+                        Player.movePlayerToStation(cityMapGrid, res.get(0));
+                    }
+                    break;
+                case P:
+                    if (res.size() > 1 && res.get(1) != null) {
+                        Player.movePlayerToStation(cityMapGrid, res.get(1));
                     }
                     break;
                 default:

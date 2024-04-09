@@ -69,7 +69,8 @@ public class Player {
         }
     }
 
-    public static void checkTransportOptionsAndMove(GridPane cityMapGrid) {
+    public static  ArrayList<Location> checkTransportOptionsAndMove(GridPane cityMapGrid) {
+        ArrayList<Location> res = new ArrayList<Location>();
         List<Location> keysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
         final Location[] currentStation = {null};
         final Location[] nextStation = {null};
@@ -98,32 +99,10 @@ public class Player {
                 System.out.println("Press 'P' for Previous Station: " + previousStation[0].getLocationName());
             }
         }
-    
-        cityMapGrid.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.N && nextStation[0] != null) {
-                movePlayerToStation(cityMapGrid, nextStation[0]);
-            } else if (keyEvent.getCode() == KeyCode.P && previousStation[0] != null) {
-                movePlayerToStation(cityMapGrid, previousStation[0]);
-            } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
-                System.out.println("Travel cancelled.");
-            } else {
-                System.out.println("Invalid choice.");
-            }
-            keyEvent.consume();
-        });
-        cityMapGrid.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.N && nextStation[0] != null) {
-                movePlayerToStation(cityMapGrid, nextStation[0]);
-            } else if (keyEvent.getCode() == KeyCode.P && previousStation[0] != null) {
-                movePlayerToStation(cityMapGrid, previousStation[0]);
-            } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
-                System.out.println("Travel cancelled.");
-            } else {
-                System.out.println("Invalid choice.");
-            }
-            keyEvent.consume();
-        });
-        CityMapController.mainEventHandler(cityMapGrid);
+
+        res.add(nextStation[0]);
+        res.add(previousStation[0]);
+        return res;
     }
     
 
