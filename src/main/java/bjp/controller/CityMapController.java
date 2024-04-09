@@ -10,6 +10,7 @@ import bjp.utility.StaticTransportConfig;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 
 public class CityMapController {
@@ -29,9 +30,23 @@ public class CityMapController {
         Player.placePlayer(cityMapGrid);
         // cityMapGrid.setGridLinesVisible(true);
 
+        CityMapController.mainEventHandler(cityMapGrid);
+    }
+
+    private void generateGrid(int rows, int cols) {
+        cityMapGrid.getChildren().clear();
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                Rectangle rect = new Rectangle(20, 20);
+                rect.setFill(Color.WHITE);
+                cityMapGrid.add(rect, col, row);
+            }
+        }
+    }
+
+    public static void mainEventHandler(GridPane cityMapGrid){
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
-    
         cityMapGrid.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case UP:
@@ -46,22 +61,16 @@ public class CityMapController {
                 case RIGHT:
                     Player.movePlayer(cityMapGrid, 1, 0);
                     break;
+                case KeyCode.ENTER:
+                    if (Player.foundTransport){
+                        Player.checkTransportOptionsAndMove(cityMapGrid);
+                    }
+                    break;
                 default:
                     break;
             }
             Player.checkTransportOptions(cityMapGrid);
             event.consume();
         });
-    }
-
-    private void generateGrid(int rows, int cols) {
-        cityMapGrid.getChildren().clear();
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                Rectangle rect = new Rectangle(20, 20);
-                rect.setFill(Color.WHITE);
-                cityMapGrid.add(rect, col, row);
-            }
-        }
     }
 }

@@ -21,6 +21,10 @@ public class Location {
         return yOrdinate;
     }
 
+    public String getLocationName() {
+        return locationName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
