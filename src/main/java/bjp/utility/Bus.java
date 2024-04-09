@@ -48,7 +48,7 @@ public class Bus extends StaticTransport{
                 fillGridCellWithImage(grid, x, startY, roadConn);
             }
             else{
-                fillGridCellWithImage(grid, x, startY, roadVerti);
+                fillGridCellWithImage(grid, x, startY, roadHori);
             }
         }
 
@@ -57,12 +57,12 @@ public class Bus extends StaticTransport{
                 fillGridCellWithImage(grid, endX, y, roadConn);
             }
             else{
-                fillGridCellWithImage(grid, endX, y, roadHori);
+                fillGridCellWithImage(grid, endX, y, roadVerti);
             }
         }
     }
 
-    public void fillGridCellWithImage(GridPane grid, int row, int col, Image roadImage) {
+    public void fillGridCellWithImage(GridPane grid, int col, int row, Image roadImage) {
         Node node = getNodeFromGridPane(grid, col, row);
         if (node instanceof ImageView) {
             ((ImageView) node).setImage(roadImage);

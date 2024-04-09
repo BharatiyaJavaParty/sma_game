@@ -4,6 +4,8 @@ package bjp.utility;
 import java.util.Random;
 
 import bjp.controller.CityMapController;
+import bjp.utility.StaticTransportConfig;
+
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,4 +39,28 @@ public class Player {
         playerY = Math.min(Math.max(playerY, 0), CityMapController.ROWS - 1);
         cityMapGrid.add(playerView, playerX, playerY);
     }
+
+    public static void checkTransportOptions(GridPane cityMapGrid) {
+        boolean foundTransport = false;
+    
+        if (StaticTransportConfig.isPlayerAtLuasStop(playerX, playerY)) {
+            System.out.println("Player is at a LUAS stop.");
+            foundTransport = true;
+        }
+    
+        else if (StaticTransportConfig.isPlayerAtBus1Stop(playerX, playerY)) {
+            System.out.println("Player is at a Bus1 stop.");
+            foundTransport = true;
+        }
+    
+        else if (StaticTransportConfig.isPlayerAtBus2Stop(playerX, playerY)) {
+            System.out.println("Player is at a Bus2 stop.");
+            foundTransport = true;
+        }
+    
+        if (!foundTransport) {
+            System.out.println("Player is not at any transport stop.");
+        }
+    }
+    
 }

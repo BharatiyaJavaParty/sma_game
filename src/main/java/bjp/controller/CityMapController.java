@@ -49,16 +49,17 @@ public class CityMapController {
                 default:
                     break;
             }
+            Player.checkTransportOptions(cityMapGrid);
             event.consume();
         });
     }
 
     private void generateGrid(int rows, int cols) {
-        cityMapGrid.getChildren().clear(); // Clear existing content if any
+        cityMapGrid.getChildren().clear();
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 Rectangle rect = new Rectangle(20, 20);
-                rect.setFill(Color.WHITE); // Default color
+                rect.setFill(Color.WHITE);
                 cityMapGrid.add(rect, col, row);
             }
         }
