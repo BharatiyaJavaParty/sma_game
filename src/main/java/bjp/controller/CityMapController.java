@@ -31,6 +31,7 @@ public class CityMapController {
         // cityMapGrid.setGridLinesVisible(true);
 
         CityMapController.mainEventHandler(cityMapGrid);
+
     }
 
     private void generateGrid(int rows, int cols) {
@@ -70,6 +71,13 @@ public class CityMapController {
                     break;
             }
             Player.checkTransportOptions(cityMapGrid);
+            event.consume();
+        });
+        cityMapGrid.setOnKeyReleased(event->{
+            if(Player.playerX == Gem.gemX && Player.playerY==Gem.gemY){
+                System.err.println("Win");
+                System.exit(0);
+            }
             event.consume();
         });
     }

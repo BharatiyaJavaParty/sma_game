@@ -8,11 +8,13 @@ import java.util.Random;
 import bjp.controller.CityMapController;
 
 public class Gem {
+    public static int gemX;
+    public static int gemY;
     private static final Image gem = new Image(Gem.class.getResourceAsStream("/img/gem.png"));
     public static void placeGem(GridPane cityMapGrid ) {
         Random random = new Random();
-        int gemX = random.nextInt(CityMapController.COLS);
-        int gemY = random.nextInt(CityMapController.ROWS);
+        gemX  = random.nextInt(CityMapController.COLS);
+        gemY = random.nextInt(CityMapController.ROWS);
 
         ImageView imageView = new ImageView(gem);
         imageView.setFitWidth(20);

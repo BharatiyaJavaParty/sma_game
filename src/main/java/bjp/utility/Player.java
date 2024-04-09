@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private static int playerX;
-    private static int playerY;
+    public static int playerX;
+    public static int playerY;
     public static boolean foundTransport = false;
     private static ImageView playerView;
     private static final Image gem = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
