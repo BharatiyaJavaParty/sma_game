@@ -1,5 +1,6 @@
 package bjp.utility;
 
+import java.util.Objects;
 
 public class Location {
     private String locationName;
@@ -18,5 +19,22 @@ public class Location {
 
     public int getY() {
         return yOrdinate;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return xOrdinate == location.xOrdinate && yOrdinate == location.yOrdinate;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xOrdinate, yOrdinate);
     }
 }
