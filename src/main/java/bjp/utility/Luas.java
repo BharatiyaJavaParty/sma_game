@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Pair;
 
 public class Luas extends StaticTransport{
     
@@ -18,13 +19,13 @@ public class Luas extends StaticTransport{
     private static final Image trackTopCurve = new Image(Luas.class.getResourceAsStream("/img/train-top-curve.png"));
     private static final Image luasStop = new Image(Luas.class.getResourceAsStream("/img/luas-stop.png"));
     
-    public Luas(String transportName, double co2Emissions, double speed, HashMap<Location, Location> stops) {
+    public Luas(String transportName, double co2Emissions, double speed, HashMap<Location,Pair<Location, Location>> stops) {
         super(transportName, co2Emissions, speed, stops);
     }
 
-    public static void makeLuasLane(Luas luas, HashMap<Location,Location> luasStops, GridPane grid) {
+    public static void makeLuasLane(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) {
         for (Location start : luasStops.keySet()) {
-            Location end = luasStops.get(start);
+            Location end = luasStops.get(start).getValue();
             luas.drawRoad(start, end, grid);
         }
 

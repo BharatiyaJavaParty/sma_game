@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javafx.util.Pair;
+
 public class StaticTransportConfig {
     private static final Set<Location> LUAS_STOPS_SET = new HashSet<>();
     private static final Set<Location> BUS1_STOPS_SET = new HashSet<>();
@@ -13,27 +15,48 @@ public class StaticTransportConfig {
     //creating hashmaps which contain information about how stops of different transport options like bus, luas etc connect 
     //to each other
 
-    public static final HashMap<Location, Location> LUAS_STOPS = new HashMap<Location, Location>() {{
-        put(new Location("Phibsborough", 3, 3), new Location("Parnell", 9, 14));
-        put(new Location("Parnell", 9, 14), new Location("Abbey Street", 14, 15));
-        put(new Location("Abbey Street", 14, 15), new Location("Trinity", 20, 16));
-        put(new Location("Trinity", 20, 16), new Location("Dawson", 25, 17));
-        put(new Location("Dawson", 25, 17), new Location("UCD", 27, 24));
-        put(new Location("UCD", 27, 24), new Location("UCD", 27, 24));
+
+    public static final Location Bus1_Stop1 = new Location("Croke Park", 5, 20);
+    public static final Location Bus1_Stop2 = new Location("Mayor Square", 10, 21);
+    public static final Location Bus1_Stop3 = new Location("Ballsbridge", 17, 17);
+    public static final Location Bus1_Stop4 = new Location("Donnybrook", 25, 20);
+
+    public static final Location Bus2_Stop1 = new Location("UCD", 28, 25);
+    public static final Location Bus2_Stop2 = new Location("Miltown", 27, 17);
+    public static final Location Bus2_Stop3 = new Location("Rathmines", 29, 9);
+    public static final Location Bus2_Stop4 = new Location("Rialto", 16, 1);
+
+    public static final Location Luas_stop1 = new Location("Phibsborough", 3, 3);
+    public static final Location Luas_stop2 = new Location("Parnell", 9, 14);
+    public static final Location Luas_stop3 = new Location("Abbey Street", 14, 15);
+    public static final Location Luas_stop4 = new Location("Trinity", 20, 15);
+    public static final Location Luas_stop5 = new Location("Dawson", 25, 16);
+    public static final Location Luas_stop6 = new Location("UCD", 27, 24);
+
+// this hashmap contains a location and pair of its previousLocation and nextLocation
+//getKey gives previous station 
+//getValue gives next station
+    public static final HashMap<Location, Pair<Location,Location>> LUAS_STOPS = new HashMap<Location, Pair<Location,Location>>() {{
+        put(Luas_stop1,new Pair<Location,Location>(Luas_stop1, Luas_stop2));
+        put(Luas_stop2, new Pair<Location,Location>(Luas_stop1, Luas_stop3));
+        put(Luas_stop3, new Pair<Location,Location>(Luas_stop2, Luas_stop4));
+        put(Luas_stop4, new Pair<Location,Location>(Luas_stop3, Luas_stop5));
+        put(Luas_stop5, new Pair<Location,Location>(Luas_stop4, Luas_stop6));
+        put(Luas_stop6, new Pair<Location,Location>(Luas_stop5, Luas_stop6));
     }};
 
-    public static final HashMap<Location, Location> BUS1_STOPS = new HashMap<Location, Location>(){{
-        put(new Location("Croke Park", 5, 20),new Location("Mayor Square", 10, 21));
-        put(new Location("Mayor Square", 10, 21),new Location("Ballsbridge", 17, 17));
-        put(new Location("Ballsbridge", 17, 17),new Location("Donnybrook", 25, 20));
-        put(new Location("Donnybrook", 25, 20),new Location("Donnybrook", 25, 20));
+    public static final HashMap<Location, Pair<Location,Location>> BUS1_STOPS = new HashMap<Location, Pair<Location,Location>>(){{
+        put(Bus1_Stop1,new Pair<Location,Location>(Bus1_Stop1, Bus1_Stop2));
+        put(Bus1_Stop2,new Pair<Location,Location>(Bus1_Stop1, Bus1_Stop3));
+        put(Bus1_Stop3,new Pair<Location,Location>(Bus1_Stop2, Bus1_Stop4));
+        put(Bus1_Stop4,new Pair<Location,Location>(Bus1_Stop3, Bus1_Stop4));
     }};
 
-    public static final HashMap<Location, Location> BUS2_STOPS = new HashMap<Location, Location>() {{
-        put( new Location("UCD", 28, 25), new Location("Miltown", 27, 17));
-        put(new Location("Miltown", 27, 17), new Location("Rathmines", 29, 9));
-        put(new Location("Rathmines", 29, 9), new Location("Rialto", 16, 1));
-        put(new Location("Rialto", 16, 1), new Location("Rialto", 16, 1));
+    public static final HashMap<Location, Pair<Location,Location>> BUS2_STOPS = new HashMap<Location, Pair<Location,Location>>() {{
+        put(Bus2_Stop1, new Pair<Location,Location>(Bus2_Stop1, Bus2_Stop2));
+        put(Bus2_Stop2, new Pair<Location,Location>(Bus2_Stop1, Bus2_Stop3));
+        put(Bus2_Stop3, new Pair<Location,Location>(Bus2_Stop2, Bus2_Stop4));
+        put(Bus2_Stop4, new Pair<Location,Location>(Bus2_Stop3, Bus2_Stop4));
     }}; 
 
     public static final Luas LUAS = new Luas("Luas", 75.0, 50.0, LUAS_STOPS);
@@ -46,9 +69,12 @@ public class StaticTransportConfig {
         addAllStops(BUS2_STOPS, BUS2_STOPS_SET);
     }
 
-    private static void addAllStops(Map<Location, Location> stopsMap, Set<Location> stopsSet) {
+    private static void addAllStops(Map<Location, Pair<Location, Location>> stopsMap, Set<Location> stopsSet) {
         stopsSet.addAll(stopsMap.keySet());
-        stopsSet.addAll(stopsMap.values());
+        for (Pair<Location, Location> pair : stopsMap.values()) {
+            stopsSet.add(pair.getKey());
+            stopsSet.add(pair.getValue());
+        }
     }
     
     public static boolean isPlayerAtLuasStop(int playerX, int playerY) {

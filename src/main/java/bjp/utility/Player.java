@@ -56,39 +56,24 @@ public class Player {
             foundTransport = true;
         }
     
-        if (StaticTransportConfig.isPlayerAtBus1Stop(playerX, playerY)) {
-            System.out.println("Player is at a Bus1 stop.");
-            foundTransport = true;
-        }
+        // if (StaticTransportConfig.isPlayerAtBus1Stop(playerX, playerY)) {
+        //     System.out.println("Player is at a Bus1 stop.");
+        //     foundTransport = true;
+        // }
     
-        if (StaticTransportConfig.isPlayerAtBus2Stop(playerX, playerY)) {
-            System.out.println("Player is at a Bus2 stop.");
-            foundTransport = true;
-        }
+        // if (StaticTransportConfig.isPlayerAtBus2Stop(playerX, playerY)) {
+        //     System.out.println("Player is at a Bus2 stop.");
+        //     foundTransport = true;
+        // }
     
         if (!foundTransport) {
             System.out.println("Player is not at any transport stop.");
         }
     }
 
-// Sort the list of Location objects
-public static void sortLocationList(List<Location> myLocationList) {
-    Collections.sort(myLocationList, new Comparator<Location>() {
-        @Override
-        public int compare(Location o1, Location o2) {
-            int result = Double.compare(o1.getX(), o2.getX());
-            if (result == 0) {
-                result = Double.compare(o1.getY(), o2.getY());
-            }
-            return result;
-        }
-    });
-}
-
     public static  ArrayList<Location> checkTransportOptionsAndMove(GridPane cityMapGrid) {
         ArrayList<Location> res = new ArrayList<Location>();
         List<Location> keysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
-        Player.sortLocationList(keysAsList);
         final Location[] currentStation = {null};
         final Location[] nextStation = {null};
         final Location[] previousStation = {null};
@@ -97,8 +82,8 @@ public static void sortLocationList(List<Location> myLocationList) {
             Location key = keysAsList.get(i);
             if (key.getX() == playerX && key.getY() == playerY) {
                 currentStation[0] = key;
-                if (i + 1 < keysAsList.size()) nextStation[0] = StaticTransportConfig.LUAS_STOPS.get(key);
-                if (i > 0) previousStation[0] = keysAsList.get(i - 1);
+                if (i + 1 < keysAsList.size()) nextStation[0] = StaticTransportConfig.LUAS_STOPS.get(key).getValue();
+                if (i > 0) previousStation[0] = StaticTransportConfig.LUAS_STOPS.get(key).getKey();
                 break;
             }
         }

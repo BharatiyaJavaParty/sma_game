@@ -5,15 +5,16 @@ import java.util.HashMap;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.Node;
+import javafx.util.Pair;
 
 //abstract class which serves as parent for Bus, Luas, Dart etc
 public abstract class StaticTransport {
     private String transportName;
     private double co2Emissions;
     private double speed;
-    private HashMap<Location,Location> stops;
+    private HashMap<Location,Pair<Location, Location>> stops;
     
-    public StaticTransport(String transportName, double co2Emissions, double speed, HashMap<Location, Location> stops) {
+    public StaticTransport(String transportName, double co2Emissions, double speed, HashMap<Location,Pair<Location, Location>> stops) {
         this.transportName = transportName;
         this.co2Emissions = co2Emissions;
         this.speed = speed;

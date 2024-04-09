@@ -3,6 +3,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Pair;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -16,13 +17,13 @@ public class Bus extends StaticTransport{
     private static final Image roadVerti = new Image(Luas.class.getResourceAsStream("/img/road-verti.png"));
     private static final Image busStop = new Image(Luas.class.getResourceAsStream("/img/bus-stop.png"));
 
-    public Bus(String transportName, double co2Emissions, double speed, HashMap<Location, Location> stops) {
-        super(transportName, co2Emissions, speed, stops);
+    public Bus(String transportName, double co2Emissions, double speed, HashMap<Location, Pair<Location, Location>> bus1Stops) {
+        super(transportName, co2Emissions, speed, bus1Stops);
     }
 
-    public static void makeBusRoad(Bus bus, HashMap<Location, Location> busStops, GridPane grid) {
+    public static void makeBusRoad(Bus bus, HashMap<Location, Pair<Location, Location>> busStops, GridPane grid) {
         for (Location start : busStops.keySet()) {
-            Location end = busStops.get(start);
+            Location end = busStops.get(start).getValue();
             bus.drawRoad(start, end, grid);
         }
 

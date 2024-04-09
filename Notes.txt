@@ -14,3 +14,6 @@ sma_game
     │   └── resources
     │       ├── bjp
     │       └── img
+
+
+Try to implemet key to pair of stops for luas and bus stops
