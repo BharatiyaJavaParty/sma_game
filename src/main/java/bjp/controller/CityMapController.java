@@ -15,11 +15,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.StackPane;
+import bjp.controller.PopupController;
 
 public class CityMapController {
     @FXML
     private GridPane cityMapGrid;
-
+    @FXML
+    private StackPane cityMainStack;
     public static final int ROWS = 30;
     public static final int COLS = 30;
     
@@ -29,11 +32,12 @@ public class CityMapController {
         Bus.makeBusRoad(StaticTransportConfig.BUS1, StaticTransportConfig.BUS1_STOPS, cityMapGrid);
         Bus.makeBusRoad(StaticTransportConfig.BUS2, StaticTransportConfig.BUS2_STOPS, cityMapGrid);
         Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);
-        Gem.placeGem(cityMapGrid);
+        Gem.placeGem(cityMainStack, cityMapGrid);
         Player.placePlayer(cityMapGrid);
         // cityMapGrid.setGridLinesVisible(true);
+        PopupController.show_popup_message(cityMainStack, "Welcome to Joels World");
 
-        CityMapController.mainEventHandler(cityMapGrid);
+        CityMapController.mainEventHandler(cityMainStack, cityMapGrid);
 
     }
 
@@ -48,23 +52,23 @@ public class CityMapController {
         }
     }
 
-    public static void mainEventHandler(GridPane cityMapGrid){
+    public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid){
         final ArrayList<Location> res = new ArrayList<>();
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
         cityMapGrid.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case UP:
-                    Player.movePlayer(cityMapGrid, 0, -1);
+                    Player.movePlayer(cityMainStack,cityMapGrid, 0, -1);
                     break;
                 case DOWN:
-                    Player.movePlayer(cityMapGrid, 0, 1);
+                    Player.movePlayer(cityMainStack, cityMapGrid, 0, 1);
                     break;
                 case LEFT:
-                    Player.movePlayer(cityMapGrid, -1, 0);
+                    Player.movePlayer(cityMainStack, cityMapGrid, -1, 0);
                     break;
                 case RIGHT:
-                    Player.movePlayer(cityMapGrid, 1, 0);
+                    Player.movePlayer(cityMainStack, cityMapGrid, 1, 0);
                     break;
                 case ENTER:
                     if (Player.foundTransport){
@@ -85,7 +89,7 @@ public class CityMapController {
                 default:
                     break;
             }
-            Player.checkTransportOptions(cityMapGrid);
+            Player.checkTransportOptions(cityMainStack,cityMapGrid);
             event.consume();
         });
         cityMapGrid.setOnKeyReleased(event->{

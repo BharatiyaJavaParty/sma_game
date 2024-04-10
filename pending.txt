@@ -10,3 +10,9 @@ improve appearance of overall game
 
 
 player will traverse using intermediate nodes(class:- Main.java)
+
+Joel Sajan
+
+1. Creating an info box with showcasing the icons
+2. Need a complete script to take the player through the controlls
+3.
