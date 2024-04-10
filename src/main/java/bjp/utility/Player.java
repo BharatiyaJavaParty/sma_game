@@ -43,10 +43,10 @@ public class Player {
         playerX = Math.min(Math.max(playerX, 0), CityMapController.COLS );
         playerY = Math.min(Math.max(playerY, 0), CityMapController.ROWS );
         cityMapGrid.add(playerView, playerX, playerY);
-        check_gem_collected(cityMainStack, cityMapGrid);
+        checkGemCollected(cityMainStack, cityMapGrid);
     }
 
-    public static void check_gem_collected(StackPane cityMainStack, GridPane cityMapGrid)
+    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid)
     {
         if (Gem.gemX == playerX && Gem.gemY == playerY)
         {

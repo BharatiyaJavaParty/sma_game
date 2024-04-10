@@ -27,7 +27,7 @@ public class CityMapController {
         Gem.placeGem(cityMainStack, cityMapGrid);
         Player.placePlayer(cityMapGrid);
         // cityMapGrid.setGridLinesVisible(true);
-        PopupController.show_popup_message(cityMainStack, "Welcome to Joels World");
+        PopupController.show_popup_message(cityMainStack, "Welcome to Gem World");
 
         CityMapController.mainEventHandler(cityMainStack, cityMapGrid);
 
