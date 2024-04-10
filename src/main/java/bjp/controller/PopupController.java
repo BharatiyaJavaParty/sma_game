@@ -11,7 +11,7 @@ import javafx.animation.PauseTransition;
 
 public class PopupController {
 
-    public static void show_popup_message(StackPane layoutPane, String message) {
+    public static void show_popup_message(StackPane cityMainStack, String message) {
         Label messageLabel = new Label("");
         messageLabel.setFont(new Font("Arial", 16)); // Example font and size
         messageLabel.setAlignment(Pos.CENTER);
@@ -26,10 +26,10 @@ public class PopupController {
                         "-fx-text-fill: black;");  // Text color
 
         // Remove previous message labels if they exist
-        layoutPane.getChildren().removeIf(node -> node instanceof Label);
+        cityMainStack.getChildren().removeIf(node -> node instanceof Label);
 
         // Add the message label to the StackPane, overlaying the GridPane
-        layoutPane.getChildren().add(messageLabel);
+        cityMainStack.getChildren().add(messageLabel);
         StackPane.setAlignment(messageLabel, Pos.TOP_CENTER); // Align the label at the top center of the StackPane
 
         final int[] charIndex = {0};
@@ -43,7 +43,7 @@ public class PopupController {
         timeline.setOnFinished(event -> {
             // Hide the message after 2 seconds
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished(delayEvent -> layoutPane.getChildren().remove(messageLabel));
+            delay.setOnFinished(delayEvent -> cityMainStack.getChildren().remove(messageLabel));
             delay.play();
         });
         timeline.play();

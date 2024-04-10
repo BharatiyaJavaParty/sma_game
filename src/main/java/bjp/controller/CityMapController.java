@@ -1,22 +1,14 @@
 package bjp.controller;
 
-import java.util.ArrayList;
-
-import bjp.utility.Bus;
-import bjp.utility.Gem;
-import bjp.utility.Location;
-import bjp.utility.Luas;
-import bjp.utility.NonRandomSquare;
-import bjp.utility.Player;
-import bjp.utility.RandomSquare;
-import bjp.utility.StaticTransportConfig;
+import bjp.utility.*;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.input.KeyCode;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.StackPane;
-import bjp.controller.PopupController;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
+
 
 public class CityMapController {
     @FXML
