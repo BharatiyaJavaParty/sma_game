@@ -21,6 +21,16 @@ public class Location {
         return yOrdinate;
     }
 
+    public void setX(int xCoordinate)
+    {
+        this.xOrdinate = xCoordinate; 
+    }
+
+    public void setY(int yCoordinate)
+    {
+        this.yOrdinate = yCoordinate;
+    }
+
     public String getLocationName() {
         return locationName;
     }

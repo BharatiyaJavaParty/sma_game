@@ -4,10 +4,12 @@ package bjp.utility;
 import java.util.Random;
 
 import bjp.controller.CityMapController;
+import bjp.controller.PopupController;
 import bjp.utility.StaticTransportConfig;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.Map;
@@ -17,8 +19,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Player {
-    public static int playerX;
-    public static int playerY;
+    public static Location playerLocation;
+    private static int gemCount;
     public static boolean foundTransport = false;
     public static boolean atLuas = false;
     public static boolean atBus1 = false;
@@ -29,53 +31,70 @@ public class Player {
     // Initialize the player on the grid
     public static void placePlayer(GridPane cityMapGrid) {
         Random random = new Random();
-        playerX = random.nextInt(CityMapController.COLS);
-        playerY = random.nextInt(CityMapController.ROWS);
+        playerLocation.setX(random.nextInt(CityMapController.COLS));
+        playerLocation.setY(random.nextInt(CityMapController.ROWS));
 
         playerView = new ImageView(gem);
         playerView.setFitWidth(20);
         playerView.setFitHeight(20);
         playerView.setSmooth(true);
 
-        cityMapGrid.add(playerView, playerX, playerY);
+        cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
     }
 
-    public static void movePlayer(GridPane cityMapGrid, int deltaX, int deltaY) {
+    public static void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY) {
         cityMapGrid.getChildren().remove(playerView);
-        playerX += deltaX;
-        playerY += deltaY;
+        playerLocation.setX(playerLocation.getX()+deltaX);
+        playerLocation.setY(playerLocation.getY()+deltaY);
+        // playerY += deltaY;
 
-        playerX = Math.min(Math.max(playerX, 0), CityMapController.COLS );
-        playerY = Math.min(Math.max(playerY, 0), CityMapController.ROWS );
-        cityMapGrid.add(playerView, playerX, playerY);
+        playerLocation.setX(Math.min(Math.max(playerLocation.getX(), 0), CityMapController.COLS ));
+        playerLocation.setY(Math.min(Math.max(playerLocation.getY(), 0), CityMapController.COLS ));
+        // playerY = Math.min(Math.max(playerY, 0), CityMapController.ROWS );
+        cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+        checkGemCollected(cityMainStack, cityMapGrid);
     }
 
-    public static void checkTransportOptions(GridPane cityMapGrid) {
+    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid)
+    {
+        if (Gem.gemLocation.getX() == playerLocation.getX() && Gem.gemLocation.getY() == playerLocation.getY())
+        {
+            Gem.placeGem(cityMainStack, cityMapGrid);
+            gemCount = gemCount+1;
+            PopupController.show_popup_message(cityMainStack, "You have collected " + String.valueOf(gemCount) + " Gems!");
+        }
+    }
+
+    public static void checkTransportOptions(StackPane cityMainStack, GridPane cityMapGrid) {
         foundTransport = false;
         atLuas = false;
         atBus1 = false;
         atBus2 = false;
     
-        if (StaticTransportConfig.isPlayerAtLuasStop(playerX, playerY)) {
+        if (StaticTransportConfig.isPlayerAtLuasStop(playerLocation.getX(), playerLocation.getY())) {
             System.out.println("Player is at a LUAS stop.");
             System.out.println("Want to travel in LUAS?");
+            PopupController.show_popup_message(cityMainStack, "Player is at a Luas stop.");
             foundTransport = true;
             atLuas = true;
         }
     
-        if (StaticTransportConfig.isPlayerAtBus1Stop(playerX, playerY)) {
+        if (StaticTransportConfig.isPlayerAtBus1Stop(playerLocation.getX(), playerLocation.getY())) {
             System.out.println("Player is at a Bus1 stop.");
+            PopupController.show_popup_message(cityMainStack, "Player is at a Bus1 stop.");
             foundTransport = true;
             atBus1 = true;
         }
     
-        if (StaticTransportConfig.isPlayerAtBus2Stop(playerX, playerY)) {
+        if (StaticTransportConfig.isPlayerAtBus2Stop(playerLocation.getX(), playerLocation.getY())) {
             System.out.println("Player is at a Bus2 stop.");
+            PopupController.show_popup_message(cityMainStack, "Player is at a Bus2 stop.");
             foundTransport = true;
             atBus2 = true;
         }
     
         if (!foundTransport) {
+            PopupController.show_popup_message(cityMainStack, "Player is not at any transport stop.");
             System.out.println("Player is not at any transport stop.");
         }
     }
@@ -89,7 +108,7 @@ public class Player {
     
         for (int i = 0; i < keysAsList.size(); i++) {
             Location key = keysAsList.get(i);
-            if (key.getX() == playerX && key.getY() == playerY) {
+            if (key.getX() == playerLocation.getX() && key.getY() == playerLocation.getY()) {
                 currentStation[0] = key;
                 if (i + 1 < keysAsList.size()) nextStation[0] = StaticTransportConfig.LUAS_STOPS.get(key).getValue();
                 if (i > 0) previousStation[0] = StaticTransportConfig.LUAS_STOPS.get(key).getKey();
@@ -129,7 +148,7 @@ public class Player {
         if(atLuas==true && (atBus1==false && atBus2==false)){
             for (int i = 0; i < luasKeysAsList.size(); i++) {
                 Location key = luasKeysAsList.get(i);
-                if (key.getX() == playerX && key.getY() == playerY) {
+                if (key.getX() == playerLocation.getX() && key.getY() == playerLocation.getY()) {
                     currentStation = key;
                     if (i + 1 < luasKeysAsList.size()) {
                         nextStation = StaticTransportConfig.LUAS_STOPS.get(key).getValue();
@@ -163,7 +182,7 @@ public class Player {
         else if(atBus1==true && (atLuas==false && atBus2==false)){
             for (int i = 0; i < bus1KeysAsList.size(); i++) {
                 Location key = bus1KeysAsList.get(i);
-                if (key.getX() == playerX && key.getY() == playerY) {
+                if (key.getX() == playerLocation.getX() && key.getY() == playerLocation.getY()) {
                     currentStation = key;
                     if (i + 1 < bus1KeysAsList.size()) {
                         nextStation = StaticTransportConfig.BUS1_STOPS.get(key).getValue();
@@ -196,7 +215,7 @@ public class Player {
         else if(atBus2==true && (atLuas==false && atBus1==false)){
             for (int i = 0; i < bus2KeysAsList.size(); i++) {
                 Location key = bus2KeysAsList.get(i);
-                if (key.getX() == playerX && key.getY() == playerY) {
+                if (key.getX() == playerLocation.getX() && key.getY() == playerLocation.getY()) {
                     currentStation = key;
                     if (i + 1 < bus2KeysAsList.size()) {
                         nextStation = StaticTransportConfig.BUS2_STOPS.get(key).getValue();
@@ -232,9 +251,9 @@ public class Player {
 
     public static void movePlayerToStation(GridPane cityMapGrid, Location station) {
         cityMapGrid.getChildren().remove(playerView);
-        playerX = station.getX();
-        playerY = station.getY();
-        cityMapGrid.add(playerView, playerX, playerY);
+        playerLocation.setX(station.getX());
+        playerLocation.setY(station.getY());
+        cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
     }
     
 }
