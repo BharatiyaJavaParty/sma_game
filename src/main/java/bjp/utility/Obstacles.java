@@ -12,7 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Pair;
 
-public class Obstacles {2
+public class Obstacles {
     private static final Set<Location> Tree_SET = new HashSet<>();
     private static final Image gem = new Image(Gem.class.getResourceAsStream("/img/tree.png"));
     public static ImageView imageView;
