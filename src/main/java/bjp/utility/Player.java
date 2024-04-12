@@ -19,8 +19,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Player {
-    private static Location playerLocation;
-    private static int gemCount;
+    public static Location playerLocation;
+    public static int gemCount;
     public static boolean foundTransport = false;
     public static boolean atLuas = false;
     public static boolean atBus1 = false;
@@ -106,6 +106,8 @@ public class Player {
         }
     
         if (!foundTransport) {
+            // PopupController.showPopupMessage(cityMainStack, "Player is not at any transport stop.");
+            System.out.println("Player is not at any transport stop.");
             PopupController.showPopupMessage(cityMainStack, "Player is not at any transport stop.");
             // System.out.println("Player is not at any transport stop.");
         }

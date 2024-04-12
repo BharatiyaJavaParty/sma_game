@@ -21,7 +21,7 @@ public class Gem {
         gemLocation = newLocation;
     }
 
-    public static void placeGem(StackPane cityMainStack, GridPane cityMapGrid ) {
+    public static void placeGem(StackPane cityMainStack, GridPane cityMapGrid) {
         Random random = new Random();
         // gemLocation.setX(random.nextInt(CityMapController.COLS)) ;
         // gemLocation.setY(random.nextInt(CityMapController.ROWS));

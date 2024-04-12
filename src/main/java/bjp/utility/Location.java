@@ -35,6 +35,11 @@ public class Location {
         this.yOrdinate = yCoordinate;
     }
 
+    public void setLocationName(String yCoordinate)
+    {
+        this.locationName = yCoordinate;
+    }
+
     public String getLocationName() {
         return locationName;
     }
