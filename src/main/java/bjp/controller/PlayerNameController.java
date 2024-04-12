@@ -14,10 +14,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import bjp.Main;
+import bjp.utility.GameEngine;
 import bjp.utility.Player;
 
 
 public class PlayerNameController {
+
+    public String newPlayerName;
 
     @FXML
     private TextField textField;
@@ -26,7 +29,7 @@ public class PlayerNameController {
     public void okButtonClicked() {
        try
        {
-            Player.setPlayerName(textField.getText());
+            GameEngine.newPlayer.setPlayerName(textField.getText());
             Main.setRoot("CityMap");
        }
        catch(Exception e)

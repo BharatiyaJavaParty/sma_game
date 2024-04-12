@@ -5,19 +5,20 @@ import java.util.HashMap;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.util.Pair;
 
 //abstract class which serves as parent for Bus, Luas, Dart etc
 public abstract class StaticTransport {
     private String transportName;
     private double co2Emissions;
-    private double speed;
+    private long timeTakenPerGrid;
     private HashMap<Location,Pair<Location, Location>> stops;
     
-    public StaticTransport(String transportName, double co2Emissions, double speed, HashMap<Location,Pair<Location, Location>> stops) {
+    public StaticTransport(String transportName, double co2Emissions, long timePerGrid, HashMap<Location,Pair<Location, Location>> stops) {
         this.transportName = transportName;
         this.co2Emissions = co2Emissions;
-        this.speed = speed;
+        this.timeTakenPerGrid = timePerGrid;
         this.stops = stops;
     }
 
@@ -37,17 +38,21 @@ public abstract class StaticTransport {
         this.co2Emissions = co2Emissions;
     }
 
-    public double getSpeed() {
-        return speed;
+    public long getTimeTakenPerGrid() {
+        return timeTakenPerGrid;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
+    public void setTimeTakenPerGrid(long timeTaken) {
+        this.timeTakenPerGrid = timeTaken;
     }
 
     public abstract void drawRoad(Location location1, Location location2, GridPane grid);
 
     public abstract void fillGridCell(GridPane grid, int col, int row, Color color);
 
+    public abstract void fillGridCellWithImage(GridPane grid, int col, int row, Image roadImage);
+
     public abstract Node getNodeFromGridPane(GridPane gridPane, int col, int row);
+
+    public abstract int getManhattanDistance(Location l1, Location l2);
 }

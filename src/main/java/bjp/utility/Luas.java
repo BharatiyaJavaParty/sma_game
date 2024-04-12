@@ -18,8 +18,8 @@ public class Luas extends StaticTransport{
     private static final Image luasStop = new Image(Luas.class.getResourceAsStream("/img/luas-stop.png"));
     private static final Image trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join.png"));
     
-    public Luas(String transportName, double co2Emissions, double speed, HashMap<Location,Pair<Location, Location>> stops) {
-        super(transportName, co2Emissions, speed, stops);
+    public Luas(String transportName, double co2Emissions, long timeTaken, HashMap<Location,Pair<Location, Location>> stops) {
+        super(transportName, co2Emissions, timeTaken, stops);
     }
 
     public static void makeLuasLane(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) {
@@ -64,6 +64,7 @@ public class Luas extends StaticTransport{
         }
     }
 
+    @Override
     public void fillGridCellWithImage(GridPane grid, int col, int row, Image roadImage) {
         Node node = getNodeFromGridPane(grid, col, row);
         if (node instanceof ImageView) {
@@ -93,6 +94,11 @@ public class Luas extends StaticTransport{
             }
         }
         return null;
+    }
+
+    @Override
+    public int getManhattanDistance(Location l1, Location l2) {
+        return Math.abs(l1.getX() - l2.getX()) + Math.abs(l1.getY() - l2.getY());
     }
 }
 

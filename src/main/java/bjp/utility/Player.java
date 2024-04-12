@@ -19,42 +19,60 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Player {
-    private static String playerName;
-    private static Location playerLocation;
-    private static int gemCount;
-    public static boolean foundTransport = false;
-    public static boolean atLuas = false;
-    public static boolean atBus1 = false;
-    public static boolean atBus2 = false;
+    //player properties
+    //ideally player should have object and not all fucntions should not be called using class name
+    private String playerName;
+    private Location playerLocation;
+    private int gemCount; 
+    private double co2Budget;
+
+
+    public  boolean foundTransport = false;
+    public  boolean atLuas = false;
+    public  boolean atBus1 = false;
+    public  boolean atBus2 = false;
     private static ImageView playerView;
     private static final Image playerImage = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
 
-    public static Location getPlayerLocation()
+    //constructor
+    // public Player(String name, Location loc, int gemCount, double co2, boolean foundTransport, boolean atLuas, boolean atBus1, boolean atBus2)
+    // {
+    //     this.playerName = name;
+    //     this.playerLocation = loc;
+    //     this.gemCount = gemCount;
+    //     this.co2Budget = co2;
+    //     this. foundTransport = foundTransport;
+    //     this.atLuas = atLuas;
+    //     this.atBus1 = atBus1;
+    //     this.atBus2 = atBus2;
+    // }
+
+    //constructor
+
+    public Location getPlayerLocation()
     {
-        return playerLocation;
+        return this.playerLocation;
     }
 
-    public static void setPlayerLocation(Location playerNewLocation)
+    public void setPlayerLocation(Location playerNewLocation)
     {
-        playerLocation = playerNewLocation;
+        this.playerLocation = playerNewLocation;
     }
 
-    public static String getPlayerName()
+    public String getPlayerName()
     {
-        return playerName;
+        return this.playerName;
     }
 
-    public static void setPlayerName(String name)
+    public void setPlayerName(String name)
     {
-        playerName = name;
+        this.playerName = name;
     }
     // Initialize the player on the grid
-    public static void placePlayer(GridPane cityMapGrid) {
+    public void placePlayer(GridPane cityMapGrid) {
         Random random = new Random();
-        // playerLocation.setX(random.nextInt(CityMapController.COLS));
-        // playerLocation.setY(random.nextInt(CityMapController.ROWS));
 
-        setPlayerLocation(new Location(null, random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS)));
+        this.setPlayerLocation(new Location(null, random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS)));
 
         playerView = new ImageView(playerImage);
         playerView.setFitWidth(20);
@@ -64,60 +82,60 @@ public class Player {
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
     }
 
-    public static void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY) {
+    public void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY) {
         cityMapGrid.getChildren().remove(playerView);
-        playerLocation.setX(playerLocation.getX()+deltaX);
-        playerLocation.setY(playerLocation.getY()+deltaY);
+        this.playerLocation.setX(playerLocation.getX()+deltaX);
+        this.playerLocation.setY(playerLocation.getY()+deltaY);
         // playerY += deltaY;
 
-        playerLocation.setX(Math.min(Math.max(playerLocation.getX(), 0), CityMapController.COLS ));
-        playerLocation.setY(Math.min(Math.max(playerLocation.getY(), 0), CityMapController.COLS ));
+        this.playerLocation.setX(Math.min(Math.max(playerLocation.getX(), 0), CityMapController.COLS ));
+        this.playerLocation.setY(Math.min(Math.max(playerLocation.getY(), 0), CityMapController.COLS ));
         // playerY = Math.min(Math.max(playerY, 0), CityMapController.ROWS );
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
         checkGemCollected(cityMainStack, cityMapGrid);
     }
 
-    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid)
+    public void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid)
     {
-        if (Gem.getGemLocation().getX() == playerLocation.getX() && Gem.getGemLocation().getY() == playerLocation.getY())
+        if (Gem.getGemLocation().getX() == this.playerLocation.getX() && Gem.getGemLocation().getY() == this.playerLocation.getY())
         {
             Gem.placeGem(cityMainStack, cityMapGrid);
-            gemCount = gemCount+1;
-            PopupController.showPopupMessage(cityMainStack, "You have collected " + String.valueOf(gemCount) + " Gems!");
+            this.gemCount = this.gemCount+1;
+            PopupController.showPopupMessage(cityMainStack, "You have collected " + String.valueOf(this.gemCount) + " Gems!");
         }
     }
 
-    public static void checkTransportOptions(StackPane cityMainStack, GridPane cityMapGrid) {
-        foundTransport = false;
-        atLuas = false;
-        atBus1 = false;
-        atBus2 = false;
+    public  void checkTransportOptions(StackPane cityMainStack, GridPane cityMapGrid) {
+        this.foundTransport = false;
+        this.atLuas = false;
+        this.atBus1 = false;
+        this.atBus2 = false;
     
-        if (StaticTransportConfig.isPlayerAtLuasStop(playerLocation.getX(), playerLocation.getY())) {
-            PopupController.showPopupMessage(cityMainStack, playerName + " is at a Luas stop. Want to travel in LUAS?");
-            foundTransport = true;
-            atLuas = true;
+        if (StaticTransportConfig.isPlayerAtLuasStop(this.playerLocation.getX(), this.playerLocation.getY())) {
+            PopupController.showPopupMessage(cityMainStack, this.playerName + " is at a Luas stop. Want to travel in LUAS?");
+            this.foundTransport = true;
+            this.atLuas = true;
         }
     
-        if (StaticTransportConfig.isPlayerAtBus1Stop(playerLocation.getX(), playerLocation.getY())) {
-            PopupController.showPopupMessage(cityMainStack, playerName + " is at a Bus1 stop.");
-            foundTransport = true;
-            atBus1 = true;
+        if (StaticTransportConfig.isPlayerAtBus1Stop(this.playerLocation.getX(), this.playerLocation.getY())) {
+            PopupController.showPopupMessage(cityMainStack, this.playerName + " is at a Bus1 stop.");
+            this.foundTransport = true;
+            this.atBus1 = true;
         }
     
-        if (StaticTransportConfig.isPlayerAtBus2Stop(playerLocation.getX(), playerLocation.getY())) {
-            PopupController.showPopupMessage(cityMainStack, playerName + " is at a Bus2 stop.");
-            foundTransport = true;
-            atBus2 = true;
+        if (StaticTransportConfig.isPlayerAtBus2Stop(this.playerLocation.getX(), this.playerLocation.getY())) {
+            PopupController.showPopupMessage(cityMainStack, this.playerName + " is at a Bus2 stop.");
+            this.foundTransport = true;
+            this.atBus2 = true;
         }
     
-        if (!foundTransport) {
+        if (!this.foundTransport) {
             System.out.println("Player is not at any transport stop.");
-            PopupController.showPopupMessage(cityMainStack, playerName + " is not at any transport stop.");
+            PopupController.showPopupMessage(cityMainStack, this.playerName + " is not at any transport stop.");
         }
     }
 
-    public static  ArrayList<Location> checkTransportOptionsAndMove(GridPane cityMapGrid) {
+    public  ArrayList<Location> checkTransportOptionsAndMove(GridPane cityMapGrid) {
         ArrayList<Location> res = new ArrayList<Location>();
         List<Location> keysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
         final Location[] currentStation = {null};
@@ -126,7 +144,7 @@ public class Player {
     
         for (int i = 0; i < keysAsList.size(); i++) {
             Location key = keysAsList.get(i);
-            if (key.getX() == playerLocation.getX() && key.getY() == playerLocation.getY()) {
+            if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
                 currentStation[0] = key;
                 if (i + 1 < keysAsList.size()) nextStation[0] = StaticTransportConfig.LUAS_STOPS.get(key).getValue();
                 if (i > 0) previousStation[0] = StaticTransportConfig.LUAS_STOPS.get(key).getKey();
@@ -153,7 +171,7 @@ public class Player {
         return res;
     }
 
-    public static ArrayList<Location> checkTransportOptionsAndMoveUpdated(StackPane cityMainStack, GridPane cityMapGrid){
+    public ArrayList<Location> checkTransportOptionsAndMoveUpdated(StackPane cityMainStack, GridPane cityMapGrid){
         ArrayList<Location> res = new ArrayList<Location>();
         List<Location> luasKeysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
         List<Location> bus1KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
@@ -163,10 +181,10 @@ public class Player {
         Location previousStation = null;
 
         //Only Luas
-        if(atLuas==true && (atBus1==false && atBus2==false)){
+        if(this.atLuas==true && (this.atBus1==false && this.atBus2==false)){
             for (int i = 0; i < luasKeysAsList.size(); i++) {
                 Location key = luasKeysAsList.get(i);
-                if (key.getX() == playerLocation.getX() && key.getY() == playerLocation.getY()) {
+                if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
                     currentStation = key;
                     if (i + 1 < luasKeysAsList.size()) {
                         nextStation = StaticTransportConfig.LUAS_STOPS.get(key).getValue();
@@ -198,10 +216,10 @@ public class Player {
             return res;
         }
         //Only Bus1
-        else if(atBus1==true && (atLuas==false && atBus2==false)){
+        else if(this.atBus1==true && (this.atLuas==false && this.atBus2==false)){
             for (int i = 0; i < bus1KeysAsList.size(); i++) {
                 Location key = bus1KeysAsList.get(i);
-                if (key.getX() == playerLocation.getX() && key.getY() == playerLocation.getY()) {
+                if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
                     currentStation = key;
                     if (i + 1 < bus1KeysAsList.size()) {
                         nextStation = StaticTransportConfig.BUS1_STOPS.get(key).getValue();
@@ -232,10 +250,10 @@ public class Player {
             res.add(previousStation);
             return res;
         }//Onlu BusStop 2
-        else if(atBus2==true && (atLuas==false && atBus1==false)){
+        else if(this.atBus2==true && (this.atLuas==false && this.atBus1==false)){
             for (int i = 0; i < bus2KeysAsList.size(); i++) {
                 Location key = bus2KeysAsList.get(i);
-                if (key.getX() == playerLocation.getX() && key.getY() == playerLocation.getY()) {
+                if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
                     currentStation = key;
                     if (i + 1 < bus2KeysAsList.size()) {
                         nextStation = StaticTransportConfig.BUS2_STOPS.get(key).getValue();
@@ -270,11 +288,11 @@ public class Player {
     }
     
 
-    public static void movePlayerToStation(GridPane cityMapGrid, Location station) {
+    public void movePlayerToStation(GridPane cityMapGrid, Location station) {
         cityMapGrid.getChildren().remove(playerView);
-        playerLocation.setX(station.getX());
-        playerLocation.setY(station.getY());
-        cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+        this.playerLocation.setX(station.getX());
+        this.playerLocation.setY(station.getY());
+        cityMapGrid.add(playerView, this.playerLocation.getX(), this.playerLocation.getY());
     }
     
 }

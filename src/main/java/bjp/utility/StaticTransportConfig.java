@@ -63,9 +63,9 @@ public class StaticTransportConfig {
         put(Bus2_Stop5, new Pair<Location,Location>(Bus2_Stop3, Bus2_Stop5));
     }}; 
 
-    public static final Luas LUAS = new Luas("Luas", 75.0, 50.0, LUAS_STOPS);
-    public static final Bus BUS1 = new Bus("Bus1", 35.0, 20.0, BUS1_STOPS);
-    public static final Bus BUS2 = new Bus("Bus2", 35.0, 20.0, BUS2_STOPS);
+    public static final Luas LUAS = new Luas("Luas", 75.0, 10, LUAS_STOPS);
+    public static final Bus BUS1 = new Bus("Bus1", 35.0, 20, BUS1_STOPS);
+    public static final Bus BUS2 = new Bus("Bus2", 35.0, 20, BUS2_STOPS);
 
     static {
         addAllStops(LUAS_STOPS, LUAS_STOPS_SET);

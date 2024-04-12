@@ -9,16 +9,14 @@ import javafx.scene.image.ImageView;
 
 import java.util.HashMap;
 
-import bjp.utility.Location;
-
 public class Bus extends StaticTransport{
     private static final Image roadHori = new Image(Luas.class.getResourceAsStream("/img/road-hori.png"));
     private static final Image roadConn = new Image(Luas.class.getResourceAsStream("/img/road-conn.png"));
     private static final Image roadVerti = new Image(Luas.class.getResourceAsStream("/img/road-verti.png"));
     private static final Image busStop = new Image(Luas.class.getResourceAsStream("/img/bus-stop.png"));
 
-    public Bus(String transportName, double co2Emissions, double speed, HashMap<Location, Pair<Location, Location>> bus1Stops) {
-        super(transportName, co2Emissions, speed, bus1Stops);
+    public Bus(String transportName, double co2Emissions, long timeTaken, HashMap<Location, Pair<Location, Location>> bus1Stops) {
+        super(transportName, co2Emissions, timeTaken, bus1Stops);
     }
 
     public static void makeBusRoad(Bus bus, HashMap<Location, Pair<Location, Location>> busStops, GridPane grid) {
@@ -63,6 +61,7 @@ public class Bus extends StaticTransport{
         }
     }
 
+    @Override
     public void fillGridCellWithImage(GridPane grid, int col, int row, Image roadImage) {
         Node node = getNodeFromGridPane(grid, col, row);
         if (node instanceof ImageView) {
@@ -93,4 +92,10 @@ public class Bus extends StaticTransport{
         }
         return null;
     }
+
+    @Override
+    public int getManhattanDistance(Location l1, Location l2) {
+        return Math.abs(l1.getX() - l2.getX()) + Math.abs(l1.getY() - l2.getY());
+    }
+
 }

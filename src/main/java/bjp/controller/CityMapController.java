@@ -53,7 +53,7 @@ public class CityMapController {
         }
     }
 
-    public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid){
+    // public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid){
         final ArrayList<Location> res = new ArrayList<>();
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
