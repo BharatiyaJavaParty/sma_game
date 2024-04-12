@@ -21,10 +21,11 @@ public class StaticTransportConfig {
     public static final Location Bus1_Stop3 = new Location("Ballsbridge", 17, 17);
     public static final Location Bus1_Stop4 = new Location("Donnybrook", 25, 20);
 
-    public static final Location Bus2_Stop1 = new Location("UCD", 28, 25);
-    public static final Location Bus2_Stop2 = new Location("Miltown", 27, 17);
+    public static final Location Bus2_Stop1 = new Location("UCD", 28, 24);
+    public static final Location Bus2_Stop2 = new Location("Miltown", 28, 17);
     public static final Location Bus2_Stop3 = new Location("Rathmines", 29, 9);
     public static final Location Bus2_Stop4 = new Location("Rialto", 16, 1);
+    public static final Location Bus2_Stop5 = new Location("Spire", 14, 2);
 
     public static final Location Luas_stop1 = new Location("Phibsborough", 3, 3);
     public static final Location Luas_stop2 = new Location("Parnell", 9, 14);
@@ -32,6 +33,7 @@ public class StaticTransportConfig {
     public static final Location Luas_stop4 = new Location("Trinity", 20, 15);
     public static final Location Luas_stop5 = new Location("Dawson", 25, 16);
     public static final Location Luas_stop6 = new Location("UCD", 27, 24);
+    public static final Location Luas_stop7 = new Location("TCD", 29, 23);
 
 // this hashmap contains a location and pair of its previousLocation and nextLocation
 //getKey gives previous station 
@@ -42,7 +44,8 @@ public class StaticTransportConfig {
         put(Luas_stop3, new Pair<Location,Location>(Luas_stop2, Luas_stop4));
         put(Luas_stop4, new Pair<Location,Location>(Luas_stop3, Luas_stop5));
         put(Luas_stop5, new Pair<Location,Location>(Luas_stop4, Luas_stop6));
-        put(Luas_stop6, new Pair<Location,Location>(Luas_stop5, Luas_stop6));
+        put(Luas_stop6, new Pair<Location,Location>(Luas_stop5, Luas_stop7));
+        put(Luas_stop7, new Pair<Location,Location>(Luas_stop6, Luas_stop7));
     }};
 
     public static final HashMap<Location, Pair<Location,Location>> BUS1_STOPS = new HashMap<Location, Pair<Location,Location>>(){{
@@ -56,7 +59,8 @@ public class StaticTransportConfig {
         put(Bus2_Stop1, new Pair<Location,Location>(Bus2_Stop1, Bus2_Stop2));
         put(Bus2_Stop2, new Pair<Location,Location>(Bus2_Stop1, Bus2_Stop3));
         put(Bus2_Stop3, new Pair<Location,Location>(Bus2_Stop2, Bus2_Stop4));
-        put(Bus2_Stop4, new Pair<Location,Location>(Bus2_Stop3, Bus2_Stop4));
+        put(Bus2_Stop4, new Pair<Location,Location>(Bus2_Stop3, Bus2_Stop5));
+        put(Bus2_Stop5, new Pair<Location,Location>(Bus2_Stop3, Bus2_Stop5));
     }}; 
 
     public static final Luas LUAS = new Luas("Luas", 75.0, 50.0, LUAS_STOPS);

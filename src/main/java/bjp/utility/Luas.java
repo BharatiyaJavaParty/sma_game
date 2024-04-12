@@ -15,9 +15,8 @@ public class Luas extends StaticTransport{
     // Assuming you have an image at "src/main/resources/bjp/img/roadTexture.jpg"
     private static final Image trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori.png"));
     private static final Image trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti.png"));
-    private static final Image trackBottomCurve = new Image(Luas.class.getResourceAsStream("/img/train-bottom-curve.png"));
-    private static final Image trackTopCurve = new Image(Luas.class.getResourceAsStream("/img/train-top-curve.png"));
     private static final Image luasStop = new Image(Luas.class.getResourceAsStream("/img/luas-stop.png"));
+    private static final Image trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join.png"));
     
     public Luas(String transportName, double co2Emissions, double speed, HashMap<Location,Pair<Location, Location>> stops) {
         super(transportName, co2Emissions, speed, stops);
@@ -48,7 +47,7 @@ public class Luas extends StaticTransport{
 
         for (int x = minX+1; x <= maxX; x++) {
             if (x == maxX) {
-                fillGridCellWithImage(grid, x, startY, trackTopCurve);
+                fillGridCellWithImage(grid, x, startY, trackJoin);
             }
             else{
                 fillGridCellWithImage(grid, x, startY, trackHori);
@@ -57,7 +56,7 @@ public class Luas extends StaticTransport{
 
         for (int y = minY+1; y <= maxY; y++) {
             if (y == maxY) {
-                fillGridCellWithImage(grid, endX, y, trackBottomCurve);
+                fillGridCellWithImage(grid, endX, y, trackJoin);
             }
             else{
                 fillGridCellWithImage(grid, endX, y, trackVerti);
@@ -96,3 +95,6 @@ public class Luas extends StaticTransport{
         return null;
     }
 }
+
+
+// psyren
