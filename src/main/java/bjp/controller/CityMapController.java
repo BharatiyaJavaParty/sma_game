@@ -80,11 +80,13 @@ public class CityMapController {
                 case N:
                     if (!res.isEmpty() && res.get(0) != null) {
                         Player.movePlayerToStation(cityMapGrid, res.get(0));
+                        res.clear();
                     }
                     break;
                 case P:
                     if (res.size() > 1 && res.get(1) != null) {
                         Player.movePlayerToStation(cityMapGrid, res.get(1));
+                        res.clear();
                     }
                     break;
                 default:

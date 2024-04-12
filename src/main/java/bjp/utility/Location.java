@@ -51,4 +51,9 @@ public class Location {
     public int hashCode() {
         return Objects.hash(xOrdinate, yOrdinate);
     }
+
+    @Override
+    public String toString(){
+        return locationName;
+    }
 }

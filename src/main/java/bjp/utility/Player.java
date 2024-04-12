@@ -107,7 +107,7 @@ public class Player {
     
         if (!foundTransport) {
             PopupController.showPopupMessage(cityMainStack, "Player is not at any transport stop.");
-            System.out.println("Player is not at any transport stop.");
+            // System.out.println("Player is not at any transport stop.");
         }
     }
 
