@@ -74,7 +74,7 @@ public class CityMapController {
                 case ENTER:
                     if (Player.foundTransport){
                         res.clear();
-                        res.addAll(Player.checkTransportOptionsAndMoveUpdated(cityMapGrid));
+                        res.addAll(Player.checkTransportOptionsAndMoveUpdated(cityMainStack, cityMapGrid));
                     }
                     break;
                 case N:

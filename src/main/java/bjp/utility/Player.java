@@ -19,25 +19,35 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Player {
-    public static Location playerLocation;
-    public static int gemCount;
+    private static String playerName;
+    private static Location playerLocation;
+    private static int gemCount;
     public static boolean foundTransport = false;
     public static boolean atLuas = false;
     public static boolean atBus1 = false;
     public static boolean atBus2 = false;
     private static ImageView playerView;
-    private static final Image gem = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
+    private static final Image playerImage = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
 
     public static Location getPlayerLocation()
     {
         return playerLocation;
     }
 
-    public static void setPlayerLocation(Location newLocation)
+    public static void setPlayerLocation(Location playerNewLocation)
     {
-        playerLocation = newLocation;
+        playerLocation = playerNewLocation;
     }
 
+    public static String getPlayerName()
+    {
+        return playerName;
+    }
+
+    public static void setPlayerName(String name)
+    {
+        playerName = name;
+    }
     // Initialize the player on the grid
     public static void placePlayer(GridPane cityMapGrid) {
         Random random = new Random();
@@ -46,7 +56,7 @@ public class Player {
 
         setPlayerLocation(new Location(null, random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS)));
 
-        playerView = new ImageView(gem);
+        playerView = new ImageView(playerImage);
         playerView.setFitWidth(20);
         playerView.setFitHeight(20);
         playerView.setSmooth(true);
@@ -149,7 +159,7 @@ public class Player {
         return res;
     }
 
-    public static ArrayList<Location> checkTransportOptionsAndMoveUpdated(GridPane cityMapGrid){
+    public static ArrayList<Location> checkTransportOptionsAndMoveUpdated(StackPane cityMainStack, GridPane cityMapGrid){
         ArrayList<Location> res = new ArrayList<Location>();
         List<Location> luasKeysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
         List<Location> bus1KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
@@ -177,6 +187,7 @@ public class Player {
             // Access elements via [0] since they are now array elements
             if (nextStation != null) System.out.println("1 : " + nextStation.getLocationName());
             if (previousStation != null) System.out.println("2 : " + previousStation.getLocationName());
+            PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + " stop.");
         
             if (currentStation != null) {
                 System.out.println("Current Station: " + currentStation.getLocationName());
@@ -211,6 +222,7 @@ public class Player {
             // Access elements via [0] since they are now array elements
             if (nextStation != null) System.out.println("1 : " + nextStation.getLocationName());
             if (previousStation != null) System.out.println("2 : " + previousStation.getLocationName());
+            PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + " stop.");
         
             if (currentStation != null) {
                 System.out.println("Current Bus Stop: " + currentStation.getLocationName());
@@ -244,6 +256,7 @@ public class Player {
             // Access elements via [0] since they are now array elements
             if (nextStation != null) System.out.println("1 : " + nextStation.getLocationName());
             if (previousStation != null) System.out.println("2 : " + previousStation.getLocationName());
+            PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + " stop.");
         
             if (currentStation != null) {
                 System.out.println("Current Bus Stop: " + currentStation.getLocationName());

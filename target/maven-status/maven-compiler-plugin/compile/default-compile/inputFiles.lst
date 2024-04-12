@@ -1,33 +1,17 @@
-<<<<<<< Updated upstream
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/Gem.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/Player.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/StaticTransport.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/controller/PopupController.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/Main.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/RandomSquare.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/StaticTransportConfig.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/Luas.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/Location.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/Bus.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/controller/CityMapController.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/module-info.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/DynamicTransport.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/NonRandomSquare.java
-/Users/musaddique33/Program/java/sma_game/src/main/java/bjp/utility/Bike.java
-=======
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\DynamicTransport.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\Gem.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\Main.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\module-info.java
+D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\controller\LaunchController.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\RandomSquare.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\StaticTransport.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\Luas.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\Bus.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\Player.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\NonRandomSquare.java
+D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\controller\PlayerNameDialog.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\Location.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\Bike.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\controller\PopupController.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\controller\CityMapController.java
 D:\Masters Class Learning\Assignments\Java\GameRepo\sma_game\src\main\java\bjp\utility\StaticTransportConfig.java
->>>>>>> Stashed changes
