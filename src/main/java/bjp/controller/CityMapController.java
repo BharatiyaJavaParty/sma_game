@@ -35,7 +35,7 @@ public class CityMapController {
         Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);
         Gem.placeGem(cityMainStack, cityMapGrid);
         Player.placePlayer(cityMapGrid);
-        PopupController.show_popup_message(cityMainStack, "Welcome to Gem World");
+        PopupController.showPopupMessage(cityMainStack, "Welcome to Gem World");
         // cityMapGrid.setGridLinesVisible(true);
 
         CityMapController.mainEventHandler(cityMainStack, cityMapGrid);
@@ -94,7 +94,7 @@ public class CityMapController {
             event.consume();
         });
         cityMapGrid.setOnKeyReleased(event->{
-            if(Player.playerLocation.getX() == Gem.gemLocation.getX() && Player.playerLocation.getY() == Gem.gemLocation.getY()){
+            if(Player.getPlayerLocation().getX() == Gem.getGemLocation().getX() && Player.getPlayerLocation().getY() == Gem.getGemLocation().getY()){
                 System.err.println("Win");
                 System.exit(0);
             }

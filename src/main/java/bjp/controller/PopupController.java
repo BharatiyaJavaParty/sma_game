@@ -11,7 +11,7 @@ import javafx.animation.PauseTransition;
 
 public class PopupController {
 
-    public static void show_popup_message(StackPane cityMainStack, String message) {
+    public static void showPopupMessage(StackPane cityMainStack, String message) {
         Label messageLabel = new Label("");
         messageLabel.setFont(new Font("Arial", 16)); // Example font and size
         messageLabel.setAlignment(Pos.CENTER);

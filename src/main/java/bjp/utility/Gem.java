@@ -6,19 +6,26 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import java.util.Random;
 
-public class Gem{
-    public static Location gemLocation;
-
+public class Gem {
+    private static Location gemLocation;
     public static ImageView imageView;
     private static final Image gem = new Image(Gem.class.getResourceAsStream("/img/gem.png"));
 
+    public static Location getGemLocation()
+    {
+        return gemLocation;
+    }
+
+    public static void setGemLocation(Location newLocation)
+    {
+        gemLocation = newLocation;
+    }
+
     public static void placeGem(StackPane cityMainStack, GridPane cityMapGrid ) {
         Random random = new Random();
-
-        // gemLocation.setX(random.nextInt(CityMapController.COLS));
+        // gemLocation.setX(random.nextInt(CityMapController.COLS)) ;
         // gemLocation.setY(random.nextInt(CityMapController.ROWS));
-        gemLocation = new Location("gem", random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS));
-
+        setGemLocation(new Location(null, random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS)));
         cityMapGrid.getChildren().removeIf(node -> node == imageView);
 
         imageView = new ImageView(gem);

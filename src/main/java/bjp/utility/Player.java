@@ -19,7 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Player {
-    public static Location playerLocation;
+    private static Location playerLocation;
     private static int gemCount;
     public static boolean foundTransport = false;
     public static boolean atLuas = false;
@@ -28,13 +28,23 @@ public class Player {
     private static ImageView playerView;
     private static final Image gem = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
 
+    public static Location getPlayerLocation()
+    {
+        return playerLocation;
+    }
+
+    public static void setPlayerLocation(Location newLocation)
+    {
+        playerLocation = newLocation;
+    }
+
     // Initialize the player on the grid
     public static void placePlayer(GridPane cityMapGrid) {
         Random random = new Random();
         // playerLocation.setX(random.nextInt(CityMapController.COLS));
         // playerLocation.setY(random.nextInt(CityMapController.ROWS));
 
-        playerLocation = new Location("player", random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS));
+        setPlayerLocation(new Location(null, random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS)));
 
         playerView = new ImageView(gem);
         playerView.setFitWidth(20);
@@ -59,11 +69,11 @@ public class Player {
 
     public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid)
     {
-        if (Gem.gemLocation.getX() == playerLocation.getX() && Gem.gemLocation.getY() == playerLocation.getY())
+        if (Gem.getGemLocation().getX() == playerLocation.getX() && Gem.getGemLocation().getY() == playerLocation.getY())
         {
             Gem.placeGem(cityMainStack, cityMapGrid);
             gemCount = gemCount+1;
-            PopupController.show_popup_message(cityMainStack, "You have collected " + String.valueOf(gemCount) + " Gems!");
+            PopupController.showPopupMessage(cityMainStack, "You have collected " + String.valueOf(gemCount) + " Gems!");
         }
     }
 
@@ -76,27 +86,27 @@ public class Player {
         if (StaticTransportConfig.isPlayerAtLuasStop(playerLocation.getX(), playerLocation.getY())) {
             System.out.println("Player is at a LUAS stop.");
             System.out.println("Want to travel in LUAS?");
-            // PopupController.show_popup_message(cityMainStack, "Player is at a Luas stop.");
+            PopupController.showPopupMessage(cityMainStack, "Player is at a Luas stop.");
             foundTransport = true;
             atLuas = true;
         }
     
         if (StaticTransportConfig.isPlayerAtBus1Stop(playerLocation.getX(), playerLocation.getY())) {
             System.out.println("Player is at a Bus1 stop.");
-            PopupController.show_popup_message(cityMainStack, "Player is at a Bus1 stop.");
+            PopupController.showPopupMessage(cityMainStack, "Player is at a Bus1 stop.");
             foundTransport = true;
             atBus1 = true;
         }
     
         if (StaticTransportConfig.isPlayerAtBus2Stop(playerLocation.getX(), playerLocation.getY())) {
             System.out.println("Player is at a Bus2 stop.");
-            PopupController.show_popup_message(cityMainStack, "Player is at a Bus2 stop.");
+            PopupController.showPopupMessage(cityMainStack, "Player is at a Bus2 stop.");
             foundTransport = true;
             atBus2 = true;
         }
     
         if (!foundTransport) {
-            // PopupController.show_popup_message(cityMainStack, "Player is not at any transport stop.");
+            PopupController.showPopupMessage(cityMainStack, "Player is not at any transport stop.");
             System.out.println("Player is not at any transport stop.");
         }
     }
