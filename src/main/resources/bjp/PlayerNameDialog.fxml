@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+
+
+<GridPane  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bjp.controller.PlayerNameController">
+    <!-- <columnConstraints>
+        <ColumnConstraints hgrow="NEVER" />
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="NEVER" />
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="NEVER" />
+    </rowConstraints> -->
+    <!-- <Label text="Label:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField fx:id="textField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Button text="OK" onAction="#okButtonClicked" GridPane.columnIndex="0" GridPane.rowIndex="2" /> -->
+    <Button text="Cancel" onAction="#cancelButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+</GridPane>
