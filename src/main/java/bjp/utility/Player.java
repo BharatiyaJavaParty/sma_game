@@ -31,8 +31,10 @@ public class Player {
     // Initialize the player on the grid
     public static void placePlayer(GridPane cityMapGrid) {
         Random random = new Random();
-        playerLocation.setX(random.nextInt(CityMapController.COLS));
-        playerLocation.setY(random.nextInt(CityMapController.ROWS));
+        // playerLocation.setX(random.nextInt(CityMapController.COLS));
+        // playerLocation.setY(random.nextInt(CityMapController.ROWS));
+
+        playerLocation = new Location("player", random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS));
 
         playerView = new ImageView(gem);
         playerView.setFitWidth(20);
@@ -74,7 +76,7 @@ public class Player {
         if (StaticTransportConfig.isPlayerAtLuasStop(playerLocation.getX(), playerLocation.getY())) {
             System.out.println("Player is at a LUAS stop.");
             System.out.println("Want to travel in LUAS?");
-            PopupController.show_popup_message(cityMainStack, "Player is at a Luas stop.");
+            // PopupController.show_popup_message(cityMainStack, "Player is at a Luas stop.");
             foundTransport = true;
             atLuas = true;
         }
@@ -94,7 +96,7 @@ public class Player {
         }
     
         if (!foundTransport) {
-            PopupController.show_popup_message(cityMainStack, "Player is not at any transport stop.");
+            // PopupController.show_popup_message(cityMainStack, "Player is not at any transport stop.");
             System.out.println("Player is not at any transport stop.");
         }
     }

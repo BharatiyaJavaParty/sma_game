@@ -3,15 +3,19 @@ package bjp.utility;
 import java.util.Objects;
 
 public class Location {
-    private String locationName;
-    private int xOrdinate;
-    private int yOrdinate;
+    public String locationName;
+    public int xOrdinate;
+    public int yOrdinate;
 
     public Location(String locationName, int xOrdinate, int yOrdinate) {
         this.locationName = locationName;
         this.xOrdinate = xOrdinate;
         this.yOrdinate = yOrdinate;
     }
+
+    // public Location() {
+    //     System.out.println("Location object created successfully");
+    // }
 
     public int getX() {
         return xOrdinate;

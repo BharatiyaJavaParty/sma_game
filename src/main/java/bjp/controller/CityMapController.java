@@ -24,7 +24,6 @@ public class CityMapController {
 
     @FXML
     private StackPane cityMainStack;
-
     public static final int ROWS = 30;
     public static final int COLS = 30;
     

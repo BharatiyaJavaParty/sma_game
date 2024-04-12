@@ -14,5 +14,6 @@ bjp/utility/Player.class
 bjp/utility/Location.class
 bjp/utility/NonRandomSquare.class
 bjp/utility/StaticTransportConfig$3.class
+bjp/controller/PopupController.class
 bjp/utility/Bus.class
 bjp/utility/DynamicTransport.class
