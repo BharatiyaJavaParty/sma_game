@@ -84,22 +84,22 @@ public class Player {
         atBus2 = false;
     
         if (StaticTransportConfig.isPlayerAtLuasStop(playerLocation.getX(), playerLocation.getY())) {
-            System.out.println("Player is at a LUAS stop.");
-            System.out.println("Want to travel in LUAS?");
-            PopupController.showPopupMessage(cityMainStack, "Player is at a Luas stop.");
+            // System.out.println("Player is at a LUAS stop.");
+            // System.out.println("Want to travel in LUAS?");
+            PopupController.showPopupMessage(cityMainStack, "Player is at a Luas stop. Want to travel in LUAS?");
             foundTransport = true;
             atLuas = true;
         }
     
         if (StaticTransportConfig.isPlayerAtBus1Stop(playerLocation.getX(), playerLocation.getY())) {
-            System.out.println("Player is at a Bus1 stop.");
+            // System.out.println("Player is at a Bus1 stop.");
             PopupController.showPopupMessage(cityMainStack, "Player is at a Bus1 stop.");
             foundTransport = true;
             atBus1 = true;
         }
     
         if (StaticTransportConfig.isPlayerAtBus2Stop(playerLocation.getX(), playerLocation.getY())) {
-            System.out.println("Player is at a Bus2 stop.");
+            // System.out.println("Player is at a Bus2 stop.");
             PopupController.showPopupMessage(cityMainStack, "Player is at a Bus2 stop.");
             foundTransport = true;
             atBus2 = true;
