@@ -42,8 +42,8 @@ public class PlayerNameController {
     public void cancelButtonClicked() {
         try
         {
+            GameEngine.newPlayer.setPlayerName("Player1");
             Main.setRoot("CityMap");
-            Player.setPlayerName("Player1");
         }
         catch(Exception e)
         {
