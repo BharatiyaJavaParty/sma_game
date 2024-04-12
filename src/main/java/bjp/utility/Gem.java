@@ -23,9 +23,9 @@ public class Gem {
 
     public static void placeGem(StackPane cityMainStack, GridPane cityMapGrid) {
         Random random = new Random();
-        // gemLocation.setX(random.nextInt(CityMapController.COLS)) ;
-        // gemLocation.setY(random.nextInt(CityMapController.ROWS));
-        setGemLocation(new Location(null, random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS)));
+
+        Location gemLocation = new Location("Gem Location",random.nextInt(CityMapController.COLS) , random.nextInt(CityMapController.ROWS));
+        setGemLocation(gemLocation);
         cityMapGrid.getChildren().removeIf(node -> node == imageView);
 
         imageView = new ImageView(gem);
