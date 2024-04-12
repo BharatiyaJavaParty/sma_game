@@ -1,5 +1,6 @@
 package bjp.utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,18 +14,21 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Pair;
 
 public class Obstacles {
-    private static final Set<Location> Tree_SET = new HashSet<>();
+    public static ArrayList<Location> Tree_SET = new ArrayList<>();
     private static final Image gem = new Image(Gem.class.getResourceAsStream("/img/tree.png"));
     public static ImageView imageView;
-    static {
+    
+    static{
         Tree_SET.add(new Location("Tree", 1, 1));
+        Tree_SET.add(new Location("Tree1", 2, 2));
     }
-    public static void placeTrees(StackPane cityMainStack, GridPane cityMapGrid) {
-        imageView = new ImageView(gem);
-        imageView.setFitWidth(20);
-        imageView.setFitHeight(20);
-        imageView.setSmooth(true);
+
+    public static void placeTrees( GridPane cityMapGrid) {
         for (Location tree : Tree_SET) {
+            imageView = new ImageView(gem);
+            imageView.setFitWidth(20);
+            imageView.setFitHeight(20);
+            imageView.setSmooth(true);
             cityMapGrid.add(imageView, tree.getX(), tree.getY());
         }
     }

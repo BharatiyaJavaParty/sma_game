@@ -8,6 +8,7 @@ import bjp.utility.Gem;
 import bjp.utility.Location;
 import bjp.utility.Luas;
 import bjp.utility.NonRandomSquare;
+import bjp.utility.Obstacles;
 import bjp.utility.Player;
 import bjp.utility.RandomSquare;
 import bjp.utility.StaticTransportConfig;
@@ -35,6 +36,7 @@ public class CityMapController {
         Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);
         Gem.placeGem(cityMainStack, cityMapGrid);
         Player.placePlayer(cityMapGrid);
+        Obstacles.placeTrees(cityMapGrid);
         PopupController.showPopupMessage(cityMainStack, "Welcome to Gem World");
         // cityMapGrid.setGridLinesVisible(true);
 
