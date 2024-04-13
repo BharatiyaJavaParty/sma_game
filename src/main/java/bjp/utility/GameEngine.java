@@ -14,7 +14,7 @@ public class GameEngine {
     //level 1 - 5
     //level 2 - 
 
-    public void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid){
+    public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid){
         final ArrayList<Location> res = new ArrayList<>();
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
@@ -57,14 +57,12 @@ public class GameEngine {
             event.consume();
         });
         cityMapGrid.setOnKeyReleased(event->{
-            if(newPlayer.getPlayerLocation().getX() == Gem.getGemLocation().getX() && Player.getPlayerLocation().getY() == Gem.getGemLocation().getY()){
+            if(newPlayer.getPlayerLocation().getX() == Gem.getGemLocation().getX() && GameEngine.newPlayer.getPlayerLocation().getY() == Gem.getGemLocation().getY()){
                 System.err.println("Win");
                 System.exit(0);
             }
             event.consume();
         });
     }
-
-
 
 }

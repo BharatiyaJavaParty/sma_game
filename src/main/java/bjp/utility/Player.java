@@ -18,6 +18,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import javafx.util.Pair;
+
 public class Player {
     //player properties
     //ideally player should have object and not all fucntions should not be called using class name
@@ -33,6 +39,8 @@ public class Player {
     public  boolean atBus2 = false;
     private static ImageView playerView;
     private static final Image playerImage = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
+    public static HashMap<Location, Pair<Location,Location>> STOPS;
+    public static List<Location> KeysAsList;
 
     //constructor
     // public Player(String name, Location loc, int gemCount, double co2, boolean foundTransport, boolean atLuas, boolean atBus1, boolean atBus2)
@@ -135,41 +143,6 @@ public class Player {
         }
     }
 
-    public  ArrayList<Location> checkTransportOptionsAndMove(GridPane cityMapGrid) {
-        ArrayList<Location> res = new ArrayList<Location>();
-        List<Location> keysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
-        final Location[] currentStation = {null};
-        final Location[] nextStation = {null};
-        final Location[] previousStation = {null};
-    
-        for (int i = 0; i < keysAsList.size(); i++) {
-            Location key = keysAsList.get(i);
-            if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
-                currentStation[0] = key;
-                if (i + 1 < keysAsList.size()) nextStation[0] = StaticTransportConfig.LUAS_STOPS.get(key).getValue();
-                if (i > 0) previousStation[0] = StaticTransportConfig.LUAS_STOPS.get(key).getKey();
-                break;
-            }
-        }
-    
-        // Access elements via [0] since they are now array elements
-        if (nextStation[0] != null) System.out.println("1 : " + nextStation[0].getLocationName());
-        if (previousStation[0] != null) System.out.println("2 : " + previousStation[0].getLocationName());
-    
-        if (currentStation[0] != null) {
-            System.out.println("Current Station: " + currentStation[0].getLocationName());
-            if (nextStation[0] != null) {
-                System.out.println("Press 'N' for Next Station: " + nextStation[0].getLocationName());
-            }
-            if (previousStation[0] != null) {
-                System.out.println("Press 'P' for Previous Station: " + previousStation[0].getLocationName());
-            }
-        }
-
-        res.add(nextStation[0]);
-        res.add(previousStation[0]);
-        return res;
-    }
 
     public ArrayList<Location> checkTransportOptionsAndMoveUpdated(StackPane cityMainStack, GridPane cityMapGrid){
         ArrayList<Location> res = new ArrayList<Location>();
@@ -180,111 +153,49 @@ public class Player {
         Location nextStation = null;
         Location previousStation = null;
 
-        //Only Luas
         if(this.atLuas==true && (this.atBus1==false && this.atBus2==false)){
-            for (int i = 0; i < luasKeysAsList.size(); i++) {
-                Location key = luasKeysAsList.get(i);
-                if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
-                    currentStation = key;
-                    if (i + 1 < luasKeysAsList.size()) {
-                        nextStation = StaticTransportConfig.LUAS_STOPS.get(key).getValue();
-                    }
-                    if (i > 0) {
-                        previousStation = StaticTransportConfig.LUAS_STOPS.get(key).getKey();
-                    }
-                    break;
-                }
-            }
-        
-            // Access elements via [0] since they are now array elements
-            if (nextStation != null) System.out.println("1 : " + nextStation.getLocationName());
-            if (previousStation != null) System.out.println("2 : " + previousStation.getLocationName());
-            PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + " stop.");
-        
-            if (currentStation != null) {
-                System.out.println("Current Station: " + currentStation.getLocationName());
-                if (nextStation != null) {
-                    System.out.println("Press 'N' for Next Station: " + nextStation.getLocationName());
-                }
-                if (previousStation != null) {
-                    System.out.println("Press 'P' for Previous Station: " + previousStation.getLocationName());
-                }
-            }
-    
-            res.add(nextStation);
-            res.add(previousStation);
-            return res;
+            KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
+            STOPS = StaticTransportConfig.LUAS_STOPS;
         }
-        //Only Bus1
         else if(this.atBus1==true && (this.atLuas==false && this.atBus2==false)){
-            for (int i = 0; i < bus1KeysAsList.size(); i++) {
-                Location key = bus1KeysAsList.get(i);
-                if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
-                    currentStation = key;
-                    if (i + 1 < bus1KeysAsList.size()) {
-                        nextStation = StaticTransportConfig.BUS1_STOPS.get(key).getValue();
-                    }
-                    if (i > 0) {
-                        previousStation = StaticTransportConfig.BUS1_STOPS.get(key).getKey();
-                    }
-                    break;
-                }
-            }
-        
-            // Access elements via [0] since they are now array elements
-            if (nextStation != null) System.out.println("1 : " + nextStation.getLocationName());
-            if (previousStation != null) System.out.println("2 : " + previousStation.getLocationName());
-            PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + " stop.");
-        
-            if (currentStation != null) {
-                System.out.println("Current Bus Stop: " + currentStation.getLocationName());
-                if (nextStation != null) {
-                    System.out.println("Press 'N' for Next Bus Stop: " + nextStation.getLocationName());
-                }
-                if (previousStation != null) {
-                    System.out.println("Press 'P' for Previous Bus Stop: " + previousStation.getLocationName());
-                }
-            }
-    
-            res.add(nextStation);
-            res.add(previousStation);
-            return res;
-        }//Onlu BusStop 2
-        else if(this.atBus2==true && (this.atLuas==false && this.atBus1==false)){
-            for (int i = 0; i < bus2KeysAsList.size(); i++) {
-                Location key = bus2KeysAsList.get(i);
-                if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
-                    currentStation = key;
-                    if (i + 1 < bus2KeysAsList.size()) {
-                        nextStation = StaticTransportConfig.BUS2_STOPS.get(key).getValue();
-                    }
-                    if (i > 0) {
-                        previousStation = StaticTransportConfig.BUS2_STOPS.get(key).getKey();
-                    }
-                    break;
-                }
-            }
-        
-            // Access elements via [0] since they are now array elements
-            if (nextStation != null) System.out.println("1 : " + nextStation.getLocationName());
-            if (previousStation != null) System.out.println("2 : " + previousStation.getLocationName());
-            PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + " stop.");
-        
-            if (currentStation != null) {
-                System.out.println("Current Bus Stop: " + currentStation.getLocationName());
-                if (nextStation != null) {
-                    System.out.println("Press 'N' for Next Bus Stop: " + nextStation.getLocationName());
-                }
-                if (previousStation != null) {
-                    System.out.println("Press 'P' for Previous Bus Stop: " + previousStation.getLocationName());
-                }
-            }
-    
-            res.add(nextStation);
-            res.add(previousStation);
-            return res;
+            KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
+            STOPS = StaticTransportConfig.BUS1_STOPS;
         }
-        return null;
+        else if(this.atBus2==true && (this.atLuas==false && this.atBus1==false)){
+            KeysAsList = new ArrayList<>(StaticTransportConfig.BUS2_STOPS.keySet());
+            STOPS = StaticTransportConfig.BUS2_STOPS;
+        }
+        for (int i = 0; i < KeysAsList.size(); i++) {
+            Location key = KeysAsList.get(i);
+            if (key.getX() == this.playerLocation.getX() && key.getY() == this.playerLocation.getY()) {
+                currentStation = key;
+                if (i + 1 < luasKeysAsList.size()) {
+                    nextStation = STOPS.get(key).getValue();
+                }
+                if (i > 0) {
+                    previousStation = STOPS.get(key).getKey();
+                }
+                break;
+            }
+        }
+    
+        if (nextStation != null) System.out.println("1 : " + nextStation.getLocationName());
+        if (previousStation != null) System.out.println("2 : " + previousStation.getLocationName());
+        PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + " stop.");
+    
+        if (currentStation != null) {
+            System.out.println("Current Station: " + currentStation.getLocationName());
+            if (nextStation != null) {
+                System.out.println("Press 'N' for Next Station: " + nextStation.getLocationName());
+            }
+            if (previousStation != null) {
+                System.out.println("Press 'P' for Previous Station: " + previousStation.getLocationName());
+            }
+        }
+
+        res.add(nextStation);
+        res.add(previousStation);
+        return res;
     }
     
 
