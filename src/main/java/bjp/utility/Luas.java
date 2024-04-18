@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
+import bjp.controller.CityMapController;
 
 public class Luas extends StaticTransport{
     
@@ -71,8 +72,8 @@ public class Luas extends StaticTransport{
             ((ImageView) node).setImage(roadImage);
         } else {
             ImageView imageView = new ImageView(roadImage);
-            imageView.setFitWidth(20);
-            imageView.setFitHeight(20);
+            imageView.setFitWidth(CityMapController.ROWS);
+            imageView.setFitHeight(CityMapController.COLS);
             imageView.setSmooth(true);
             grid.add(imageView, col, row);
         }

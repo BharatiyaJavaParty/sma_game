@@ -2,8 +2,11 @@ package bjp.utility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javafx.util.Pair;
 
+import bjp.controller.PopupController;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
@@ -11,6 +14,13 @@ public class GameEngine {
     
     public static Player newPlayer = new Player();
     private Map<Integer, Integer> levelMap = new HashMap<>();
+    private static int gemCount; 
+    private static double co2Budget;
+
+    public static boolean foundTransport = false;
+    public static boolean atLuas = false;
+    public static boolean atBus1 = false;
+    public static boolean atBus2 = false;
     //level 1 - 5
     //level 2 - 
 
@@ -33,9 +43,9 @@ public class GameEngine {
                     newPlayer.movePlayer(cityMainStack, cityMapGrid, 1, 0);
                     break;
                 case ENTER:
-                    if (newPlayer.foundTransport){
+                    if (foundTransport){
                         res.clear();
-                        res.addAll(newPlayer.checkTransportOptionsAndMoveUpdated(cityMainStack, cityMapGrid));
+                        res.addAll(checkTransportOptionsAndMoveUpdated(cityMainStack, cityMapGrid));
                     }
                     break;
                 case N:
@@ -53,7 +63,7 @@ public class GameEngine {
                 default:
                     break;
             }
-            newPlayer.checkTransportOptions(cityMainStack, cityMapGrid);
+            checkTransportOptions(cityMainStack, cityMapGrid);
             event.consume();
         });
         cityMapGrid.setOnKeyReleased(event->{
@@ -63,6 +73,95 @@ public class GameEngine {
             }
             event.consume();
         });
+    }
+
+    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid)
+    {
+        if (Gem.getGemLocation().getX() == newPlayer.playerLocation.getX() && Gem.getGemLocation().getY() == newPlayer.playerLocation.getY())
+        {
+            Gem.placeGem(cityMainStack, cityMapGrid);
+            gemCount = gemCount+1;
+            PopupController.showPopupMessage(cityMainStack, "You have collected " + String.valueOf(gemCount) + " Gems!");
+        }
+    }
+
+    public static void checkTransportOptions(StackPane cityMainStack, GridPane cityMapGrid) {
+        foundTransport = false;
+        atLuas = false;
+        atBus1 = false;
+        atBus2 = false;
+    
+        if (StaticTransportConfig.isPlayerAtLuasStop(newPlayer.playerLocation.getX(), newPlayer.playerLocation.getY())) {
+            PopupController.showPopupMessage(cityMainStack, newPlayer.playerName + "is at Luas");
+            foundTransport = true;
+            atLuas = true;
+        }
+    
+        if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.playerLocation.getX(), newPlayer.playerLocation.getY())) {
+            PopupController.showPopupMessage(cityMainStack, newPlayer.playerName + " is at a Bus");
+            foundTransport = true;
+            atBus1 = true;
+        }
+    
+        if (StaticTransportConfig.isPlayerAtBus2Stop(newPlayer.playerLocation.getX(), newPlayer.playerLocation.getY())) {
+            PopupController.showPopupMessage(cityMainStack, newPlayer.playerName + " is at a Bus");
+            foundTransport = true;
+            atBus2 = true;
+        }
+    }
+
+    public static ArrayList<Location> checkTransportOptionsAndMoveUpdated(StackPane cityMainStack, GridPane cityMapGrid){
+        ArrayList<Location> res = new ArrayList<Location>();
+        Location currentStation = null;
+        Location nextStation = null;
+        Location previousStation = null;
+        HashMap<Location, Pair<Location,Location>> STOPS = new HashMap<Location, Pair<Location,Location>>();
+        List<Location> KeysAsList = new ArrayList<Location>();
+    
+
+        if(atLuas==true && (atBus1==false && atBus2==false)){
+            KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
+            STOPS = StaticTransportConfig.LUAS_STOPS;
+        }
+        else if(atBus1==true && (atLuas==false && atBus2==false)){
+            KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
+            STOPS = StaticTransportConfig.BUS1_STOPS;
+        }
+        else if(atBus2==true && (atLuas==false && atBus1==false)){
+            KeysAsList = new ArrayList<>(StaticTransportConfig.BUS2_STOPS.keySet());
+            STOPS = StaticTransportConfig.BUS2_STOPS;
+        }
+        for (int i = 0; i < KeysAsList.size(); i++) {
+            Location key = KeysAsList.get(i);
+            if (key.getX() == newPlayer.playerLocation.getX() && key.getY() == newPlayer.playerLocation.getY()) {
+                currentStation = key;
+                if (i + 1 < KeysAsList.size()) {
+                    nextStation = STOPS.get(key).getValue();
+                }
+                if (i > 0) {
+                    previousStation = STOPS.get(key).getKey();
+                }
+                break;
+            }
+        }
+    
+        if (nextStation != null) System.out.println("1 : " + nextStation.getLocationName());
+        if (previousStation != null) System.out.println("2 : " + previousStation.getLocationName());
+    
+        if (currentStation != null) {
+            System.out.println("Current Station: " + currentStation.getLocationName());
+            if (nextStation != null) {
+                System.out.println("Press 'N' for Next Station: " + nextStation.getLocationName());
+            }
+            if (previousStation != null) {
+                System.out.println("Press 'P' for Previous Station: " + previousStation.getLocationName());
+            }
+        }
+        PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + " stop.");
+
+        res.add(nextStation);
+        res.add(previousStation);
+        return res;
     }
 
 }

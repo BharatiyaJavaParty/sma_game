@@ -6,6 +6,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import bjp.controller.CityMapController;
 
 import java.util.HashMap;
 
@@ -68,8 +69,8 @@ public class Bus extends StaticTransport{
             ((ImageView) node).setImage(roadImage);
         } else {
             ImageView imageView = new ImageView(roadImage);
-            imageView.setFitWidth(20);
-            imageView.setFitHeight(20);
+            imageView.setFitWidth(CityMapController.ROWS);
+            imageView.setFitHeight(CityMapController.COLS);
             imageView.setSmooth(true);
             grid.add(imageView, col, row);
         }

@@ -19,7 +19,7 @@ public class Main extends Application {
             //loads the fmxl file containing the first screen/ main screen of the game 
             //user has 2 options on this screen 
             primaryStage.setTitle("Rush Hour");
-            scene = new Scene(loadFXML("launch-view"), 620, 600);
+            scene = new Scene(loadFXML("launch-view"), 1600, 900);
             primaryStage.setScene(scene);
             primaryStage.show();
         }
