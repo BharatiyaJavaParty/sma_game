@@ -85,8 +85,8 @@ public class Player {
         this.playerLocation.setX(playerLocation.getX()+deltaX);
         this.playerLocation.setY(playerLocation.getY()+deltaY);
 
-        this.playerLocation.setX(Math.min(Math.max(playerLocation.getX(), 0), CityMapController.COLS ));
-        this.playerLocation.setY(Math.min(Math.max(playerLocation.getY(), 0), CityMapController.COLS ));
+        this.playerLocation.setX(Math.min(Math.max(playerLocation.getX(), 0), CityMapController.COLS-1 ));
+        this.playerLocation.setY(Math.min(Math.max(playerLocation.getY(), 0), CityMapController.COLS-1 ));
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
         GameEngine.checkGemCollected(cityMainStack, cityMapGrid);
     }

@@ -69,8 +69,8 @@ public class Bus extends StaticTransport{
             ((ImageView) node).setImage(roadImage);
         } else {
             ImageView imageView = new ImageView(roadImage);
-            imageView.setFitWidth(CityMapController.ROWS);
-            imageView.setFitHeight(CityMapController.COLS);
+            imageView.setFitWidth(CityMapController.WIDTH);
+            imageView.setFitHeight(CityMapController.HEIGHT);
             imageView.setSmooth(true);
             grid.add(imageView, col, row);
         }

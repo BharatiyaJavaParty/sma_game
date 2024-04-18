@@ -1,7 +1,6 @@
 package bjp;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +9,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static Scene scene;
+    public static Scene scene;
 
     @Override
     public void start (Stage primaryStage) throws IOException{
@@ -19,7 +18,8 @@ public class Main extends Application {
             //loads the fmxl file containing the first screen/ main screen of the game 
             //user has 2 options on this screen 
             primaryStage.setTitle("Rush Hour");
-            scene = new Scene(loadFXML("launch-view"), 1600, 900);
+            primaryStage.setMaximized(true);
+            scene = new Scene(loadFXML("launch-view"));
             primaryStage.setScene(scene);
             primaryStage.show();
         }
