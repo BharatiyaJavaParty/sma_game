@@ -27,8 +27,9 @@ import javafx.util.Pair;
 public class Player {
     //player properties
     //ideally player should have object and not all fucntions should not be called using class name
-    public String playerName;
-    public Location playerLocation;
+    private String playerName;
+    private Location playerLocation;
+ 
 
     private static ImageView playerView;
     private static final Image playerImage = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
@@ -67,6 +68,8 @@ public class Player {
     {
         this.playerName = name;
     }
+
+
     public void placePlayer(GridPane cityMapGrid) {
         Random random = new Random();
 

@@ -21,8 +21,15 @@ public class GameEngine {
     public static boolean atLuas = false;
     public static boolean atBus1 = false;
     public static boolean atBus2 = false;
-    //level 1 - 5
-    //level 2 - 
+    
+    //the keys in levels hashmap represent the level
+    //the first value in pair represent the number of gems that will appear simultaneously
+    //the second value in pair represent the total number of gems that will appear in that level 
+    private HashMap<Integer, Pair<Integer, Integer>> levels = new HashMap<Integer, Pair<Integer, Integer>>(){{
+        put(1, new Pair<>(1, 5));
+        put(2, new Pair<>(2, 10));
+        put(3, new Pair<>(3, 9));
+    }};
 
     public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid){
         final ArrayList<Location> res = new ArrayList<>();
@@ -77,7 +84,7 @@ public class GameEngine {
 
     public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid)
     {
-        if (Gem.getGemLocation().getX() == newPlayer.playerLocation.getX() && Gem.getGemLocation().getY() == newPlayer.playerLocation.getY())
+        if (Gem.getGemLocation().getX() == newPlayer.getPlayerLocation().getX() && Gem.getGemLocation().getY() == newPlayer.getPlayerLocation().getY())
         {
             Gem.placeGem(cityMainStack, cityMapGrid);
             gemCount = gemCount+1;
@@ -91,20 +98,20 @@ public class GameEngine {
         atBus1 = false;
         atBus2 = false;
     
-        if (StaticTransportConfig.isPlayerAtLuasStop(newPlayer.playerLocation.getX(), newPlayer.playerLocation.getY())) {
-            PopupController.showPopupMessage(cityMainStack, newPlayer.playerName + "is at Luas");
+        if (StaticTransportConfig.isPlayerAtLuasStop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+            PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + "is at Luas");
             foundTransport = true;
             atLuas = true;
         }
     
-        if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.playerLocation.getX(), newPlayer.playerLocation.getY())) {
-            PopupController.showPopupMessage(cityMainStack, newPlayer.playerName + " is at a Bus");
+        if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+            PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at a Bus");
             foundTransport = true;
             atBus1 = true;
         }
     
-        if (StaticTransportConfig.isPlayerAtBus2Stop(newPlayer.playerLocation.getX(), newPlayer.playerLocation.getY())) {
-            PopupController.showPopupMessage(cityMainStack, newPlayer.playerName + " is at a Bus");
+        if (StaticTransportConfig.isPlayerAtBus2Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+            PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at a Bus");
             foundTransport = true;
             atBus2 = true;
         }
@@ -133,7 +140,7 @@ public class GameEngine {
         }
         for (int i = 0; i < KeysAsList.size(); i++) {
             Location key = KeysAsList.get(i);
-            if (key.getX() == newPlayer.playerLocation.getX() && key.getY() == newPlayer.playerLocation.getY()) {
+            if (key.getX() == newPlayer.getPlayerLocation().getX() && key.getY() == newPlayer.getPlayerLocation().getY()) {
                 currentStation = key;
                 if (i + 1 < KeysAsList.size()) {
                     nextStation = STOPS.get(key).getValue();
