@@ -30,7 +30,7 @@ public class CityMapController {
     @FXML
     private StackPane cityMainStack;
     public static final int ROWS = 30;
-    public static final int COLS = 30;
+    public static final int COLS = 55;
     
     @FXML
     private void initialize() {
@@ -60,55 +60,4 @@ public class CityMapController {
             }
         }
     }
-
-    // public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid){
-    //     final ArrayList<Location> res = new ArrayList<>();
-    //     cityMapGrid.setFocusTraversable(true);
-    //     cityMapGrid.requestFocus();
-    //     cityMapGrid.setOnKeyPressed(event -> {
-    //         switch (event.getCode()) {
-    //             case UP:
-    //                 Player.movePlayer(cityMainStack, cityMapGrid, 0, -1);
-    //                 break;
-    //             case DOWN:
-    //                 Player.movePlayer(cityMainStack, cityMapGrid, 0, 1);
-    //                 break;
-    //             case LEFT:
-    //                 Player.movePlayer(cityMainStack, cityMapGrid, -1, 0);
-    //                 break;
-    //             case RIGHT:
-    //                 Player.movePlayer(cityMainStack, cityMapGrid, 1, 0);
-    //                 break;
-    //             case ENTER:
-    //                 if (Player.foundTransport){
-    //                     res.clear();
-    //                     res.addAll(Player.checkTransportOptionsAndMoveUpdated(cityMainStack, cityMapGrid));
-    //                 }
-    //                 break;
-    //             case N:
-    //                 if (!res.isEmpty() && res.get(0) != null) {
-    //                     Player.movePlayerToStation(cityMapGrid, res.get(0));
-    //                     res.clear();
-    //                 }
-    //                 break;
-    //             case P:
-    //                 if (res.size() > 1 && res.get(1) != null) {
-    //                     Player.movePlayerToStation(cityMapGrid, res.get(1));
-    //                     res.clear();
-    //                 }
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //         Player.checkTransportOptions(cityMainStack, cityMapGrid);
-    //         event.consume();
-    //     });
-    //     cityMapGrid.setOnKeyReleased(event->{
-    //         if(Player.getPlayerLocation().getX() == Gem.getGemLocation().getX() && Player.getPlayerLocation().getY() == Gem.getGemLocation().getY()){
-    //             System.err.println("Win");
-    //             System.exit(0);
-    //         }
-    //         event.consume();
-    //     });
-    // }
 }

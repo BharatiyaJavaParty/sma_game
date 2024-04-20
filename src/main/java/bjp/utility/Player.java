@@ -34,20 +34,6 @@ public class Player {
     private static ImageView playerView;
     private static final Image playerImage = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
 
-    //constructor
-    // public Player(String name, Location loc, int gemCount, double co2, boolean foundTransport, boolean atLuas, boolean atBus1, boolean atBus2)
-    // {
-    //     this.playerName = name;
-    //     this.playerLocation = loc;
-    //     this.gemCount = gemCount;
-    //     this.co2Budget = co2;
-    //     this. foundTransport = foundTransport;
-    //     this.atLuas = atLuas;
-    //     this.atBus1 = atBus1;
-    //     this.atBus2 = atBus2;
-    // }
-
-    //constructor
 
     public Location getPlayerLocation()
     {
