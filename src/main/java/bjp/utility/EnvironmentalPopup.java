@@ -61,7 +61,7 @@ public class EnvironmentalPopup {
         }));
         timeline.setCycleCount(message.length());
         timeline.setOnFinished(event -> {
-            // Hide the message after 20 seconds
+            // Hide the message after 10 seconds
             PauseTransition delay = new PauseTransition(javafx.util.Duration.seconds(duration));
             delay.setOnFinished(delayEvent -> cityMainStack.getChildren().remove(messageLabel));
             delay.play();

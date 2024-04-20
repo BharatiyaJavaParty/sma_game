@@ -25,8 +25,8 @@ public class StaticTransportConfig {
     public static final Location Bus2_Stop1 = new Location("UCD", 34, 8);
     public static final Location Bus2_Stop2 = new Location("Miltown", 33, 15);
     public static final Location Bus2_Stop3 = new Location("Rathmines", 27, 9);
-    public static final Location Bus2_Stop4 = new Location("Rialto", 18, 1);
-    public static final Location Bus2_Stop5 = new Location("Spire", 14, 2);
+    public static final Location Bus2_Stop2 = new Location("Rialto", 18, 1);
+    public static final Location Bus2_Stop1 = new Location("Spire", 14, 2);
 
     public static final Location Luas_stop1 = new Location("Phibsborough", 3, 3);
     public static final Location Luas_stop2 = new Location("Parnell", 7, 14);
