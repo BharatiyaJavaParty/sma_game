@@ -70,14 +70,17 @@ public class Player {
     }
 
     public void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY) {
-        cityMapGrid.getChildren().remove(playerView);
-        this.playerLocation.setX(playerLocation.getX()+deltaX);
-        this.playerLocation.setY(playerLocation.getY()+deltaY);
-
-        this.playerLocation.setX(Math.min(Math.max(playerLocation.getX(), 0), CityMapController.COLS-1 ));
-        this.playerLocation.setY(Math.min(Math.max(playerLocation.getY(), 0), CityMapController.COLS-1 ));
-        cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
-        GameEngine.checkGemCollected(cityMainStack, cityMapGrid);
+        int proposedX = Math.min(Math.max(playerLocation.getX() + deltaX, 0), CityMapController.COLS - 1);
+        int proposedY = Math.min(Math.max(playerLocation.getY() + deltaY, 0), CityMapController.COLS - 1);
+    
+        // Check for obstacles before moving the player
+        if (!GameEngine.checkObstacles(proposedX, proposedY)) {
+            cityMapGrid.getChildren().remove(playerView);
+            playerLocation.setX(proposedX);
+            playerLocation.setY(proposedY);
+            cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+            GameEngine.checkGemCollected(cityMainStack, cityMapGrid);
+        }
     }
 
     public void movePlayerToStation(GridPane cityMapGrid, Location station) {

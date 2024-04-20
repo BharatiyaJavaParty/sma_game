@@ -32,4 +32,5 @@ public class Obstacles {
             cityMapGrid.add(imageView, tree.getX(), tree.getY());
         }
     }
+    
 }
