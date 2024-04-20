@@ -5,26 +5,11 @@ import java.util.Random;
 
 import bjp.constants.AppConstants;
 import bjp.controller.CityMapController;
-import bjp.controller.PopupController;
-import bjp.utility.StaticTransportConfig;
-import bjp.constants.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import javafx.util.Pair;
 
 public class Player {
     //player properties
@@ -105,7 +90,7 @@ public class Player {
         int proposedY = Math.min(Math.max(playerLocation.getY() + deltaY, 0), CityMapController.ROWS - 1);
     
         // Check for obstacles before moving the player
-        if (!GameEngine.checkObstacles(proposedX, proposedY)) {
+        if (!Obstacles.checkObstacles(proposedX, proposedY)) {
             cityMapGrid.getChildren().remove(playerView);
             playerLocation.setX(proposedX);
             playerLocation.setY(proposedY);

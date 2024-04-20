@@ -1,27 +1,24 @@
 package bjp.utility;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 
 import bjp.controller.CityMapController;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.util.Pair;
+
 
 public class Obstacles {
     public static ArrayList<Location> Tree_SET = new ArrayList<>();
+    public static ArrayList<Location> HOUSE_SET = new ArrayList<>();
     private static final Image treeImg = new Image(Obstacles.class.getResourceAsStream("/img/tree.png"));
+    private static final Image houseImg = new Image(Obstacles.class.getResourceAsStream("/img/house.png"));
     public static ImageView imageView;
     
     static{
         Tree_SET.add(new Location("Tree1", 1, 1));
         Tree_SET.add(new Location("Tree2", 2, 2));
+        HOUSE_SET.add(new Location("House1", 10, 10));
     }
 
     public static void placeTrees( GridPane cityMapGrid) {
@@ -32,5 +29,30 @@ public class Obstacles {
             imageView.setSmooth(true);
             cityMapGrid.add(imageView, tree.getX(), tree.getY());
         }
+    }
+
+    public static void placeHouses( GridPane cityMapGrid) {
+        for (Location house : HOUSE_SET) {
+            imageView = new ImageView(houseImg);
+            imageView.setFitWidth(2*CityMapController.WIDTH);
+            imageView.setFitHeight(2*CityMapController.HEIGHT);
+            imageView.setSmooth(true);
+            cityMapGrid.add(imageView, house.getX(), house.getY(), 2, 2);
+        }
+    }
+
+    public static boolean checkObstacles(int newX, int newY) {
+        for (Location tree : Obstacles.Tree_SET) {
+            if (tree.getX() == newX && tree.getY() == newY) {
+                return true; // There is an obstacle at the new position
+            }
+        }
+        
+        for (Location house : Obstacles.HOUSE_SET) {
+            if ((house.getX() == newX || house.getX() == newX - 1 )&& (house.getY() == newY || house.getY() == newY - 1)) {
+                return true; // There is an obstacle at the new position
+            }
+        }
+        return false; // No obstacles, movement is possible
     }
 }

@@ -37,8 +37,8 @@ public class StaticTransportConfig {
     public static final Location Luas_stop7 = new Location("TCD", 34, 19);
 
 // this hashmap contains a location and pair of its previousLocation and nextLocation
-//getKey gives previous station 
-//getValue gives next station
+// getKey gives previous station 
+// getValue gives next station
     public static final HashMap<Location, Pair<Location,Location>> LUAS_STOPS = new HashMap<Location, Pair<Location,Location>>() {{
         put(Luas_stop1,new Pair<Location,Location>(Luas_stop1, Luas_stop2));
         put(Luas_stop2, new Pair<Location,Location>(Luas_stop1, Luas_stop3));

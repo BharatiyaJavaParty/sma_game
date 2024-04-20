@@ -9,7 +9,6 @@ import bjp.constants.AppConstants;
 import bjp.controller.PopupController;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import bjp.utility.Obstacles;
 
 public class GameEngine {
     
@@ -193,14 +192,6 @@ public class GameEngine {
         return res;
     }
 
-    public static boolean checkObstacles(int newX, int newY) {
-        for (Location tree : Obstacles.Tree_SET) {
-            if (tree.getX() == newX && tree.getY() == newY) {
-                return true; // There is an obstacle at the new position
-            }
-        }
-        return false; // No obstacles, movement is possible
-    }
-    
+   
 
 }

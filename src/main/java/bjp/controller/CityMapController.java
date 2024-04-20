@@ -1,6 +1,5 @@
 package bjp.controller;
 
-import bjp.controller.PopupController;
 import bjp.utility.GameEngine;
 import bjp.utility.Bus;
 import bjp.utility.EnvironmentalPopup;
@@ -8,7 +7,6 @@ import bjp.utility.Gem;
 import bjp.utility.Luas;
 import bjp.utility.Obstacles;
 import bjp.utility.StaticTransportConfig;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
@@ -38,10 +36,9 @@ public class CityMapController {
         Gem.placeGem(cityMainStack, cityMapGrid);
         GameEngine.newPlayer.placePlayer(cityMapGrid);
         Obstacles.placeTrees(cityMapGrid);
+        Obstacles.placeHouses(cityMapGrid);
     
         PopupController.showPopupMessage(cityMainStack, "Welcome to Gem World");
-        cityMapGrid.setGridLinesVisible(true);
-
 
         Thread thread = new Thread(() -> {
             while (true) {
@@ -63,7 +60,7 @@ public class CityMapController {
         thread.start();
         GameEngine.mainEventHandler(cityMainStack, cityMapGrid);
        
-        cityMapGrid.setGridLinesVisible(true);
+        // cityMapGrid.setGridLinesVisible(true);
     }
     
     private void generateGrid(int rows, int cols) {
