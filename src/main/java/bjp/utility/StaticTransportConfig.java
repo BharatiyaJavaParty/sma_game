@@ -16,24 +16,25 @@ public class StaticTransportConfig {
     //to each other
 
 
-    public static final Location Bus1_Stop1 = new Location("Croke Park", 5, 20);
-    public static final Location Bus1_Stop2 = new Location("Mayor Square", 10, 21);
-    public static final Location Bus1_Stop3 = new Location("Ballsbridge", 17, 17);
-    public static final Location Bus1_Stop4 = new Location("Donnybrook", 25, 20);
+    public static final Location Bus1_Stop1 = new Location("Croke Park", 5, 5);
+    public static final Location Bus1_Stop2 = new Location("Mayor Square", 14, 7);
+    public static final Location Bus1_Stop3 = new Location("Ballsbridge", 20, 5);
+    public static final Location Bus1_Stop4 = new Location("Donnybrook", 30, 2);
+    public static final Location Bus1_Stop5 = new Location("Stillorgan", 35, 0);
 
-    public static final Location Bus2_Stop1 = new Location("UCD", 28, 24);
-    public static final Location Bus2_Stop2 = new Location("Miltown", 28, 17);
-    public static final Location Bus2_Stop3 = new Location("Rathmines", 29, 9);
-    public static final Location Bus2_Stop4 = new Location("Rialto", 16, 1);
+    public static final Location Bus2_Stop1 = new Location("UCD", 34, 19);
+    public static final Location Bus2_Stop2 = new Location("Miltown", 30, 17);
+    public static final Location Bus2_Stop3 = new Location("Rathmines", 27, 9);
+    public static final Location Bus2_Stop4 = new Location("Rialto", 18, 1);
     public static final Location Bus2_Stop5 = new Location("Spire", 14, 2);
 
     public static final Location Luas_stop1 = new Location("Phibsborough", 3, 3);
-    public static final Location Luas_stop2 = new Location("Parnell", 9, 14);
-    public static final Location Luas_stop3 = new Location("Abbey Street", 14, 15);
-    public static final Location Luas_stop4 = new Location("Trinity", 20, 15);
-    public static final Location Luas_stop5 = new Location("Dawson", 25, 16);
-    public static final Location Luas_stop6 = new Location("UCD", 27, 24);
-    public static final Location Luas_stop7 = new Location("TCD", 29, 23);
+    public static final Location Luas_stop2 = new Location("Parnell", 7, 14);
+    public static final Location Luas_stop3 = new Location("Abbey Street", 10, 15);
+    public static final Location Luas_stop4 = new Location("Trinity", 15, 15);
+    public static final Location Luas_stop5 = new Location("Dawson", 21, 16);
+    public static final Location Luas_stop6 = new Location("UCD", 25, 18);
+    public static final Location Luas_stop7 = new Location("TCD", 34, 19);
 
 // this hashmap contains a location and pair of its previousLocation and nextLocation
 //getKey gives previous station 
@@ -52,7 +53,9 @@ public class StaticTransportConfig {
         put(Bus1_Stop1,new Pair<Location,Location>(Bus1_Stop1, Bus1_Stop2));
         put(Bus1_Stop2,new Pair<Location,Location>(Bus1_Stop1, Bus1_Stop3));
         put(Bus1_Stop3,new Pair<Location,Location>(Bus1_Stop2, Bus1_Stop4));
-        put(Bus1_Stop4,new Pair<Location,Location>(Bus1_Stop3, Bus1_Stop4));
+        //Joel Added this code
+        put(Bus1_Stop4,new Pair<Location,Location>(Bus1_Stop3, Bus1_Stop5));
+        put(Bus1_Stop5,new Pair<Location,Location>(Bus1_Stop4, Bus1_Stop5));
     }};
 
     public static final HashMap<Location, Pair<Location,Location>> BUS2_STOPS = new HashMap<Location, Pair<Location,Location>>() {{

@@ -26,8 +26,8 @@ public class Obstacles {
     public static void placeTrees( GridPane cityMapGrid) {
         for (Location tree : Tree_SET) {
             imageView = new ImageView(gem);
-            imageView.setFitWidth(20);
-            imageView.setFitHeight(20);
+            imageView.setFitWidth(35);
+            imageView.setFitHeight(35);
             imageView.setSmooth(true);
             cityMapGrid.add(imageView, tree.getX(), tree.getY());
         }

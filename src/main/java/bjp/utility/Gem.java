@@ -29,8 +29,8 @@ public class Gem {
         cityMapGrid.getChildren().removeIf(node -> node == imageView);
 
         imageView = new ImageView(gem);
-        imageView.setFitWidth(20);
-        imageView.setFitHeight(20);
+        imageView.setFitWidth(30);
+        imageView.setFitHeight(30);
         imageView.setSmooth(true);
 
         cityMapGrid.add(imageView, gemLocation.getX(), gemLocation.getY());

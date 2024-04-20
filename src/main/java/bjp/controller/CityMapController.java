@@ -22,15 +22,15 @@ import javafx.scene.shape.Rectangle;
 import bjp.Main;
 
 public class CityMapController {
-    public static final int WIDTH = ((int) Main.scene.getHeight() - 30)/30;
-    public static final int HEIGHT = ((int) Main.scene.getHeight() - 30)/30;
+    public static final int WIDTH = ((int) Main.scene.getHeight() - 30)/20;
+    public static final int HEIGHT = ((int) Main.scene.getHeight() - 30)/20;
     @FXML
     private GridPane cityMapGrid;
 
     @FXML
     private StackPane cityMainStack;
-    public static final int ROWS = 30;
-    public static final int COLS = 55;
+    public static final int ROWS = 20;
+    public static final int COLS = 35;
     
     @FXML
     private void initialize() {

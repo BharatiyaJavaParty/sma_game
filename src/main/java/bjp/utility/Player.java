@@ -62,8 +62,8 @@ public class Player {
         this.setPlayerLocation(new Location(null, random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS)));
 
         playerView = new ImageView(playerImage);
-        playerView.setFitWidth(20);
-        playerView.setFitHeight(20);
+        playerView.setFitWidth(CityMapController.WIDTH);
+        playerView.setFitHeight(CityMapController.HEIGHT);
         playerView.setSmooth(true);
 
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
