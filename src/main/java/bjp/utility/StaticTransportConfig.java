@@ -63,7 +63,7 @@ public class StaticTransportConfig {
         put(Bus2_Stop2, new Pair<Location,Location>(Bus2_Stop1, Bus2_Stop3));
         put(Bus2_Stop3, new Pair<Location,Location>(Bus2_Stop2, Bus2_Stop4));
         put(Bus2_Stop4, new Pair<Location,Location>(Bus2_Stop3, Bus2_Stop5));
-        put(Bus2_Stop5, new Pair<Location,Location>(Bus2_Stop3, Bus2_Stop5));
+        put(Bus2_Stop5, new Pair<Location,Location>(Bus2_Stop4, Bus2_Stop5));
     }}; 
 
     public static final Luas LUAS = new Luas("Luas", 75.0, 10, LUAS_STOPS);

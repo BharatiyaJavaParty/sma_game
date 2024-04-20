@@ -58,7 +58,7 @@ public class CityMapController {
                     // Execute the popup display on the JavaFX Application Thread
                     Platform.runLater(() -> {
                         EnvironmentalPopup.showEduPopup(cityMainStack, EnvironmentalPopup.selectMsg());
-                        System.out.println("Asynchronous task running");
+                        // System.out.println("Asynchronous task running");
                     });
         
                 } catch (InterruptedException e) {
