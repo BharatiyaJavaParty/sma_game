@@ -1,5 +1,6 @@
 package bjp.utility;
 
+import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,28 +8,37 @@ import java.util.Map;
 import javafx.util.Pair;
 import bjp.constants.AppConstants;
 import bjp.controller.PopupController;
+import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import bjp.utility.*;
 
 public class GameEngine {
     
     public static Player newPlayer = new Player();
-    private Map<Integer, Integer> levelMap = new HashMap<>();
     private static int gemCount; 
 
     public static boolean foundTransport = false;
     public static boolean atLuas = false;
     public static boolean atBus1 = false;
     public static boolean atBus2 = false;
+    public static int maxLevel = 3;
+    public static int current_level = 1;
+    public static ArrayList<Gem> gems = new ArrayList<Gem>();
+    static {
+        gems.add(new Gem("red"));
+        gems.add(new Gem("orange"));
+        gems.add(new Gem("green"));
+    }
     
     //the keys in levels hashmap represent the level
-    //the first value in pair represent the number of gems that will appear simultaneously
-    //the second value in pair represent the total number of gems that will appear in that level 
-    private HashMap<Integer, Pair<Integer, Integer>> levels = new HashMap<Integer, Pair<Integer, Integer>>(){{
-        put(1, new Pair<>(1, 5));
-        put(2, new Pair<>(2, 10));
-        put(3, new Pair<>(3, 9));
+    //the key is level and the value s after how many gems level gets completed
+    private static HashMap<Integer, Integer> levels = new HashMap<Integer, Integer>(){{
+        put(1,2);
+        put(2, 4);
+        put(3, 6);  // if added new level change exit condion as well in check gems collected
     }};
+
 
     public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid){
         final ArrayList<Location> res = new ArrayList<>();
@@ -80,22 +90,35 @@ public class GameEngine {
             checkTransportOptions(cityMainStack, cityMapGrid);
             event.consume();
         });
-        cityMapGrid.setOnKeyReleased(event->{
-            if(newPlayer.getPlayerLocation().getX() == Gem.getGemLocation().getX() && GameEngine.newPlayer.getPlayerLocation().getY() == Gem.getGemLocation().getY()){
-                System.err.println("Win");
-                System.exit(0);
-            }
-            event.consume();
-        });
     }
 
-    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid)
+    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid, Gem gem)
     {
-        if (Gem.getGemLocation().getX() == newPlayer.getPlayerLocation().getX() && Gem.getGemLocation().getY() == newPlayer.getPlayerLocation().getY())
-        {
-            Gem.placeGem(cityMainStack, cityMapGrid);
-            gemCount = gemCount+1;
-            PopupController.showPopupMessage(cityMainStack, "You have collected " + String.valueOf(gemCount) + " Gems!");
+        if (gemCount == levels.get(3)) {
+            PopupController.showPopupMessage(cityMainStack, "You Win!!");
+            PauseTransition pause = new PauseTransition(Duration.millis(1000));
+            pause.setOnFinished(event -> System.exit(0));
+            pause.play();
+        };
+
+        if (gem.getGemLocation().getX() == -1){
+            gem.placeGem(cityMainStack, cityMapGrid);
+        }
+        else{
+            if (gem.getGemLocation().getX() == newPlayer.getPlayerLocation().getX() && gem.getGemLocation().getY() == newPlayer.getPlayerLocation().getY())
+            {
+                gem.placeGem(cityMainStack, cityMapGrid);
+                gemCount = gemCount+1;
+                PopupController.showPopupMessage(cityMainStack, "You have collected " + String.valueOf(gemCount) + " Gems!");
+            }
+            if (gemCount == levels.get(current_level) && current_level < 2) {
+                current_level += 1;
+                PopupController.showPopupMessage(cityMainStack, "Congratulations Level 2!");
+            }
+            if (gemCount == levels.get(current_level) && current_level < 3) {
+                current_level += 1;
+                PopupController.showPopupMessage(cityMainStack, "Congratulations Level 3!");
+            }
         }
     }
 

@@ -95,7 +95,13 @@ public class Player {
             playerLocation.setX(proposedX);
             playerLocation.setY(proposedY);
             cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
-            GameEngine.checkGemCollected(cityMainStack, cityMapGrid);
+            GameEngine.checkGemCollected(cityMainStack, cityMapGrid, GameEngine.gems.get(0));
+            if(GameEngine.current_level >= 2){
+                GameEngine.checkGemCollected(cityMainStack, cityMapGrid, GameEngine.gems.get(1));
+            }
+            if(GameEngine.current_level >= 3){
+                GameEngine.checkGemCollected(cityMainStack, cityMapGrid, GameEngine.gems.get(2));
+            }
         }
     }
 

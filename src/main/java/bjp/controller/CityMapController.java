@@ -7,6 +7,7 @@ import bjp.utility.Gem;
 import bjp.utility.Luas;
 import bjp.utility.Obstacles;
 import bjp.utility.StaticTransportConfig;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
@@ -14,6 +15,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 import javafx.scene.shape.Rectangle;
+
+import java.time.Duration;
+import java.util.ArrayList;
+
 import bjp.Main;
 
 public class CityMapController {
@@ -32,8 +37,8 @@ public class CityMapController {
         generateGrid(ROWS, COLS);
         Bus.makeBusRoad(StaticTransportConfig.BUS1, StaticTransportConfig.BUS1_STOPS, cityMapGrid);
         Bus.makeBusRoad(StaticTransportConfig.BUS2, StaticTransportConfig.BUS2_STOPS, cityMapGrid);
-        Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);   //addesd bu 
-        Gem.placeGem(cityMainStack, cityMapGrid);
+        Luas.makeLuasLane(StaticTransportConfig.LUAS, StaticTransportConfig.LUAS_STOPS, cityMapGrid);
+        
         GameEngine.newPlayer.placePlayer(cityMapGrid);
         Obstacles.placeTrees(cityMapGrid);
         Obstacles.placeHouses(cityMapGrid);
@@ -58,6 +63,8 @@ public class CityMapController {
             }
         });
         thread.start();
+
+
         GameEngine.mainEventHandler(cityMainStack, cityMapGrid);
        
         // cityMapGrid.setGridLinesVisible(true);
