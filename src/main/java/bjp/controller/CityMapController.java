@@ -1,10 +1,15 @@
 package bjp.controller;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import bjp.controller.PopupController;
 import bjp.utility.GameEngine;
 import bjp.utility.Bus;
+import bjp.utility.EnvironmentalPopup;
 import bjp.utility.Gem;
 import bjp.utility.Location;
 import bjp.utility.Luas;
@@ -13,6 +18,7 @@ import bjp.utility.Obstacles;
 import bjp.utility.Player;
 import bjp.utility.RandomSquare;
 import bjp.utility.StaticTransportConfig;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.GridPane;
@@ -46,6 +52,37 @@ public class CityMapController {
         cityMapGrid.setGridLinesVisible(true);
 
         // CityMapController.mainEventHandler(cityMainStack, cityMapGrid);
+        // ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        // Random rand = new Random();
+        // int delay = rand.nextInt(5) + 1; 
+        // executor.schedule(() -> {
+        //     Platform.runLater(() -> {
+        //         EnvironmentalPopup.showEduPopup(cityMainStack, EnvironmentalPopup.selectMsg());
+        //     });
+        // }, delay, TimeUnit.SECONDS);
+
+        Thread thread = new Thread(() -> {
+            while (true) {  // Infinite loop to keep the thread running
+                try {
+                    // Sleep for 3 seconds before showing the popup
+                    Thread.sleep(10000);  // 3000 milliseconds = 3 seconds
+        
+                    // Execute the popup display on the JavaFX Application Thread
+                    Platform.runLater(() -> {
+                        EnvironmentalPopup.showEduPopup(cityMainStack, EnvironmentalPopup.selectMsg());
+                        System.out.println("Asynchronous task running");
+                    });
+        
+                } catch (InterruptedException e) {
+                    System.err.println("Thread was interrupted");
+                    break;  // Optional: stop the thread if interrupted
+                }
+            }
+        });
+        thread.start();
+        
+        
+        
         GameEngine.mainEventHandler(cityMainStack, cityMapGrid);
 
     }
