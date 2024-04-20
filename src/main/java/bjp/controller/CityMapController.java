@@ -1,29 +1,17 @@
 package bjp.controller;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import bjp.controller.PopupController;
 import bjp.utility.GameEngine;
 import bjp.utility.Bus;
 import bjp.utility.EnvironmentalPopup;
 import bjp.utility.Gem;
-import bjp.utility.Location;
 import bjp.utility.Luas;
-import bjp.utility.NonRandomSquare;
 import bjp.utility.Obstacles;
-import bjp.utility.Player;
-import bjp.utility.RandomSquare;
 import bjp.utility.StaticTransportConfig;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import bjp.Main;
 

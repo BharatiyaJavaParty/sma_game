@@ -22,8 +22,8 @@ public class StaticTransportConfig {
     public static final Location Bus1_Stop4 = new Location("Donnybrook", 30, 2);
     public static final Location Bus1_Stop5 = new Location("Stillorgan", 35, 0);
 
-    public static final Location Bus2_Stop1 = new Location("UCD", 34, 19);
-    public static final Location Bus2_Stop2 = new Location("Miltown", 30, 17);
+    public static final Location Bus2_Stop1 = new Location("UCD", 34, 8);
+    public static final Location Bus2_Stop2 = new Location("Miltown", 33, 15);
     public static final Location Bus2_Stop3 = new Location("Rathmines", 27, 9);
     public static final Location Bus2_Stop4 = new Location("Rialto", 18, 1);
     public static final Location Bus2_Stop5 = new Location("Spire", 14, 2);
@@ -31,7 +31,7 @@ public class StaticTransportConfig {
     public static final Location Luas_stop1 = new Location("Phibsborough", 3, 3);
     public static final Location Luas_stop2 = new Location("Parnell", 7, 14);
     public static final Location Luas_stop3 = new Location("Abbey Street", 10, 15);
-    public static final Location Luas_stop4 = new Location("Trinity", 15, 15);
+    public static final Location Luas_stop4 = new Location("Trinity", 14, 15);
     public static final Location Luas_stop5 = new Location("Dawson", 21, 16);
     public static final Location Luas_stop6 = new Location("UCD", 25, 18);
     public static final Location Luas_stop7 = new Location("TCD", 34, 19);
