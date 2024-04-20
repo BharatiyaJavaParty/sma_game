@@ -71,7 +71,7 @@ public class Player {
 
     public void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY) {
         int proposedX = Math.min(Math.max(playerLocation.getX() + deltaX, 0), CityMapController.COLS - 1);
-        int proposedY = Math.min(Math.max(playerLocation.getY() + deltaY, 0), CityMapController.COLS - 1);
+        int proposedY = Math.min(Math.max(playerLocation.getY() + deltaY, 0), CityMapController.ROWS - 1);
     
         // Check for obstacles before moving the player
         if (!GameEngine.checkObstacles(proposedX, proposedY)) {

@@ -30,7 +30,7 @@ public class CityMapController {
     @FXML
     private StackPane cityMainStack;
     public static final int ROWS = 20;
-    public static final int COLS = 35;
+    public static final int COLS = 36;
     
     @FXML
     private void initialize() {
