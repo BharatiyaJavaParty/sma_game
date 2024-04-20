@@ -3,9 +3,11 @@ package bjp.utility;
 
 import java.util.Random;
 
+import bjp.constants.AppConstants;
 import bjp.controller.CityMapController;
 import bjp.controller.PopupController;
 import bjp.utility.StaticTransportConfig;
+import bjp.constants.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -27,13 +29,42 @@ import javafx.util.Pair;
 public class Player {
     //player properties
     //ideally player should have object and not all fucntions should not be called using class name
+
     private String playerName;
     private Location playerLocation;
+
+    //setting time and co2emission
+    private int playerTime;
+    private int playerCo2Budget;
+
+    public Player(){
+        this.playerTime = 0;
+        this.playerCo2Budget = AppConstants.CO2_BUDGET;
+    }
  
 
     private static ImageView playerView;
     private static final Image playerImage = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
 
+    public int getPlayerTime(){
+        return this.playerTime;
+    }
+
+    public void setPlayerTime(int time){
+        System.out.println("Player Time "+this.playerTime);
+        System.out.println("======================================================");
+        this.playerTime = time;
+    }
+
+    public int getPlayerCo2Budget(){
+        return this.playerCo2Budget;
+    }
+
+    public void setPlayerCo2Budget(int budget){
+        System.out.println("======================================================");
+        System.out.println("Player CO2 budget "+this.playerCo2Budget);
+        this.playerCo2Budget = budget;
+    }
 
     public Location getPlayerLocation()
     {

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.util.Pair;
-
+import bjp.constants.AppConstants;
 import bjp.controller.PopupController;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -16,7 +16,6 @@ public class GameEngine {
     public static Player newPlayer = new Player();
     private Map<Integer, Integer> levelMap = new HashMap<>();
     private static int gemCount; 
-    private static double co2Budget;
 
     public static boolean foundTransport = false;
     public static boolean atLuas = false;
@@ -40,15 +39,23 @@ public class GameEngine {
             switch (event.getCode()) {
                 case UP:
                     newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, -1);
+                    newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
+                    newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.WALKING_TIME_INCREMENT);
                     break;
                 case DOWN:
                     newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, 1);
+                    newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
+                    newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.WALKING_TIME_INCREMENT);
                     break;
                 case LEFT:
                     newPlayer.movePlayer(cityMainStack, cityMapGrid, -1, 0);
+                    newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
+                    newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.WALKING_TIME_INCREMENT);
                     break;
                 case RIGHT:
                     newPlayer.movePlayer(cityMainStack, cityMapGrid, 1, 0);
+                    newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
+                    newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.WALKING_TIME_INCREMENT);
                     break;
                 case ENTER:
                     if (foundTransport){
@@ -130,14 +137,26 @@ public class GameEngine {
         if(atLuas==true && (atBus1==false && atBus2==false)){
             KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
             STOPS = StaticTransportConfig.LUAS_STOPS;
+
+            //CO2 and Time reduction logic
+            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.LUAS_CO2_REDUCTION);
+            newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.LUAS_TIME_INCREMENT);
         }
         else if(atBus1==true && (atLuas==false && atBus2==false)){
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
             STOPS = StaticTransportConfig.BUS1_STOPS;
+
+            //CO2 and Time reduction logic
+            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.BUS_CO2_REDUCTION);
+            newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.BUS_TIME_INCREMENT);
         }
         else if(atBus2==true && (atLuas==false && atBus1==false)){
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS2_STOPS.keySet());
             STOPS = StaticTransportConfig.BUS2_STOPS;
+
+            //CO2 and Time reduction logic
+            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.BUS_CO2_REDUCTION);
+            newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.BUS_TIME_INCREMENT);
         }
         for (int i = 0; i < KeysAsList.size(); i++) {
             Location key = KeysAsList.get(i);
