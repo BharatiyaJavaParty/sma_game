@@ -3,11 +3,11 @@ package bjp.utility;
 import java.util.HashSet;
 import java.util.Set;
 
-import bjp.controller.CityMapController;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+import bjp.controller.CityMapController;
 
 public class Obstacles {
     public static Set<Location> Tree_SET = new HashSet<>();

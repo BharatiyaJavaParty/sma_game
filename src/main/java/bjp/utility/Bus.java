@@ -1,4 +1,7 @@
 package bjp.utility;
+
+import java.util.HashMap;
+
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -6,9 +9,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import bjp.controller.CityMapController;
 
-import java.util.HashMap;
+import bjp.controller.CityMapController;
 
 public class Bus extends StaticTransport{
     private static final Image roadHori = new Image(Luas.class.getResourceAsStream("/img/road-hori.png"));

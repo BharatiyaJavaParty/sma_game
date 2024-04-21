@@ -1,24 +1,11 @@
 package bjp.utility;
 
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
-
-import bjp.constants.AppConstants;
-import bjp.controller.CityMapController;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -27,10 +14,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.util.Duration;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import bjp.constants.AppConstants;
+import bjp.controller.CityMapController;
 
 public class Player {
     //player properties
@@ -108,20 +100,16 @@ public class Player {
 
 
     public void placePlayer(GridPane cityMapGrid) {
-        // Setting initial player location to predefined
         Location startLocation = new Location("House1", 16, 10);
         this.setPlayerLocation(startLocation);
 
-        // Configuring player view properties
         playerView.setFitWidth(CityMapController.WIDTH);
         playerView.setFitHeight(CityMapController.HEIGHT);
         playerView.setSmooth(true);
 
-        // Adding player to the grid at the start location
-        cityMapGrid.getChildren().remove(playerView); // Ensure the view is not already on the grid
+        cityMapGrid.getChildren().remove(playerView);
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
 
-        // Automatically move the player three steps down
         SoundEffects.startGame();;
         animateMove(cityMapGrid, 2);
     }
@@ -131,16 +119,15 @@ public class Player {
         for (int i = 1; i <= steps; i++) {
             int newY = playerLocation.getY() + i; 
             KeyFrame keyFrame = new KeyFrame(
-                MOVE_DURATION.multiply(i), // Delay each step to animate sequentially
+                MOVE_DURATION.multiply(i),
                 e -> {
-                    cityMapGrid.getChildren().remove(playerView); // Remove old position
-                    cityMapGrid.add(playerView, playerLocation.getX(), newY); // Add new position
+                    cityMapGrid.getChildren().remove(playerView);
+                    cityMapGrid.add(playerView, playerLocation.getX(), newY);
                 });
             timeline.getKeyFrames().add(keyFrame);
         }
 
         timeline.setOnFinished(e -> {
-            // Update player's final location after animation
             playerLocation = new Location(this.playerName, playerLocation.getX(), playerLocation.getY() + steps);
         });
 
@@ -172,10 +159,10 @@ public class Player {
                 lastDirection = 3;
             }
             GameEngine.checkGemCollected(cityMainStack, cityMapGrid, GameEngine.gems.get(0));
-            if(GameEngine.current_level >= 2){
+            if(GameEngine.current_level >= 2 && GameEngine.gemCount != GameEngine.levels.get(3)){
                 GameEngine.checkGemCollected(cityMainStack, cityMapGrid, GameEngine.gems.get(1));
             }
-            if(GameEngine.current_level >= 3){
+            if(GameEngine.current_level >= 3 && GameEngine.gemCount != GameEngine.levels.get(3)){
                 GameEngine.checkGemCollected(cityMainStack, cityMapGrid, GameEngine.gems.get(2));
             }
 
@@ -184,14 +171,6 @@ public class Player {
             cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
             }
         }
-    
-
-    // public void movePlayerToStation(GridPane cityMapGrid, Location station) {
-    //     cityMapGrid.getChildren().remove(playerView);
-    //     this.playerLocation.setX(station.getX());
-    //     this.playerLocation.setY(station.getY());
-    //     cityMapGrid.add(playerView, this.playerLocation.getX(), this.playerLocation.getY());
-    // }
 
     public void movePlayerToStation(GridPane cityMapGrid, Location station, String direction) {
         ArrayList<Location> path = calculatePath(playerLocation, station, direction);
@@ -204,7 +183,6 @@ public class Player {
         int yStep = Integer.signum(end.getY() - start.getY());
     
         if (direction.equals("N")) {
-            // Horizontal then vertical movement
             for (int x = start.getX(); x != end.getX(); x += xStep) {
                 path.add(new Location("Intermediate", x, start.getY()));
             }
@@ -214,7 +192,6 @@ public class Player {
                 path.add(new Location("Intermediate", end.getX(), y));
             }
         } else if (direction.equals("P")) {
-            // Vertical then horizontal movement
             for (int y = start.getY(); y != end.getY(); y += yStep) {
                 path.add(new Location("Intermediate", start.getX(), y));
             }
@@ -232,17 +209,16 @@ public class Player {
     private void animatePath(GridPane cityMapGrid, ArrayList<Location> path) {
         if (path.isEmpty()) return;
     
-        double stepDuration = 100; // Each grid cell animation takes 100 milliseconds
+        double stepDuration = 100;
         Duration totalDuration = Duration.millis(path.size() * stepDuration);
         
         Timeline timeline = new Timeline();
         timeline.setCycleCount(1);
         timeline.setAutoReverse(false);
     
-        // Change to vehicle image at the start of the animation
         playerView.setImage(VEHICLE_IMAGE);
         cityMapGrid.getChildren().remove(playerView);
-        playerLocation = path.get(0); // Start at the first location
+        playerLocation = path.get(0);
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
     
         for (int i = 0; i < path.size(); i++) {
@@ -256,12 +232,11 @@ public class Player {
             timeline.getKeyFrames().add(keyFrame);
         }
     
-        // Change back to original player image when animation is finished
         timeline.setOnFinished(e -> {
             System.out.println("Finished moving to station");
             System.out.println(playerLocation.getX());
-            playerLocation = path.get(path.size() - 1); // Update final position
-            playerView.setImage(PLAYER_IMAGE_DOWN1); // Assume PLAYER_IMAGE_DOWN1 is the default player image
+            playerLocation = path.get(path.size() - 1);
+            playerView.setImage(PLAYER_IMAGE_DOWN1);
             cityMapGrid.getChildren().remove(playerView);
             cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
         });
@@ -279,49 +254,60 @@ public class Player {
         transition.play();
     }
 
-    public void saveResults(int gems){
-        try{
-            File file = new File("Score.txt");
-            if(!file.exists()){
+    public void saveResults(int gems) {
+        try {
+            File file = new File("Score.json");
+            ObjectMapper mapper = new ObjectMapper();
+            ArrayNode arrayNode;
+    
+            if (file.exists() && file.length() != 0) {
+                arrayNode = (ArrayNode) mapper.readTree(file);
+            } else {
                 file.createNewFile();
+                arrayNode = mapper.createArrayNode();
             }
+    
+            ObjectNode jsonObject = mapper.createObjectNode();
+            jsonObject.put("playerName", playerName);
+            jsonObject.put("playerCO2Budget", playerCo2Budget);
+            jsonObject.put("playerTime", playerTime);
+            jsonObject.put("gems", gems);
+            arrayNode.add(jsonObject);
 
-            String str = "\n"+playerName+" "+Integer.toString(playerCo2Budget)+" "+Integer.toString(playerTime)+" "+Integer.toString(gems);
-
-            FileWriter fw = new FileWriter(file.getName(), true);
+            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode);
+            FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(str);
+            bw.write(jsonString);
             bw.close();
-        }
-        catch(IOException e){
-            System.out.println("An error occured while creating the file");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file");
             e.printStackTrace();
         }
     }
-
-    /**
-     * This function returns a 2D arrayList with first column being playerName;
-     * second column neing playerC02Budget at the time of wining the game
-     * third column is playerTime
-     * @return res
-     * @throws FileNotFoundException
-     */
-
-    public static ArrayList<ArrayList<String>> getResults() throws FileNotFoundException{
-        ArrayList res = new ArrayList<>();
-        File file = new File("Score.txt");
-        if(!file.exists()){
-            System.out.println("Score.txt file not found");
+    
+    public static ArrayList<ArrayList<String>> getResults() {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        File file = new File("Score.json");
+        if (!file.exists()) {
+            System.out.println("Score.json file not found");
+            return res;  // Early return to avoid further processing
         }
-        Scanner sc = new Scanner(file);
-        while(sc.hasNextLine()){
-            ArrayList<String> temp = new ArrayList<String>();
-            String[] str = sc.nextLine().split(" ");
-            for(String st:str){
-                System.out.print(st);
-                temp.add(st);
+    
+        ObjectMapper mapper = new ObjectMapper();
+    
+        try {
+            ArrayNode arrayNode = (ArrayNode) mapper.readTree(file);
+            for (JsonNode rootNode : arrayNode) {
+                ArrayList<String> temp = new ArrayList<>();
+                temp.add(rootNode.get("playerName").asText());
+                temp.add(String.valueOf(rootNode.get("playerCO2Budget").asInt()));
+                temp.add(String.valueOf(rootNode.get("playerTime").asInt()));
+                temp.add(String.valueOf(rootNode.get("gems").asInt()));
+                res.add(temp);
             }
-            res.add(temp);
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the JSON file");
+            e.printStackTrace();
         }
         return res;
     }

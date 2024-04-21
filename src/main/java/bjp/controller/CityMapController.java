@@ -1,25 +1,19 @@
 package bjp.controller;
 
-import bjp.utility.GameEngine;
-import bjp.utility.Bus;
-import bjp.utility.EnvironmentalPopup;
-import bjp.utility.Gem;
-import bjp.utility.Luas;
-import bjp.utility.Obstacles;
-import bjp.utility.StaticTransportConfig;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-import java.time.Duration;
-import java.util.ArrayList;
-
+import bjp.utility.GameEngine;
+import bjp.utility.Bus;
+import bjp.utility.EnvironmentalPopup;
+import bjp.utility.Luas;
+import bjp.utility.Obstacles;
+import bjp.utility.StaticTransportConfig;
 import bjp.Main;
 
 public class CityMapController {
@@ -52,9 +46,7 @@ public class CityMapController {
             while (true) {
                 try
                 {
-                    // Sleep for 10 seconds before showing the popup
-                    Thread.sleep(10000); 
-                    // Execute the popup display on the JavaFX Application Thread
+                    Thread.sleep(10000);
                     Platform.runLater(() -> {
                         EnvironmentalPopup.showEduPopup(cityMainStack, EnvironmentalPopup.selectMsg());
                     });
@@ -66,11 +58,7 @@ public class CityMapController {
             }
         });
         thread.start();
-
-
         GameEngine.mainEventHandler(cityMainStack, cityMapGrid);
-       
-        // cityMapGrid.setGridLinesVisible(true);
     }
     
     private void generateGrid(int rows, int cols) {

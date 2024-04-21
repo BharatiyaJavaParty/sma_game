@@ -1,30 +1,23 @@
 package bjp.utility;
 
-import javafx.util.Duration;
-
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.json.simple.parser.ParseException;
-
+import javafx.util.Duration;
 import javafx.util.Pair;
-import bjp.constants.AppConstants;
-import bjp.controller.PopupController;
 import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import bjp.utility.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+
+import bjp.constants.AppConstants;
+import bjp.controller.PopupController;
 
 public class GameEngine {
     
     public static Player newPlayer = new Player();
-    private static int gemCount; 
+    public static int gemCount; 
 
     public static boolean foundTransport = false;
     public static boolean atLuas = false;
@@ -43,7 +36,7 @@ public class GameEngine {
     
     //the keys in levels hashmap represent the level
     //the key is level and the value s after how many gems level gets completed
-    private static HashMap<Integer, Integer> levels = new HashMap<Integer, Integer>(){{
+    public static HashMap<Integer, Integer> levels = new HashMap<Integer, Integer>(){{
         put(1,2);
         put(2, 4);
         put(3, 6);  // if added new level change exit condion as well in check gems collected
@@ -60,7 +53,6 @@ public class GameEngine {
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, -1);
                     } catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
@@ -70,7 +62,6 @@ public class GameEngine {
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, 1);
                     } catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
@@ -80,7 +71,6 @@ public class GameEngine {
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, -1, 0);
                     } catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
@@ -90,7 +80,6 @@ public class GameEngine {
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, 1, 0);
                     } catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
@@ -129,9 +118,9 @@ public class GameEngine {
             newPlayer.saveResults(gemCount);
             PauseTransition pause = new PauseTransition(Duration.millis(1000));
             pause.setOnFinished(event -> System.exit(0));
-            newPlayer.getResults();
+            Player.getResults();
             // pause.setOnFinished(event->PopupController.showPopupMessage(cityMainStack, "Your CO2 Budget is"+newPlayer.getPlayerCo2Budget()));
-            pause.play();
+            pause.play(); 
         };
 
         if (gem.getGemLocation().getX() == -1){

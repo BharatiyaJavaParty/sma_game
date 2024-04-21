@@ -3,11 +3,12 @@ package bjp.controller;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import bjp.utility.Player;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import bjp.utility.Player;
 
 public class ScoreBoardController {
 

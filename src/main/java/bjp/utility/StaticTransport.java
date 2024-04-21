@@ -1,12 +1,12 @@
 package bjp.utility;
 
 import java.util.HashMap;
+import javafx.util.Pair;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.util.Pair;
 
 //abstract class which serves as parent for Bus, Luas, Dart etc
 public abstract class StaticTransport {
