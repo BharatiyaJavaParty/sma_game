@@ -1,6 +1,13 @@
 package bjp.utility;
 
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Random;
 
 import bjp.constants.AppConstants;
@@ -151,6 +158,26 @@ public class Player {
         transition.setCycleCount(2); // Bounce up and down once
         transition.setAutoReverse(true);
         transition.play();
+    }
+
+    public void saveResults(){
+        try{
+            File file = new File("Score.txt");
+            if(!file.exists()){
+                file.createNewFile();
+            }
+
+            String str = "\n Player Name "+playerName+" Player CO2 Emission "+playerCo2Budget+" Player Time "+playerTime;
+
+            FileWriter fw = new FileWriter(file.getName(), true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(str);
+            bw.close();
+        }
+        catch(IOException e){
+            System.out.println("An error occured while creating the file");
+            e.printStackTrace();
+        }
     }
     
 }

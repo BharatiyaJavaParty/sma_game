@@ -100,8 +100,10 @@ public class GameEngine {
     {
         if (gemCount == levels.get(3)) {
             PopupController.showPopupMessage(cityMainStack, "You Win!!");
+            newPlayer.saveResults();
             PauseTransition pause = new PauseTransition(Duration.millis(1000));
             pause.setOnFinished(event -> System.exit(0));
+            // pause.setOnFinished(event->PopupController.showPopupMessage(cityMainStack, "Your CO2 Budget is"+newPlayer.getPlayerCo2Budget()));
             pause.play();
         };
 
