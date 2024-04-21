@@ -4,12 +4,18 @@ package bjp.utility;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 import bjp.constants.AppConstants;
 import bjp.controller.CityMapController;
@@ -111,7 +117,7 @@ public class Player {
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
     }
 
-    public void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY) {
+    public void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY) throws FileNotFoundException {
         int proposedX = Math.min(Math.max(playerLocation.getX() + deltaX, 0), CityMapController.COLS - 1);
         int proposedY = Math.min(Math.max(playerLocation.getY() + deltaY, 0), CityMapController.ROWS - 1);
     
@@ -232,7 +238,7 @@ public class Player {
                 file.createNewFile();
             }
 
-            String str = "\n Player Name "+playerName+" Player CO2 Emission "+playerCo2Budget+" Player Time "+playerTime;
+            String str = "\n"+playerName+" "+Integer.toString(playerCo2Budget)+" "+Integer.toString(playerTime);
 
             FileWriter fw = new FileWriter(file.getName(), true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -243,6 +249,33 @@ public class Player {
             System.out.println("An error occured while creating the file");
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This function returns a 2D arrayList with first column being playerName;
+     * second column neing playerC02Budget at the time of wining the game
+     * third column is playerTime
+     * @return res
+     * @throws FileNotFoundException
+     */
+
+    public ArrayList<ArrayList<String>> getResults() throws FileNotFoundException{
+        ArrayList res = new ArrayList<>();
+        File file = new File("Score.txt");
+        if(!file.exists()){
+            System.out.println("Score.txt file not found");
+        }
+        Scanner sc = new Scanner(file);
+        while(sc.hasNextLine()){
+            ArrayList<String> temp = new ArrayList<String>();
+            String[] str = sc.nextLine().split(" ");
+            for(String st:str){
+                System.out.print(st);
+                temp.add(st);
+            }
+            res.add(temp);
+        }
+        return res;
     }
     
 }

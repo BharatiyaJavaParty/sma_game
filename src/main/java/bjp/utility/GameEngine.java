@@ -2,11 +2,15 @@ package bjp.utility;
 
 import javafx.util.Duration;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.json.simple.parser.ParseException;
+
 import javafx.util.Pair;
 import bjp.constants.AppConstants;
 import bjp.controller.PopupController;
@@ -53,22 +57,42 @@ public class GameEngine {
         cityMapGrid.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case UP:
-                    newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, -1);
+                    try {
+                        newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, -1);
+                    } catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
                     newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.WALKING_TIME_INCREMENT);
                     break;
                 case DOWN:
-                    newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, 1);
+                    try {
+                        newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, 1);
+                    } catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
                     newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.WALKING_TIME_INCREMENT);
                     break;
                 case LEFT:
-                    newPlayer.movePlayer(cityMainStack, cityMapGrid, -1, 0);
+                    try {
+                        newPlayer.movePlayer(cityMainStack, cityMapGrid, -1, 0);
+                    } catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
                     newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.WALKING_TIME_INCREMENT);
                     break;
                 case RIGHT:
-                    newPlayer.movePlayer(cityMainStack, cityMapGrid, 1, 0);
+                    try {
+                        newPlayer.movePlayer(cityMainStack, cityMapGrid, 1, 0);
+                    } catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.WALKING_CO2_REDUCTION);
                     newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.WALKING_TIME_INCREMENT);
                     break;
@@ -98,13 +122,14 @@ public class GameEngine {
         });
     }
 
-    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid, Gem gem)
+    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid, Gem gem) throws FileNotFoundException
     {
         if (gemCount == levels.get(3)) {
             PopupController.showPopupMessage(cityMainStack, "You Win!!");
             newPlayer.saveResults();
             PauseTransition pause = new PauseTransition(Duration.millis(1000));
             pause.setOnFinished(event -> System.exit(0));
+            newPlayer.getResults();
             // pause.setOnFinished(event->PopupController.showPopupMessage(cityMainStack, "Your CO2 Budget is"+newPlayer.getPlayerCo2Budget()));
             pause.play();
         };
