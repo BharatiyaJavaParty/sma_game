@@ -24,8 +24,10 @@ public class GameEngine {
 
     public static boolean foundTransport = false;
     public static boolean atLuas = false;
+    public static boolean atRedLuas = false;
     public static boolean atBus1 = false;
     public static boolean atBus2 = false;
+    public static boolean atBus3 = false;
     public static int maxLevel = 3;
     public static int current_level = 1;
     public static ArrayList<Gem> gems = new ArrayList<Gem>();
@@ -145,6 +147,14 @@ public class GameEngine {
             newPlayer.bouncePlayer();
             SoundEffects.playTransportSound();
         }
+
+        if (StaticTransportConfig.isPlayerAtRedLuasStop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+            // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at Luas");
+            foundTransport = true;
+            atRedLuas = true;
+            newPlayer.bouncePlayer();
+            SoundEffects.playTransportSound();
+        }
     
         if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at a Bus");
@@ -161,6 +171,14 @@ public class GameEngine {
             SoundEffects.playTransportSound();
             newPlayer.bouncePlayer();
         }
+
+        if (StaticTransportConfig.isPlayerAtBus3Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+            // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at a Bus");
+            foundTransport = true;
+            atBus3 = true;
+            SoundEffects.playTransportSound();
+            newPlayer.bouncePlayer();
+        }
     }
 
     public static ArrayList<Location> checkTransportOptionsAndMoveUpdated(StackPane cityMainStack, GridPane cityMapGrid){
@@ -172,7 +190,7 @@ public class GameEngine {
         List<Location> KeysAsList = new ArrayList<Location>();
     
 
-        if(atLuas==true && (atBus1==false && atBus2==false)){
+        if(atLuas==true && (atRedLuas==false && atBus1==false && atBus2==false && atBus3==false)){
             KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS1_STOPS.keySet());
             STOPS = StaticTransportConfig.LUAS1_STOPS;
 
@@ -180,7 +198,7 @@ public class GameEngine {
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.LUAS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.LUAS_TIME_INCREMENT);
         }
-        else if(atBus1==true && (atLuas==false && atBus2==false)){
+        else if(atBus1==true && (atRedLuas==false && atLuas==false && atBus2==false && atBus3==false)){
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
             STOPS = StaticTransportConfig.BUS1_STOPS;
 
@@ -188,9 +206,25 @@ public class GameEngine {
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.BUS_TIME_INCREMENT);
         }
-        else if(atBus2==true && (atLuas==false && atBus1==false)){
+        else if(atBus2==true && (atRedLuas==false && atLuas==false && atBus1==false && atBus3==false)){
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS2_STOPS.keySet());
             STOPS = StaticTransportConfig.BUS2_STOPS;
+
+            //CO2 and Time reduction logic
+            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.BUS_CO2_REDUCTION);
+            newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.BUS_TIME_INCREMENT);
+        }
+        else if(atBus3==true && (atRedLuas==false && atLuas==false && atBus1==false && atBus2==false)){
+            KeysAsList = new ArrayList<>(StaticTransportConfig.BUS3_STOPS.keySet());
+            STOPS = StaticTransportConfig.BUS3_STOPS;
+
+            //CO2 and Time reduction logic
+            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.BUS_CO2_REDUCTION);
+            newPlayer.setPlayerTime(newPlayer.getPlayerTime()+AppConstants.BUS_TIME_INCREMENT);
+        }
+        else if(atRedLuas==true && (atLuas==false && atBus1==false && atBus3==false && atBus2==false)){
+            KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS2_STOPS.keySet());
+            STOPS = StaticTransportConfig.LUAS2_STOPS;
 
             //CO2 and Time reduction logic
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.BUS_CO2_REDUCTION);

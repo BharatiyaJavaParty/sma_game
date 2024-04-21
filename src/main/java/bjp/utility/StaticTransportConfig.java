@@ -31,12 +31,12 @@ public class StaticTransportConfig {
     public static final Location Bus2_Stop2 = new Location("Rialto", 18, 1);
     public static final Location Bus2_Stop1 = new Location("Spire", 14, 2);
 
-    public static final Location Bus3_Stop6 = new Location("Connolly", 2, 5);
-    public static final Location Bus3_Stop5 = new Location("Heuston", 5, 10);
-    public static final Location Bus3_Stop4 = new Location("Tara", 8, 16);
-    public static final Location Bus3_Stop3 = new Location("Pearse", 28, 19);
-    public static final Location Bus3_Stop2 = new Location("Docklands", 32, 12);
-    public static final Location Bus3_Stop1 = new Location("Dame Street", 34, 7);
+    public static final Location Bus3_Stop1 = new Location("Connolly", 2, 5);
+    public static final Location Bus3_Stop2 = new Location("Heuston", 5, 10);
+    public static final Location Bus3_Stop3 = new Location("Tara", 8, 16);
+    public static final Location Bus3_Stop4 = new Location("Pearse", 28, 19);
+    public static final Location Bus3_Stop5 = new Location("Docklands", 32, 12);
+    public static final Location Bus3_Stop6 = new Location("Dame Street", 34, 7);
 
     public static final Location Luas1_stop1 = new Location("Phibsborough", 3, 3);
     public static final Location Luas1_stop2 = new Location("Parnell", 7, 14);
@@ -46,12 +46,12 @@ public class StaticTransportConfig {
     public static final Location Luas1_stop6 = new Location("UCD", 25, 18);
     public static final Location Luas1_stop7 = new Location("TCD", 34, 19);
 
-    public static final Location Luas2_stop1 = new Location("Tallaght", 12, 1);
-    public static final Location Luas2_stop2 = new Location("Dundrum", 12, 14);
-    public static final Location Luas2_stop3 = new Location("St. Stephen's", 16, 14);
-    public static final Location Luas2_stop4 = new Location("The Point", 16, 17);
-    public static final Location Luas2_stop5 = new Location("Irish Town", 3, 17);
-    public static final Location Luas2_stop6 = new Location("Blackrock", 1, 9);
+    public static final Location Luas2_stop6 = new Location("Tallaght", 12, 1);
+    public static final Location Luas2_stop5 = new Location("Dundrum", 12, 14);
+    public static final Location Luas2_stop4 = new Location("St. Stephen's", 16, 14);
+    public static final Location Luas2_stop3 = new Location("The Point", 16, 17);
+    public static final Location Luas2_stop2 = new Location("Irish Town", 3, 17);
+    public static final Location Luas2_stop1 = new Location("Blackrock", 1, 9);
 
 
 // this hashmap contains a location and pair of its previousLocation and nextLocation
@@ -129,11 +129,19 @@ public class StaticTransportConfig {
         return LUAS1_STOPS_SET.contains(new Location("Temporary", playerX, playerY));
     }
 
+    public static boolean isPlayerAtRedLuasStop(int playerX, int playerY) {
+        return LUAS2_STOPS_SET.contains(new Location("Temporary", playerX, playerY));
+    }
+
     public static boolean isPlayerAtBus1Stop(int playerX, int playerY) {
         return BUS1_STOPS_SET.contains(new Location("Temporary", playerX, playerY));
     }
 
     public static boolean isPlayerAtBus2Stop(int playerX, int playerY) {
         return BUS2_STOPS_SET.contains(new Location("Temporary", playerX, playerY));
+    }
+
+    public static boolean isPlayerAtBus3Stop(int playerX, int playerY) {
+        return BUS3_STOPS_SET.contains(new Location("Temporary", playerX, playerY));
     }
 }
