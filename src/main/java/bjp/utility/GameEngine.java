@@ -173,8 +173,8 @@ public class GameEngine {
     
 
         if(atLuas==true && (atBus1==false && atBus2==false)){
-            KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS_STOPS.keySet());
-            STOPS = StaticTransportConfig.LUAS_STOPS;
+            KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS1_STOPS.keySet());
+            STOPS = StaticTransportConfig.LUAS1_STOPS;
 
             //CO2 and Time reduction logic
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget()-AppConstants.LUAS_CO2_REDUCTION);

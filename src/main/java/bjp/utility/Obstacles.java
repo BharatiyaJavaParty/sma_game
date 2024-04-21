@@ -23,9 +23,16 @@ public class Obstacles {
         Tree_SET.add(new Location("Tree2", 0, 0));
         Tree_SET.add(new Location("Tree2", 0, 1));
         Tree_SET.add(new Location("Tree2", 1, 0));
+        Tree_SET.add(new Location("Tree2", 18, 9));
+        Tree_SET.add(new Location("Tree2", 18, 10));
+        Tree_SET.add(new Location("Tree2", 18, 11));
         Tree_SET.add(new Location("Tree2", 17, 9));
+        Tree_SET.add(new Location("Tree2", 16, 9));
+        Tree_SET.add(new Location("Tree2", 15, 9));
+        Tree_SET.add(new Location("Tree2", 15, 10));
+        Tree_SET.add(new Location("Tree2", 15, 11));
 
-        HOUSE_SET.add(new Location("House1", 10, 10));
+        HOUSE_SET.add(new Location("House1", 16, 10));
     }
 
     public static void placeTrees( GridPane cityMapGrid) {

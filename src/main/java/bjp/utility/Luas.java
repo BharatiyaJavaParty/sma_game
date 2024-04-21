@@ -11,19 +11,36 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 import bjp.controller.CityMapController;
 
-public class Luas extends StaticTransport{
-    
+public class Luas extends StaticTransport {
+
     // Assuming you have an image at "src/main/resources/bjp/img/roadTexture.jpg"
-    private static final Image trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori.png"));
-    private static final Image trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti.png"));
-    private static final Image luasStop = new Image(Luas.class.getResourceAsStream("/img/luas-stop.png"));
-    private static final Image trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join.png"));
-    
-    public Luas(String transportName, double co2Emissions, long timeTaken, HashMap<Location,Pair<Location, Location>> stops) {
+    private static Image trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori-green.png"));
+    private static Image trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti-green.png"));
+    private static Image luasStop = new Image(Luas.class.getResourceAsStream("/img/luas-stop.png"));
+    private static Image trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join-green.png"));
+
+    public Luas(String transportName, double co2Emissions, long timeTaken,
+            HashMap<Location, Pair<Location, Location>> stops) {
         super(transportName, co2Emissions, timeTaken, stops);
     }
 
-    public static void makeLuasLane(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) {
+    public static void makeLuasLane_green(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops,
+            GridPane grid) {
+        for (Location start : luasStops.keySet()) {
+            Location end = luasStops.get(start).getValue();
+            luas.drawRoad(start, end, grid);
+        }
+
+        for (Location stop : luasStops.keySet()) {
+            luas.fillGridCellWithImage(grid, stop.getX(), stop.getY(), luasStop);
+        }
+    }
+
+    public static void makeLuasLane_red(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) 
+        {
+        trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori-red.png"));
+        trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti-red.png"));
+        trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join-red.png"));
         for (Location start : luasStops.keySet()) {
             Location end = luasStops.get(start).getValue();
             luas.drawRoad(start, end, grid);
@@ -46,20 +63,18 @@ public class Luas extends StaticTransport{
         int minY = Math.min(startY, endY);
         int maxY = Math.max(startY, endY);
 
-        for (int x = minX+1; x <= maxX; x++) {
+        for (int x = minX + 1; x <= maxX; x++) {
             if (x == maxX) {
                 fillGridCellWithImage(grid, x, startY, trackJoin);
-            }
-            else{
+            } else {
                 fillGridCellWithImage(grid, x, startY, trackHori);
             }
         }
 
-        for (int y = minY+1; y <= maxY; y++) {
+        for (int y = minY + 1; y <= maxY; y++) {
             if (y == maxY) {
                 fillGridCellWithImage(grid, endX, y, trackJoin);
-            }
-            else{
+            } else {
                 fillGridCellWithImage(grid, endX, y, trackVerti);
             }
         }
@@ -102,6 +117,5 @@ public class Luas extends StaticTransport{
         return Math.abs(l1.getX() - l2.getX()) + Math.abs(l1.getY() - l2.getY());
     }
 }
-
 
 // psyren

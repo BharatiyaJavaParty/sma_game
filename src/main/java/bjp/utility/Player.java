@@ -1,7 +1,6 @@
 package bjp.utility;
 
 
-<<<<<<< Updated upstream
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,9 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-=======
 import java.util.ArrayList;
->>>>>>> Stashed changes
 import java.util.Random;
 
 import bjp.constants.AppConstants;
