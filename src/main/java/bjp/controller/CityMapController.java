@@ -23,15 +23,15 @@ import java.util.ArrayList;
 import bjp.Main;
 
 public class CityMapController {
-    public static final int WIDTH = ((int) Main.scene.getHeight() - 30)/20;
-    public static final int HEIGHT = ((int) Main.scene.getHeight() - 30)/20;
+    public static final int WIDTH = ((int) Main.scene.getHeight() - 50)/20;
+    public static final int HEIGHT = ((int) Main.scene.getHeight() - 50)/20;
     @FXML
     private GridPane cityMapGrid;
 
     @FXML
     private StackPane cityMainStack;
-    public static final int ROWS = 20;
-    public static final int COLS = 36;
+    public static final int ROWS = (int) Main.scene.getHeight()/ (int) HEIGHT;
+    public static final int COLS = (int) Main.scene.getWidth()/ (int) WIDTH;
     
     @FXML
     private void initialize() {

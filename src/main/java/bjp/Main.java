@@ -20,6 +20,7 @@ public class Main extends Application {
             primaryStage.setTitle("GEM HUNTER");
             primaryStage.setMaximized(true);
             scene = new Scene(loadFXML("launch-view"));
+    
             primaryStage.setScene(scene);
             primaryStage.show();
         }
