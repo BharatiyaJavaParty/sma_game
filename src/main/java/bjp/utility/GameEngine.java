@@ -126,7 +126,7 @@ public class GameEngine {
     {
         if (gemCount == levels.get(3)) {
             PopupController.showPopupMessage(cityMainStack, "You Win!!");
-            newPlayer.saveResults();
+            newPlayer.saveResults(gemCount);
             PauseTransition pause = new PauseTransition(Duration.millis(1000));
             pause.setOnFinished(event -> System.exit(0));
             newPlayer.getResults();

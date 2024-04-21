@@ -24,13 +24,23 @@ public class LaunchController {
        }
        catch(Exception e)
        {
-         System.out.println("madarchod\n\n\n\n\n");
          e.printStackTrace();
        }
     }
  
     @FXML
     public void scoreboardButtonClicked() {
-       // Handle "Scoreboard" button click
+      try
+      {
+         Stage scoreStage = new Stage();
+         scoreStage.setTitle("SCOREBOARD");
+         Scene scoreScene = new Scene(Main.loadFXML("scoreboard"));
+         scoreStage.setScene(scoreScene);
+         scoreStage.show();
+      }
+      catch(Exception e)
+      {
+         e.printStackTrace();
+      }
     }
 }

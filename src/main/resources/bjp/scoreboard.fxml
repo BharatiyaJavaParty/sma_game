@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="400" prefWidth="600" fx:controller="bjp.controller.ScoreBoardController">
+    <ScrollPane>
+        <content>
+            <TableView fx:id="scoreboardTable" prefHeight="400" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="name" text="Player Name" prefWidth="150"/>
+                    <TableColumn fx:id="co2Budget" text="CO2 spent" prefWidth="150"/>
+                    <TableColumn fx:id="time" text="Player Time" prefWidth="150"/>
+                    <TableColumn fx:id="gems" text="Gems" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </content>
+    </ScrollPane>
+
+</VBox>

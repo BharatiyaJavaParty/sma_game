@@ -249,14 +249,14 @@ public class Player {
         transition.play();
     }
 
-    public void saveResults(){
+    public void saveResults(int gems){
         try{
             File file = new File("Score.txt");
             if(!file.exists()){
                 file.createNewFile();
             }
 
-            String str = "\n"+playerName+" "+Integer.toString(playerCo2Budget)+" "+Integer.toString(playerTime);
+            String str = "\n"+playerName+" "+Integer.toString(playerCo2Budget)+" "+Integer.toString(playerTime)+" "+Integer.toString(gems);
 
             FileWriter fw = new FileWriter(file.getName(), true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -277,7 +277,7 @@ public class Player {
      * @throws FileNotFoundException
      */
 
-    public ArrayList<ArrayList<String>> getResults() throws FileNotFoundException{
+    public static ArrayList<ArrayList<String>> getResults() throws FileNotFoundException{
         ArrayList res = new ArrayList<>();
         File file = new File("Score.txt");
         if(!file.exists()){
