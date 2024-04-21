@@ -1,6 +1,7 @@
 package bjp.utility;
 
 
+<<<<<<< Updated upstream
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,6 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+=======
+import java.util.ArrayList;
+>>>>>>> Stashed changes
 import java.util.Random;
 
 import bjp.constants.AppConstants;
@@ -19,6 +23,10 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+
 
 public class Player {
     //player properties
@@ -45,6 +53,7 @@ public class Player {
     private static final Image PLAYER_IMAGE_UP2 = new Image(Player.class.getResourceAsStream("/img/player_moments/walkup2.png"));
     private static final Image PLAYER_IMAGE_DOWN1 = new Image(Player.class.getResourceAsStream("/img/player_moments/walkdown1.png"));
     private static final Image PLAYER_IMAGE_DOWN2 = new Image(Player.class.getResourceAsStream("/img/player_moments/walkdown2.png"));
+    private static final Image VEHICLE_IMAGE = new Image(Player.class.getResourceAsStream("/img/luas-stop.png"));
 // Existing left and right images
 
     private static ImageView playerView = new ImageView(PLAYER_IMAGE_DOWN1);
@@ -144,18 +153,77 @@ public class Player {
         }
     
 
+    // public void movePlayerToStation(GridPane cityMapGrid, Location station) {
+    //     cityMapGrid.getChildren().remove(playerView);
+    //     this.playerLocation.setX(station.getX());
+    //     this.playerLocation.setY(station.getY());
+    //     cityMapGrid.add(playerView, this.playerLocation.getX(), this.playerLocation.getY());
+    // }
+
     public void movePlayerToStation(GridPane cityMapGrid, Location station) {
-        cityMapGrid.getChildren().remove(playerView);
-        this.playerLocation.setX(station.getX());
-        this.playerLocation.setY(station.getY());
-        cityMapGrid.add(playerView, this.playerLocation.getX(), this.playerLocation.getY());
+        ArrayList<Location> path = calculatePath(playerLocation, station);
+        animatePath(cityMapGrid, path, Duration.seconds(5));
     }
+
+    private ArrayList<Location> calculatePath(Location start, Location end) {
+        ArrayList<Location> path = new ArrayList<>();
+        int xStep = Integer.signum(end.getX() - start.getX());
+        int yStep = Integer.signum(end.getY() - start.getY());
+
+        for (int x = start.getX(); x != end.getX(); x += xStep) {
+            path.add(new Location("Intermediate", x, start.getY()));
+        }
+        path.add(new Location("Intermediate", end.getX(), start.getY()));
+
+        for (int y = start.getY(); y != end.getY(); y += yStep) {
+            path.add(new Location("Intermediate", end.getX(), y));
+        }
+        path.add(end);
+
+        return path;
+    }
+
+    private void animatePath(GridPane cityMapGrid, ArrayList<Location> path, Duration totalDuration) {
+        if (path.isEmpty()) return;
+    
+        Timeline timeline = new Timeline();
+        double stepDuration = totalDuration.toMillis() / path.size();
+    
+        // Change to vehicle image at the start of the animation
+        playerView.setImage(VEHICLE_IMAGE);
+        cityMapGrid.getChildren().remove(playerView);
+        playerLocation = path.get(0); // Start at the first location
+        cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+    
+        for (int i = 0; i < path.size(); i++) {
+            Location loc = path.get(i);
+            KeyFrame keyFrame = new KeyFrame(
+                Duration.millis(i * stepDuration),
+                e -> {
+                    cityMapGrid.getChildren().remove(playerView);
+                    cityMapGrid.add(playerView, loc.getX(), loc.getY());
+                });
+            timeline.getKeyFrames().add(keyFrame);
+        }
+    
+        // Change back to original player image when animation is finished
+        timeline.setOnFinished(e -> {
+            System.out.println("Finished moving to station");
+            playerLocation = path.get(path.size() - 1); // Update final position
+            playerView.setImage(PLAYER_IMAGE_DOWN1); // Assume PLAYER_IMAGE_DOWN1 is the default player image
+            cityMapGrid.getChildren().remove(playerView);
+            cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+        });
+    
+        timeline.play();
+    }
+    
 
     public void bouncePlayer() {
         TranslateTransition transition = new TranslateTransition(Duration.millis(300), playerView);
         transition.setFromY(0);
-        transition.setToY(-15); // Adjust the value to control the height of the bounce
-        transition.setCycleCount(2); // Bounce up and down once
+        transition.setToY(-15);
+        transition.setCycleCount(2);
         transition.setAutoReverse(true);
         transition.play();
     }
