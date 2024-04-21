@@ -48,7 +48,13 @@ public class Gem {
 
     public void placeGem(StackPane cityMainStack, GridPane cityMapGrid) {
         Random random = new Random();
-        this.gemLocation = new Location("Gem Location",random.nextInt(CityMapController.COLS) , random.nextInt(CityMapController.ROWS));
+        int x, y;
+        do {
+            x = random.nextInt(CityMapController.COLS);
+            y = random.nextInt(CityMapController.ROWS);
+        } while (Obstacles.checkObstacles(x, y));
+
+        this.gemLocation = new Location("Gem Location", x, y);
         this.setGemLocation(this.gemLocation);
         cityMapGrid.getChildren().removeIf(node -> node == this.imageView);
         cityMapGrid.add(this.imageView, this.gemLocation.getX(), this.gemLocation.getY());

@@ -29,6 +29,7 @@ import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 
 public class Player {
@@ -62,6 +63,7 @@ public class Player {
     private static ImageView playerView = new ImageView(PLAYER_IMAGE_DOWN1);
     private boolean isMoving = false;
     private int lastDirection = 0; // 0 = up, 1 = down, 2 = left, 3 = right
+    private static final Duration MOVE_DURATION = Duration.millis(200);
 
 
     public int getPlayerTime(){
@@ -106,15 +108,43 @@ public class Player {
 
 
     public void placePlayer(GridPane cityMapGrid) {
-        Random random = new Random();
+        // Setting initial player location to predefined
+        Location startLocation = new Location("House1", 16, 10);
+        this.setPlayerLocation(startLocation);
 
-        this.setPlayerLocation(new Location(null, random.nextInt(CityMapController.COLS), random.nextInt(CityMapController.ROWS)));
-
+        // Configuring player view properties
         playerView.setFitWidth(CityMapController.WIDTH);
         playerView.setFitHeight(CityMapController.HEIGHT);
         playerView.setSmooth(true);
 
+        // Adding player to the grid at the start location
+        cityMapGrid.getChildren().remove(playerView); // Ensure the view is not already on the grid
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+
+        // Automatically move the player three steps down
+        SoundEffects.startGame();;
+        animateMove(cityMapGrid, 2);
+    }
+
+    private void animateMove(GridPane cityMapGrid, int steps) {
+        Timeline timeline = new Timeline();
+        for (int i = 1; i <= steps; i++) {
+            int newY = playerLocation.getY() + i; 
+            KeyFrame keyFrame = new KeyFrame(
+                MOVE_DURATION.multiply(i), // Delay each step to animate sequentially
+                e -> {
+                    cityMapGrid.getChildren().remove(playerView); // Remove old position
+                    cityMapGrid.add(playerView, playerLocation.getX(), newY); // Add new position
+                });
+            timeline.getKeyFrames().add(keyFrame);
+        }
+
+        timeline.setOnFinished(e -> {
+            // Update player's final location after animation
+            playerLocation = new Location(this.playerName, playerLocation.getX(), playerLocation.getY() + steps);
+        });
+
+        timeline.play();
     }
 
     public void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY) throws FileNotFoundException {

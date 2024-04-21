@@ -26,5 +26,12 @@ public class SoundEffects {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
     }
+
+    public static void startGame() {
+        URL resource = SoundEffects.class.getResource("/audio/game-start.wav");
+        Media media = new Media(resource.toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+    }
 }
 
