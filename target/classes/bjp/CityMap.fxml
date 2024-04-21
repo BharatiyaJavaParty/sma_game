@@ -4,7 +4,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjp.controller.CityMapController">
 <!-- Assume this is part of your larger FXML file -->
-<StackPane fx:id="cityMainStack" alignment="CENTER">
+<StackPane fx:id="cityMainStack" alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
     <GridPane fx:id="cityMapGrid" alignment="CENTER" hgap="0" vgap="0">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>

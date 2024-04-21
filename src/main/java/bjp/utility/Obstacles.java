@@ -11,13 +11,20 @@ import javafx.scene.layout.GridPane;
 public class Obstacles {
     public static ArrayList<Location> Tree_SET = new ArrayList<>();
     public static ArrayList<Location> HOUSE_SET = new ArrayList<>();
-    private static final Image treeImg = new Image(Obstacles.class.getResourceAsStream("/img/tree.png"));
-    private static final Image houseImg = new Image(Obstacles.class.getResourceAsStream("/img/house.png"));
+    private static final Image treeImg = new Image(Obstacles.class.getResourceAsStream("/img/tree3.png"));
+    private static final Image houseImg = new Image(Obstacles.class.getResourceAsStream("/img/house1.png"));
     public static ImageView imageView;
     
     static{
         Tree_SET.add(new Location("Tree1", 1, 1));
         Tree_SET.add(new Location("Tree2", 2, 2));
+        Tree_SET.add(new Location("Tree2", 1, 2));
+        Tree_SET.add(new Location("Tree2", 2, 1));
+        Tree_SET.add(new Location("Tree2", 0, 0));
+        Tree_SET.add(new Location("Tree2", 0, 1));
+        Tree_SET.add(new Location("Tree2", 1, 0));
+        Tree_SET.add(new Location("Tree2", 17, 9));
+
         HOUSE_SET.add(new Location("House1", 10, 10));
     }
 

@@ -11,9 +11,10 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 import java.time.Duration;
@@ -71,13 +72,16 @@ public class CityMapController {
     }
     
     private void generateGrid(int rows, int cols) {
-        cityMapGrid.getChildren().clear();
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                Rectangle rect = new Rectangle(WIDTH, HEIGHT);
-                rect.setFill(Color.WHITE);
-                cityMapGrid.add(rect, col, row);
+        Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png")); // Replace with the correct path
+        ImagePattern grassPattern = new ImagePattern(grassImage);
+                for (int row = 0; row < rows; row++) {
+                    for (int col = 0; col < cols; col++) {
+                        Rectangle rect = new Rectangle(WIDTH, HEIGHT);
+                        rect.setFill(grassPattern);
+                        cityMapGrid.add(rect, col, row);
+                    }
+                }
             }
-        }
-    }
 }
+
+
