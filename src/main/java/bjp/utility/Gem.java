@@ -1,9 +1,12 @@
 package bjp.utility;
 import bjp.controller.CityMapController;
+import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+
+import javafx.util.Duration;
 import java.util.Random;
 
 public class Gem {
@@ -21,10 +24,10 @@ public class Gem {
                 this.imageView = new ImageView(redGem);
                 break;
             case "orange":
-                this.imageView = new ImageView(orangeGem); // Assuming you have a greenGem image
+                this.imageView = new ImageView(orangeGem);
                 break;
             case "green":
-                this.imageView = new ImageView(greenGem);  // Assuming you have a blueGem image
+                this.imageView = new ImageView(greenGem);
                 break;
         }
         
@@ -49,5 +52,15 @@ public class Gem {
         this.setGemLocation(this.gemLocation);
         cityMapGrid.getChildren().removeIf(node -> node == this.imageView);
         cityMapGrid.add(this.imageView, this.gemLocation.getX(), this.gemLocation.getY());
+        startBounceAnimation(this.imageView);
+    }
+
+    private void startBounceAnimation(ImageView imageView) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(500), imageView);
+        transition.setFromY(0);
+        transition.setToY(-20);
+        transition.setCycleCount(TranslateTransition.INDEFINITE);
+        transition.setAutoReverse(true);
+        transition.play();
     }
 }

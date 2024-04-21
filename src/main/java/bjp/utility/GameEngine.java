@@ -1,6 +1,8 @@
 package bjp.utility;
 
 import javafx.util.Duration;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,8 @@ import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import bjp.utility.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class GameEngine {
     
@@ -109,14 +113,18 @@ public class GameEngine {
             {
                 gem.placeGem(cityMainStack, cityMapGrid);
                 gemCount = gemCount+1;
+                SoundEffects.playGemCollectedSound();
+                newPlayer.bouncePlayer();
                 PopupController.showPopupMessage(cityMainStack, "You have collected " + String.valueOf(gemCount) + " Gems!");
             }
             if (gemCount == levels.get(current_level) && current_level < 2) {
                 current_level += 1;
+                SoundEffects.newLevel();
                 PopupController.showPopupMessage(cityMainStack, "Congratulations Level 2!");
             }
             if (gemCount == levels.get(current_level) && current_level < 3) {
                 current_level += 1;
+                SoundEffects.newLevel();
                 PopupController.showPopupMessage(cityMainStack, "Congratulations Level 3!");
             }
         }
@@ -132,18 +140,24 @@ public class GameEngine {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at Luas");
             foundTransport = true;
             atLuas = true;
+            newPlayer.bouncePlayer();
+            SoundEffects.playTransportSound();
         }
     
         if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at a Bus");
             foundTransport = true;
             atBus1 = true;
+            SoundEffects.playTransportSound();
+            newPlayer.bouncePlayer();
         }
     
         if (StaticTransportConfig.isPlayerAtBus2Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at a Bus");
             foundTransport = true;
             atBus2 = true;
+            SoundEffects.playTransportSound();
+            newPlayer.bouncePlayer();
         }
     }
 
@@ -214,7 +228,5 @@ public class GameEngine {
         res.add(previousStation);
         return res;
     }
-
-   
 
 }

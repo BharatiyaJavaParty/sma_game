@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.StackPane?>
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.yourpackage.MapController" prefWidth="600" prefHeight="600">
-    <!-- Map component will be added dynamically in the controller -->
-</StackPane>
