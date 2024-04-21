@@ -163,34 +163,51 @@ public class Player {
     //     cityMapGrid.add(playerView, this.playerLocation.getX(), this.playerLocation.getY());
     // }
 
-    public void movePlayerToStation(GridPane cityMapGrid, Location station) {
-        ArrayList<Location> path = calculatePath(playerLocation, station);
-        animatePath(cityMapGrid, path, Duration.seconds(5));
+    public void movePlayerToStation(GridPane cityMapGrid, Location station, String direction) {
+        ArrayList<Location> path = calculatePath(playerLocation, station, direction);
+        animatePath(cityMapGrid, path);
     }
-
-    private ArrayList<Location> calculatePath(Location start, Location end) {
+    
+    private ArrayList<Location> calculatePath(Location start, Location end, String direction) {
         ArrayList<Location> path = new ArrayList<>();
         int xStep = Integer.signum(end.getX() - start.getX());
         int yStep = Integer.signum(end.getY() - start.getY());
-
-        for (int x = start.getX(); x != end.getX(); x += xStep) {
-            path.add(new Location("Intermediate", x, start.getY()));
-        }
-        path.add(new Location("Intermediate", end.getX(), start.getY()));
-
-        for (int y = start.getY(); y != end.getY(); y += yStep) {
-            path.add(new Location("Intermediate", end.getX(), y));
+    
+        if (direction.equals("N")) {
+            // Horizontal then vertical movement
+            for (int x = start.getX(); x != end.getX(); x += xStep) {
+                path.add(new Location("Intermediate", x, start.getY()));
+            }
+            path.add(new Location("Intermediate", end.getX(), start.getY()));
+    
+            for (int y = start.getY(); y != end.getY(); y += yStep) {
+                path.add(new Location("Intermediate", end.getX(), y));
+            }
+        } else if (direction.equals("P")) {
+            // Vertical then horizontal movement
+            for (int y = start.getY(); y != end.getY(); y += yStep) {
+                path.add(new Location("Intermediate", start.getX(), y));
+            }
+            path.add(new Location("Intermediate", start.getX(), end.getY()));
+    
+            for (int x = start.getX(); x != end.getX(); x += xStep) {
+                path.add(new Location("Intermediate", x, end.getY()));
+            }
         }
         path.add(end);
-
+    
         return path;
     }
-
-    private void animatePath(GridPane cityMapGrid, ArrayList<Location> path, Duration totalDuration) {
+    
+    private void animatePath(GridPane cityMapGrid, ArrayList<Location> path) {
         if (path.isEmpty()) return;
     
+        double stepDuration = 100; // Each grid cell animation takes 100 milliseconds
+        Duration totalDuration = Duration.millis(path.size() * stepDuration);
+        
         Timeline timeline = new Timeline();
-        double stepDuration = totalDuration.toMillis() / path.size();
+        timeline.setCycleCount(1);
+        timeline.setAutoReverse(false);
     
         // Change to vehicle image at the start of the animation
         playerView.setImage(VEHICLE_IMAGE);
@@ -212,6 +229,7 @@ public class Player {
         // Change back to original player image when animation is finished
         timeline.setOnFinished(e -> {
             System.out.println("Finished moving to station");
+            System.out.println(playerLocation.getX());
             playerLocation = path.get(path.size() - 1); // Update final position
             playerView.setImage(PLAYER_IMAGE_DOWN1); // Assume PLAYER_IMAGE_DOWN1 is the default player image
             cityMapGrid.getChildren().remove(playerView);

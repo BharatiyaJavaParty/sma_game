@@ -104,13 +104,13 @@ public class GameEngine {
                     break;
                 case N:
                     if (!res.isEmpty() && res.get(0) != null) {
-                        newPlayer.movePlayerToStation(cityMapGrid, res.get(0));
+                        newPlayer.movePlayerToStation(cityMapGrid, res.get(0), "N");
                         res.clear();
                     }
                     break;
                 case P:
                     if (res.size() > 1 && res.get(1) != null) {
-                        newPlayer.movePlayerToStation(cityMapGrid, res.get(1));
+                        newPlayer.movePlayerToStation(cityMapGrid, res.get(1), "P");
                         res.clear();
                     }
                     break;
@@ -164,6 +164,8 @@ public class GameEngine {
         atLuas = false;
         atBus1 = false;
         atBus2 = false;
+        atBus3 = false;
+        atRedLuas = false;
     
         if (StaticTransportConfig.isPlayerAtLuasStop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + " is at Luas");
@@ -282,8 +284,8 @@ public class GameEngine {
                 temp = temp + "; P - " + previousStation.getLocationName();
                 System.out.println("Press 'P' for Previous Station: " + previousStation.getLocationName());
             }
+            PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + temp);
         }
-        PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + temp);
 
         res.add(nextStation);
         res.add(previousStation);

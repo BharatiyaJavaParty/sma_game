@@ -31,7 +31,7 @@ public class StaticTransportConfig {
     public static final Location Bus2_Stop2 = new Location("Rialto", 18, 1);
     public static final Location Bus2_Stop1 = new Location("Spire", 14, 2);
 
-    public static final Location Bus3_Stop1 = new Location("Connolly", 2, 5);
+    public static final Location Bus3_Stop1 = new Location("Connolly", 2, 5);  //dhjfehfgdhjkhjfdsjkhwjldjk
     public static final Location Bus3_Stop2 = new Location("Heuston", 5, 10);
     public static final Location Bus3_Stop3 = new Location("Tara", 8, 16);
     public static final Location Bus3_Stop4 = new Location("Pearse", 28, 19);
