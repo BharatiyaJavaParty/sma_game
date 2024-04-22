@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import bjp.utility.GameEngine;
-import bjp.utility.Player;
 
 public class ScoreBoardController {
 
@@ -96,6 +95,7 @@ public class ScoreBoardController {
 
     public static ArrayList<ArrayList<String>> getResults() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
+        ArrayNode arrayNode;
         File file = new File("Score.json");
         if (!file.exists()) {
             System.out.println("Score.json file not found");
@@ -105,7 +105,14 @@ public class ScoreBoardController {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            ArrayNode arrayNode = (ArrayNode) mapper.readTree(file);
+            if(file.length() == 0)
+            {
+                arrayNode = mapper.createArrayNode();
+            }
+            else
+            {
+                arrayNode = (ArrayNode) mapper.readTree(file);
+            }
             for (JsonNode rootNode : arrayNode) {
                 ArrayList<String> temp = new ArrayList<>();
                 temp.add(rootNode.get("playerName").asText());
