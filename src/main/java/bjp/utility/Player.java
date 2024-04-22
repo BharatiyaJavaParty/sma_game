@@ -1,11 +1,7 @@
 package bjp.utility;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -15,11 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import bjp.constants.AppConstants;
 import bjp.controller.CityMapController;
@@ -42,7 +33,6 @@ public class Player {
     }
 
     // private static ImageView playerView;
-    private static final Image playerImage = new Image(Gem.class.getResourceAsStream("/img/gamer.png"));
     private static final Image PLAYER_IMAGE_STILL = new Image(
             Gem.class.getResourceAsStream("/img/player_moments/walk1.png"));
     private static final Image PLAYER_IMAGE_MOVE = new Image(
@@ -136,7 +126,7 @@ public class Player {
     }
 
     public void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY)
-            throws FileNotFoundException {
+        throws FileNotFoundException {
         int proposedX = Math.min(Math.max(playerLocation.getX() + deltaX, 0), CityMapController.COLS - 1);
         int proposedY = Math.min(Math.max(playerLocation.getY() + deltaY, 0), CityMapController.ROWS - 1);
 
@@ -213,7 +203,6 @@ public class Player {
             return;
 
         double stepDuration = 100;
-        Duration totalDuration = Duration.millis(path.size() * stepDuration);
 
         Timeline timeline = new Timeline();
         timeline.setCycleCount(1);
@@ -236,8 +225,6 @@ public class Player {
         }
 
         timeline.setOnFinished(e -> {
-            System.out.println("Finished moving to station");
-            System.out.println(playerLocation.getX());
             playerLocation = path.get(path.size() - 1);
             playerView.setImage(PLAYER_IMAGE_DOWN1);
             cityMapGrid.getChildren().remove(playerView);
@@ -254,64 +241,6 @@ public class Player {
         transition.setCycleCount(2);
         transition.setAutoReverse(true);
         transition.play();
-    }
-
-    public void saveResults(int gems) {
-        try {
-            File file = new File("Score.json");
-            ObjectMapper mapper = new ObjectMapper();
-            ArrayNode arrayNode;
-
-            if (file.exists() && file.length() != 0) {
-                arrayNode = (ArrayNode) mapper.readTree(file);
-            } else {
-                file.createNewFile();
-                arrayNode = mapper.createArrayNode();
-            }
-
-            ObjectNode jsonObject = mapper.createObjectNode();
-            jsonObject.put("playerName", playerName);
-            jsonObject.put("playerCO2Budget", playerCo2Budget);
-            jsonObject.put("playerTime", playerTime);
-            jsonObject.put("gems", gems);
-            arrayNode.add(jsonObject);
-
-            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode);
-            FileWriter fw = new FileWriter(file, false);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(jsonString);
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file");
-            e.printStackTrace();
-        }
-    }
-
-    public static ArrayList<ArrayList<String>> getResults() {
-        ArrayList<ArrayList<String>> res = new ArrayList<>();
-        File file = new File("Score.json");
-        if (!file.exists()) {
-            System.out.println("Score.json file not found");
-            return res; // Early return to avoid further processing
-        }
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            ArrayNode arrayNode = (ArrayNode) mapper.readTree(file);
-            for (JsonNode rootNode : arrayNode) {
-                ArrayList<String> temp = new ArrayList<>();
-                temp.add(rootNode.get("playerName").asText());
-                temp.add(String.valueOf(rootNode.get("playerCO2Budget").asInt()));
-                temp.add(String.valueOf(rootNode.get("playerTime").asInt()));
-                temp.add(String.valueOf(rootNode.get("gems").asInt()));
-                res.add(temp);
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred while reading the JSON file");
-            e.printStackTrace();
-        }
-        return res;
     }
 
 }

@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjp.controller.CityMapController">
-    <VBox spacing="10" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
+    <VBox AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
         <!-- Scoreboard Pane with specified background color, height, and width -->
         <Pane fx:id="scoreBoardPane" style="-fx-background-color: pink;" minHeight="0" prefHeight="50" minWidth="200" prefWidth="200">
             <!-- Scoreboard content goes here -->

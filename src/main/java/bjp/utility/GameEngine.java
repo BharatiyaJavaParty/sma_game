@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 
 import bjp.constants.AppConstants;
 import bjp.controller.PopupController;
+import bjp.controller.ScoreBoardController;
 
 public class GameEngine {
 
@@ -116,10 +117,9 @@ public class GameEngine {
             throws FileNotFoundException {
         if (gemCount == levels.get(3)) {
             PopupController.showPopupMessage(cityMainStack, "You Win!!");
-            newPlayer.saveResults(gemCount);
+            ScoreBoardController.saveResults(gemCount);
             PauseTransition pause = new PauseTransition(Duration.millis(1000));
             pause.setOnFinished(event -> System.exit(0));
-            Player.getResults();
             // pause.setOnFinished(event->PopupController.showPopupMessage(cityMainStack,
             // "Your CO2 Budget is"+newPlayer.getPlayerCo2Budget()));
             pause.play();

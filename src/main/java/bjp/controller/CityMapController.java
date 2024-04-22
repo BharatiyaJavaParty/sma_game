@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 import bjp.utility.GameEngine;
 import bjp.utility.Bus;
@@ -14,19 +15,18 @@ import bjp.utility.EnvironmentalPopup;
 import bjp.utility.Luas;
 import bjp.utility.Obstacles;
 import bjp.utility.StaticTransportConfig;
-import bjp.Main;
 
 public class CityMapController {
-    public static final int WIDTH = ((int) Main.scene.getHeight() - 50) / 20;
-    public static final int HEIGHT = ((int) Main.scene.getHeight() - 50) / 20;
+    public static final int WIDTH = ((int) 720) / 30;
+    public static final int HEIGHT = ((int) 720) / 30;
 
     @FXML
     private GridPane cityMapGrid;
 
     @FXML
     private StackPane cityMainStack;
-    public static final int ROWS = 21;
-    public static final int COLS = 38;
+    public static final int ROWS = 32;
+    public static final int COLS = 57;
 
     @FXML
     private void initialize() {
@@ -41,7 +41,8 @@ public class CityMapController {
         GameEngine.newPlayer.placePlayer(cityMapGrid);
         Obstacles.placeTrees(cityMapGrid);
         Obstacles.placeHouses(cityMapGrid);
-
+        Obstacles.placeBuildings(cityMapGrid);
+        Obstacles.placeBushes(cityMapGrid);
         PopupController.showPopupMessage(cityMainStack, "Welcome to Gem World");
 
         Thread thread = new Thread(() -> {
@@ -59,17 +60,44 @@ public class CityMapController {
         thread.start();
         GameEngine.mainEventHandler(cityMainStack, cityMapGrid);
 
-        // cityMapGrid.setGridLinesVisible(true); 
+        // cityMapGrid.setGridLinesVisible(true);
     }
+
+    // private void generateGrid(int rows, int cols) {
+    //     Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png"));
+    //     ImagePattern grassPattern = new ImagePattern(grassImage);
+    //     for (int row = 0; row < rows; row++) {
+    //         for (int col = 0; col < cols; col++) {
+    //             Rectangle rect = new Rectangle(WIDTH, HEIGHT);
+    //             rect.setFill(grassPattern);
+    //             cityMapGrid.add(rect, col, row);
+    //         }
+    //     }
+    // }
 
     private void generateGrid(int rows, int cols) {
         Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png"));
         ImagePattern grassPattern = new ImagePattern(grassImage);
+    
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                Rectangle rect = new Rectangle(WIDTH, HEIGHT);
-                rect.setFill(grassPattern);
-                cityMapGrid.add(rect, col, row);
+                // Check if it's the first row or first column
+                if (row == 0 || col == 0) {
+                    Text text = new Text();
+                    if (row == 0 && col > 0) {
+                        // First row, non-first column: number the columns
+                        text.setText(String.valueOf(col));
+                    } else if (col == 0 && row > 0) {
+                        // First column, non-first row: number the rows
+                        text.setText(String.valueOf(row));
+                    }
+                    cityMapGrid.add(text, col, row);
+                } else {
+                    // All other cells get the grass image
+                    Rectangle rect = new Rectangle(WIDTH, HEIGHT);
+                    rect.setFill(grassPattern);
+                    cityMapGrid.add(rect, col, row);
+                }
             }
         }
     }
