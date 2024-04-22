@@ -3,8 +3,10 @@ package bjp.utility;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Comparator;
 
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -313,7 +315,26 @@ public class GameEngine {
             }
             PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + temp);
         }
+        Collections.sort(res, new locationComparator());
         return res;
     }
 
+}
+
+class locationComparator implements Comparator<Location> {
+    public int compare(Location l1, Location l2) {
+        if (l1.getX() > l2.getX()) {
+            return 1;
+        } else if (l1.getX() < l2.getX()) {
+            return -1;
+        } else {
+            if (l1.getY() > l2.getY()) {
+                return 1;
+            } else if (l1.getY() < l2.getY()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+    }
 }
