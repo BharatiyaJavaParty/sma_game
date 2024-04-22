@@ -13,14 +13,18 @@ import bjp.controller.CityMapController;
 
 public class Obstacles {
     public static Set<Location> TREE_SET = new HashSet<>();
+    public static Set<Location> DOUBLE_TREE_SET = new HashSet<>();
+    public static Set<Location> HOME_TREE_SET = new HashSet<>();
     public static Set<Location> BUSH_SET = new HashSet<>();
     public static Set<Location> HOUSE_SET = new HashSet<>();
     public static Set<Location> BUILDING_SET = new HashSet<>();
     public static Set<Location> ALL_OBSTACLES = new HashSet<>();
 
     private static ArrayList<Image> houseList = new ArrayList<>();
+    private static ArrayList<Image> houseTreeList = new ArrayList<>();
     private static ArrayList<Image> buildingList = new ArrayList<>();
     private static ArrayList<Image> treeList = new ArrayList<>();
+    private static ArrayList<Image> doubleTreeList = new ArrayList<>();
     private static ArrayList<Image> bushList = new ArrayList<>();
 
     //make 2 grid tree set
@@ -45,6 +49,14 @@ public class Obstacles {
             bushList.add(new Image(Obstacles.class.getResourceAsStream("/img/bush" + i + ".png")));
         }
 
+        for (int i = 1; i < 8; i++){
+            houseTreeList.add(new Image(Obstacles.class.getResourceAsStream("/img/housetree" + i + ".png")));
+        }
+
+        for (int i = 1; i < 7; i++){
+            doubleTreeList.add(new Image(Obstacles.class.getResourceAsStream("/img/doubletree" + i + ".png")));
+        }
+
         // Adding elements to Tree_SET
 
         for (int i = 0; i < CityMapController.COLS; i++){
@@ -60,29 +72,29 @@ public class Obstacles {
         for (int i = 27; i < 43; i+=3){
             HOUSE_SET.add(new Location("House1", i, 4));
 
-            BUSH_SET.add(new Location("House1", i-1, 3));
-            BUSH_SET.add(new Location("House1", i, 3));
-            BUSH_SET.add(new Location("House1", i+1, 3));
-            BUSH_SET.add(new Location("House1", i-1, 4));
+            HOME_TREE_SET.add(new Location("House1", i-1, 3));
+            HOME_TREE_SET.add(new Location("House1", i, 3));
+            HOME_TREE_SET.add(new Location("House1", i+1, 3));
+            HOME_TREE_SET.add(new Location("House1", i-1, 4));
             BUSH_SET.add(new Location("House1", i-1, 5));
             if (i == 42){
-                BUSH_SET.add(new Location("House1", i+2, 4));
+                HOME_TREE_SET.add(new Location("House1", i+2, 4));
                 BUSH_SET.add(new Location("House1", i+2, 5));
-                BUSH_SET.add(new Location("House1", i+2, 3));
+                HOME_TREE_SET.add(new Location("House1", i+2, 3));
             }
         }
         for (int i = 35; i < 45; i+=3){
             HOUSE_SET.add(new Location("House1", i, 9));
 
-            BUSH_SET.add(new Location("House1", i-1, 8));
-            BUSH_SET.add(new Location("House1", i, 8));
-            BUSH_SET.add(new Location("House1", i+1, 8));
-            BUSH_SET.add(new Location("House1", i-1, 9));
+            HOME_TREE_SET.add(new Location("House1", i-1, 8));
+            HOME_TREE_SET.add(new Location("House1", i, 8));
+            HOME_TREE_SET.add(new Location("House1", i+1, 8));
+            HOME_TREE_SET.add(new Location("House1", i-1, 9));
             BUSH_SET.add(new Location("House1", i-1, 10));
             if (i == 44){
-                BUSH_SET.add(new Location("House1", i+2, 9));
+                HOME_TREE_SET.add(new Location("House1", i+2, 9));
                 BUSH_SET.add(new Location("House1", i+2, 10));
-                BUSH_SET.add(new Location("House1", i+2, 8));
+                HOME_TREE_SET.add(new Location("House1", i+2, 8));
             }
         }
 
@@ -90,44 +102,44 @@ public class Obstacles {
             HOUSE_SET.add(new Location("House1", i, 26));
 
 
-            BUSH_SET.add(new Location("House1", i-1, 25));
-            BUSH_SET.add(new Location("House1", i, 25));
-            BUSH_SET.add(new Location("House1", i+1, 25));
-            BUSH_SET.add(new Location("House1", i-1, 26));
+            HOME_TREE_SET.add(new Location("House1", i-1, 25));
+            HOME_TREE_SET.add(new Location("House1", i, 25));
+            HOME_TREE_SET.add(new Location("House1", i+1, 25));
+            HOME_TREE_SET.add(new Location("House1", i-1, 26));
             BUSH_SET.add(new Location("House1", i-1, 27));
             if (i == 41){
-                BUSH_SET.add(new Location("House1", i+2, 26));
+                HOME_TREE_SET.add(new Location("House1", i+2, 26));
                 BUSH_SET.add(new Location("House1", i+2, 27));
-                BUSH_SET.add(new Location("House1", i+2, 25));
+                HOME_TREE_SET.add(new Location("House1", i+2, 25));
             }
         }
         for (int i = 3; i < 13; i+=3){
             HOUSE_SET.add(new Location("House1", i, 9));
             
-            BUSH_SET.add(new Location("House1", i-1, 8));
-            BUSH_SET.add(new Location("House1", i, 8));
-            BUSH_SET.add(new Location("House1", i+1, 8));
-            BUSH_SET.add(new Location("House1", i-1, 9));
+            HOME_TREE_SET.add(new Location("House1", i-1, 8));
+            HOME_TREE_SET.add(new Location("House1", i, 8));
+            HOME_TREE_SET.add(new Location("House1", i+1, 8));
+            HOME_TREE_SET.add(new Location("House1", i-1, 9));
             BUSH_SET.add(new Location("House1", i-1, 10));
             if (i == 12){
-                BUSH_SET.add(new Location("House1", i+2, 9));
+                HOME_TREE_SET.add(new Location("House1", i+2, 9));
                 BUSH_SET.add(new Location("House1", i+2, 10));
-                BUSH_SET.add(new Location("House1", i+2, 8));
+                HOME_TREE_SET.add(new Location("House1", i+2, 8));
             }
         }
 
         for (int i = 4; i < 11; i+=3){
             HOUSE_SET.add(new Location("House1", i, 23));
 
-            BUSH_SET.add(new Location("House1", i-1, 22));
-            BUSH_SET.add(new Location("House1", i, 22));
-            BUSH_SET.add(new Location("House1", i+1, 22));
-            BUSH_SET.add(new Location("House1", i-1, 23));
+            HOME_TREE_SET.add(new Location("House1", i-1, 22));
+            HOME_TREE_SET.add(new Location("House1", i, 22));
+            HOME_TREE_SET.add(new Location("House1", i+1, 22));
+            HOME_TREE_SET.add(new Location("House1", i-1, 23));
             BUSH_SET.add(new Location("House1", i-1, 24));
             if (i == 22){
-                BUSH_SET.add(new Location("House1", i+2, 23));
+                HOME_TREE_SET.add(new Location("House1", i+2, 23));
                 BUSH_SET.add(new Location("House1", i+2, 24));
-                BUSH_SET.add(new Location("House1", i+2, 22));
+                HOME_TREE_SET.add(new Location("House1", i+2, 22));
             }
         }
         HOUSE_SET.add(new Location("House1", 35, 24));
@@ -146,6 +158,62 @@ public class Obstacles {
         BUILDING_SET.add(new Location("House1", 9, 18));
         BUILDING_SET.add(new Location("House1", 11, 17));
         BUILDING_SET.add(new Location("House1", 13 , 17));
+
+
+        //Forest
+        TREE_SET.add(new Location("Tree", 50, 11));
+        TREE_SET.add(new Location("Tree", 52, 11));
+        TREE_SET.add(new Location("Tree", 51, 12));
+        TREE_SET.add(new Location("Tree", 53, 12));
+        TREE_SET.add(new Location("Tree", 53, 13));
+        TREE_SET.add(new Location("Tree", 50, 14));
+        TREE_SET.add(new Location("Tree", 52, 14));
+        TREE_SET.add(new Location("Tree", 49, 15));
+        TREE_SET.add(new Location("Tree", 50, 15));
+        TREE_SET.add(new Location("Tree", 51, 15));
+        TREE_SET.add(new Location("Tree", 52, 15));
+        TREE_SET.add(new Location("Tree", 54, 15));
+        TREE_SET.add(new Location("Tree", 49, 16));
+        TREE_SET.add(new Location("Tree", 52, 16));
+        TREE_SET.add(new Location("Tree", 53, 16));
+        TREE_SET.add(new Location("Tree", 52, 17));
+        TREE_SET.add(new Location("Tree", 50, 18));
+        TREE_SET.add(new Location("Tree", 49, 11));
+
+        DOUBLE_TREE_SET.add(new Location("Tree", 49, 11));
+        DOUBLE_TREE_SET.add(new Location("Tree", 51, 10));
+        DOUBLE_TREE_SET.add(new Location("Tree", 50, 12));
+        DOUBLE_TREE_SET.add(new Location("Tree", 50, 16));
+        DOUBLE_TREE_SET.add(new Location("Tree", 52, 12));
+        DOUBLE_TREE_SET.add(new Location("Tree", 49, 13));
+        DOUBLE_TREE_SET.add(new Location("Tree", 49, 17));
+        DOUBLE_TREE_SET.add(new Location("Tree", 52, 18));
+        DOUBLE_TREE_SET.add(new Location("Tree", 53, 14));
+        DOUBLE_TREE_SET.add(new Location("Tree", 53, 17));
+        DOUBLE_TREE_SET.add(new Location("Tree", 54, 13));
+        DOUBLE_TREE_SET.add(new Location("Tree", 54, 16));
+        DOUBLE_TREE_SET.add(new Location("Tree", 51, 13));
+        DOUBLE_TREE_SET.add(new Location("Tree", 51, 16));
+
+        TREE_SET.add(new Location("Tree", 49, 11));
+        TREE_SET.add(new Location("Tree", 51, 10));
+        TREE_SET.add(new Location("Tree", 50, 12));
+        TREE_SET.add(new Location("Tree", 50, 16));
+        TREE_SET.add(new Location("Tree", 52, 12));
+        TREE_SET.add(new Location("Tree", 49, 13));
+        TREE_SET.add(new Location("Tree", 49, 17));
+        TREE_SET.add(new Location("Tree", 52, 18));
+        TREE_SET.add(new Location("Tree", 53, 14));
+        TREE_SET.add(new Location("Tree", 53, 17));
+        TREE_SET.add(new Location("Tree", 54, 13));
+        TREE_SET.add(new Location("Tree", 54, 16));
+        TREE_SET.add(new Location("Tree", 51, 13));
+        TREE_SET.add(new Location("Tree", 51, 16));
+
+
+
+        
+        
         
 
 
@@ -160,6 +228,19 @@ public class Obstacles {
         for (Location tree : TREE_SET) {
             int index = random.nextInt(treeList.size());
             Image treeImg = treeList.get(index);
+            ImageView imageView = new ImageView(treeImg);
+            imageView.setFitWidth(CityMapController.WIDTH);
+            imageView.setFitHeight(CityMapController.HEIGHT);
+            imageView.setSmooth(true);
+            cityMapGrid.add(imageView, tree.getX(), tree.getY());
+        }
+    }
+
+    public static void placeHomeTrees(GridPane cityMapGrid) {
+        Random random = new Random();
+        for (Location tree : HOME_TREE_SET) {
+            int index = random.nextInt(houseTreeList.size());
+            Image treeImg = houseTreeList.get(index);
             ImageView imageView = new ImageView(treeImg);
             imageView.setFitWidth(CityMapController.WIDTH);
             imageView.setFitHeight(CityMapController.HEIGHT);
@@ -193,6 +274,18 @@ public class Obstacles {
             cityMapGrid.add(imageView, house.getX(), house.getY(), 2, 2);
         }
     }
+
+    public static void placeDoubleGTree(GridPane cityMapGrid) {
+        Random random = new Random();
+        for (Location tree : DOUBLE_TREE_SET) {
+            Image treeImg = doubleTreeList.get(random.nextInt(doubleTreeList.size()));
+            ImageView imageView = new ImageView(treeImg);
+            imageView.setFitWidth(CityMapController.WIDTH);
+            imageView.setFitHeight(2 * CityMapController.HEIGHT);
+            imageView.setSmooth(true);
+            cityMapGrid.add(imageView, tree.getX(), tree.getY(), 1, 3);
+        }
+    }
     
     public static void placeBuildings(GridPane cityMapGrid) {
         Random random = new Random();
@@ -210,12 +303,14 @@ public class Obstacles {
     public static boolean checkObstacles(int newX, int newY) {
         for (Location tree :TREE_SET) {
             if (tree.getX() == newX && tree.getY() == newY) {
+                System.out.println("tree");
                 return true; // Tree is an obstacle at the new position
             }
         }
 
         for (Location bush :BUSH_SET) {
             if (bush.getX() == newX && bush.getY() == newY) {
+                System.out.println("bush");
                 return true; // Tree is an obstacle at the new position
             }
         }
@@ -223,13 +318,30 @@ public class Obstacles {
         for (Location house : HOUSE_SET) {
             if ((house.getX() == newX || house.getX() == newX - 1)
                     && (house.getY() == newY || house.getY() == newY - 1)) {
+                System.out.println("house");
+                return true; // House is an obstacle at the new position
+            }
+        }
+
+        for (Location house : HOME_TREE_SET) {
+            if (house.getX() == newX && house.getY() == newY) {
+                System.out.println("house tree");
+                return true; // House is an obstacle at the new position
+            }
+        }
+
+        for (Location tree : DOUBLE_TREE_SET) {
+            if ((tree.getX() == newX)
+            && (tree.getY() <= newY && tree.getY() + 1 >= newY)) {
+                System.out.println("house tree");
                 return true; // House is an obstacle at the new position
             }
         }
 
         for (Location building : BUILDING_SET) {
             if ((building.getX() == newX || building.getX() == newX - 1)
-                    && (building.getY() <= newY && building.getY() + 2 >= newY)) { // Checks if newY falls within the vertical span of the building
+                    && (building.getY() <= newY && building.getY() + 2 >= newY)) {
+                System.out.println("building"); // Checks if newY falls within the vertical span of the building
                 return true; // Building is an obstacle at the new position
             }
         }

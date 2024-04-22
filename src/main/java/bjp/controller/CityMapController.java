@@ -43,6 +43,8 @@ public class CityMapController {
         Obstacles.placeHouses(cityMapGrid);
         Obstacles.placeBuildings(cityMapGrid);
         Obstacles.placeBushes(cityMapGrid);
+        Obstacles.placeDoubleGTree(cityMapGrid);
+        Obstacles.placeHomeTrees(cityMapGrid);
         PopupController.showPopupMessage(cityMainStack, "Welcome to Gem World");
 
         Thread thread = new Thread(() -> {
@@ -63,42 +65,42 @@ public class CityMapController {
         // cityMapGrid.setGridLinesVisible(true);
     }
 
-    // private void generateGrid(int rows, int cols) {
-    //     Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png"));
-    //     ImagePattern grassPattern = new ImagePattern(grassImage);
-    //     for (int row = 0; row < rows; row++) {
-    //         for (int col = 0; col < cols; col++) {
-    //             Rectangle rect = new Rectangle(WIDTH, HEIGHT);
-    //             rect.setFill(grassPattern);
-    //             cityMapGrid.add(rect, col, row);
-    //         }
-    //     }
-    // }
-
     private void generateGrid(int rows, int cols) {
         Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png"));
         ImagePattern grassPattern = new ImagePattern(grassImage);
-    
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                // Check if it's the first row or first column
-                if (row == 0 || col == 0) {
-                    Text text = new Text();
-                    if (row == 0 && col > 0) {
-                        // First row, non-first column: number the columns
-                        text.setText(String.valueOf(col));
-                    } else if (col == 0 && row > 0) {
-                        // First column, non-first row: number the rows
-                        text.setText(String.valueOf(row));
-                    }
-                    cityMapGrid.add(text, col, row);
-                } else {
-                    // All other cells get the grass image
-                    Rectangle rect = new Rectangle(WIDTH, HEIGHT);
-                    rect.setFill(grassPattern);
-                    cityMapGrid.add(rect, col, row);
-                }
+                Rectangle rect = new Rectangle(WIDTH, HEIGHT);
+                rect.setFill(grassPattern);
+                cityMapGrid.add(rect, col, row);
             }
         }
     }
+
+    // private void generateGrid(int rows, int cols) {
+    //     Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png"));
+    //     ImagePattern grassPattern = new ImagePattern(grassImage);
+    
+    //     for (int row = 0; row < rows; row++) {
+    //         for (int col = 0; col < cols; col++) {
+    //             // Check if it's the first row or first column
+    //             if (row == 0 || col == 0) {
+    //                 Text text = new Text();
+    //                 if (row == 0 && col > 0) {
+    //                     // First row, non-first column: number the columns
+    //                     text.setText(String.valueOf(col));
+    //                 } else if (col == 0 && row > 0) {
+    //                     // First column, non-first row: number the rows
+    //                     text.setText(String.valueOf(row));
+    //                 }
+    //                 cityMapGrid.add(text, col, row);
+    //             } else {
+    //                 // All other cells get the grass image
+    //                 Rectangle rect = new Rectangle(WIDTH, HEIGHT);
+    //                 rect.setFill(grassPattern);
+    //                 cityMapGrid.add(rect, col, row);
+    //             }
+    //         }
+    //     }
+    // }
 }
