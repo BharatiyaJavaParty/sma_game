@@ -107,7 +107,7 @@ public class Player {
     }
 
     public void placePlayer(GridPane cityMapGrid) {
-        Location startLocation = new Location("House1", 16, 10);
+        Location startLocation = new Location("House1", 20, 4);
         this.setPlayerLocation(startLocation);
 
         playerView.setFitWidth(CityMapController.WIDTH);
@@ -127,7 +127,7 @@ public class Player {
         for (int i = 1; i <= steps; i++) {
             int newY = playerLocation.getY() + i;
             KeyFrame keyFrame = new KeyFrame(
-                    MOVE_DURATION.multiply(i),
+                    MOVE_DURATION.multiply(i*5),
                     e -> {
                         cityMapGrid.getChildren().remove(playerView);
                         cityMapGrid.add(playerView, playerLocation.getX(), newY);

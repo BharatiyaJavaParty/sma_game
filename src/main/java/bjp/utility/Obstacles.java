@@ -19,6 +19,8 @@ public class Obstacles {
     public static Set<Location> HOUSE_SET = new HashSet<>();
     public static Set<Location> BUILDING_SET = new HashSet<>();
     public static Set<Location> ALL_OBSTACLES = new HashSet<>();
+    public static final Image MAIN_ENTRANCE = new Image(Obstacles.class.getResourceAsStream("/img/mainhouse.png"));
+    public static Location Entrance = new Location("Entrance", 19, 3);
 
     private static ArrayList<Image> houseList = new ArrayList<>();
     private static ArrayList<Image> houseTreeList = new ArrayList<>();
@@ -58,11 +60,11 @@ public class Obstacles {
         // Adding elements to Tree_SET
 
         for (int i = 0; i < CityMapController.COLS; i++) {
-            // TREE_SET.add(new Location("Tree", i, 0));
+            TREE_SET.add(new Location("Tree", i, 0));
             TREE_SET.add(new Location("Tree", i, CityMapController.ROWS - 1));
         }
         for (int i = 0; i < CityMapController.ROWS; i++) {
-            // TREE_SET.add(new Location("Tree", 0, i));
+            TREE_SET.add(new Location("Tree", 0, i));
             TREE_SET.add(new Location("Tree", CityMapController.COLS - 1, i));
         }
 
@@ -139,8 +141,8 @@ public class Obstacles {
                 HOME_TREE_SET.add(new Location("House1", i + 2, 22));
             }
         }
-        HOUSE_SET.add(new Location("House1", 35, 24));
-        HOUSE_SET.add(new Location("House1", 43, 24));
+        HOUSE_SET.add(new Location("House1", 35, 23));
+        HOUSE_SET.add(new Location("House1", 42, 23));
         HOUSE_SET.add(new Location("House1", 6, 25));
         HOUSE_SET.add(new Location("House1", 9, 25));
 
@@ -344,6 +346,11 @@ public class Obstacles {
             imageView.setSmooth(true);
             cityMapGrid.add(imageView, house.getX(), house.getY(), 2, 2);
         }
+        imageView = new ImageView(MAIN_ENTRANCE);
+        imageView.setFitWidth(3*CityMapController.WIDTH);
+        imageView.setFitHeight(3*CityMapController.HEIGHT);
+        imageView.setSmooth(true);
+        cityMapGrid.add(imageView, Entrance.getX(), Entrance.getY(), 3, 3);
     }
 
     public static void placeDoubleGTree(GridPane cityMapGrid) {
@@ -414,6 +421,11 @@ public class Obstacles {
                 System.out.println("building"); // Checks if newY falls within the vertical span of the building
                 return true; // Building is an obstacle at the new position
             }
+        }
+
+        if((Entrance.getX() <= newX || Entrance.getX() + 2 >= newX)
+        && (Entrance.getY() <= newY && Entrance.getY() + 2 >= newY)){
+            return true;
         }
 
         return false; // No obstacles found, movement is possible
