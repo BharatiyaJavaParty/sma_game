@@ -28,7 +28,6 @@ public class Player {
 
     private String playerName;
     private Location playerLocation;
-    public static boolean isAnimating = false;
 
 
     // setting time and co2emission
@@ -185,6 +184,7 @@ public class Player {
     public void movePlayerToStation(GridPane cityMapGrid, Location station, String direction) {
         ArrayList<Location> path = calculatePath(playerLocation, station, direction);
         animatePath(cityMapGrid, path);
+        System.out.println(station.getLocationName() + ": (" + station.getX() + "," + station.getY() + ")");
     }
 
     private ArrayList<Location> calculatePath(Location start, Location end, String direction) {
@@ -217,7 +217,6 @@ public class Player {
     }
 
     private void animatePath(GridPane cityMapGrid, ArrayList<Location> path) {
-        isAnimating = true;
         if (path.isEmpty())
             return;
 

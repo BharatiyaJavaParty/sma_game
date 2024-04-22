@@ -13,6 +13,12 @@ public class Location {
         this.yOrdinate = yOrdinate;
     }
 
+    public Location(Location other) {
+        this.locationName = other.getLocationName();
+        this.xOrdinate = other.getX();
+        this.yOrdinate = other.getY();
+    }
+
     // public Location() {
     // System.out.println("Location object created successfully");
     // }
