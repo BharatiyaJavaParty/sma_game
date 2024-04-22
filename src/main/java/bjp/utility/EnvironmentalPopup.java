@@ -36,13 +36,19 @@ public class EnvironmentalPopup {
         messageLabel.setWrapText(true);
         // keeping the pop up style same as player popup
         messageLabel.setStyle(
-                "-fx-background-color: lightblue; " +
-                        "-fx-background-radius: 10; " +
-                        "-fx-border-color: navy; " +
-                        "-fx-border-width: 2; " +
-                        "-fx-border-radius: 10; " +
-                        "-fx-padding: 10;" +
-                        "-fx-text-fill: black;");
+            "-fx-background-color: rgba(255, 105, 97, 0.7);" +
+            "-fx-background-radius: 15;" +
+            "-fx-border-color: rgba(178, 34, 34, 0.7);" +
+            "-fx-border-width: 3;" +
+            "-fx-border-radius: 15;" +
+            "-fx-padding: 10;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 14;" +
+            "-fx-text-fill: #7c0a02;" +
+            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);"
+        );
+        
+        
 
         cityMainStack.getChildren().removeIf(node -> node instanceof Label && ((Label) node).getText().contains("Tip:"));
 

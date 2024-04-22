@@ -13,19 +13,22 @@ public class PopupController {
 
     public static void showPopupMessage(StackPane cityMainStack, String message) {
         Label messageLabel = new Label("");
-        messageLabel.setFont(new Font("Arial", 16)); // Example font and size
+        messageLabel.setFont(new Font("Arial", 16));
         messageLabel.setAlignment(Pos.CENTER);
         messageLabel.setWrapText(true);
         messageLabel.setStyle(
-                "-fx-background-color: lightblue; " +
-                        "-fx-background-radius: 10; " + // Rounded corners
-                        "-fx-border-color: navy; " +
-                        "-fx-border-width: 2; " +
-                        "-fx-border-radius: 10; " +
-                        "-fx-padding: 10;" + // Padding inside the label
-                        "-fx-text-fill: black;"); // Text color
-
-
+            "-fx-background-color: rgba(234, 255, 208, 0.7);" +
+            "-fx-background-radius: 15;" +
+            "-fx-border-color: rgba(46, 139, 87, 0.7);" +
+            "-fx-border-width: 3;" +
+            "-fx-border-radius: 14;" +
+            "-fx-padding: 10;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 14;" +
+            "-fx-text-fill: #005f00;" +
+            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);"
+        );
+        
         cityMainStack.getChildren().removeIf(node -> node instanceof Label && ((Label) node).getText().contains("Player"));
         cityMainStack.getChildren().removeIf(node -> node instanceof Label && ((Label) node).getText().contains("Gems"));
         // Add the message label to the StackPane, overlaying the GridPane
