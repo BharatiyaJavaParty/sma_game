@@ -28,6 +28,8 @@ public class Player {
 
     private String playerName;
     private Location playerLocation;
+    public static boolean isAnimating = false;
+
 
     // setting time and co2emission
     private int playerTime;
@@ -215,6 +217,7 @@ public class Player {
     }
 
     private void animatePath(GridPane cityMapGrid, ArrayList<Location> path) {
+        isAnimating = true;
         if (path.isEmpty())
             return;
 
@@ -245,6 +248,7 @@ public class Player {
             playerView.setImage(PLAYER_IMAGE_DOWN1);
             cityMapGrid.getChildren().remove(playerView);
             cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+            GameEngine.isAnimating = false;
         });
 
         timeline.play();
