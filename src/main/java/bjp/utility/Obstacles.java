@@ -22,6 +22,11 @@ public class Obstacles {
 
         for (int i = 0; i < CityMapController.COLS; i++){
             Tree_SET.add(new Location("Tree", i, 0));
+            Tree_SET.add(new Location("Tree", i, CityMapController.ROWS - 1));
+        }
+        for (int i = 0; i < CityMapController.ROWS; i++){
+            Tree_SET.add(new Location("Tree", 0, i));
+            Tree_SET.add(new Location("Tree", CityMapController.COLS - 1, i));
         }
 
         // Adding element to HOUSE_SET

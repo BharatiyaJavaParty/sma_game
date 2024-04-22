@@ -68,8 +68,8 @@ public class Player {
     }
 
     public void setPlayerTime(int time) {
-        System.out.println("Player Time " + this.playerTime);
-        System.out.println("======================================================");
+        // System.out.println("Player Time " + this.playerTime);
+        // System.out.println("======================================================");
         this.playerTime = time;
     }
 
@@ -78,8 +78,8 @@ public class Player {
     }
 
     public void setPlayerCo2Budget(int budget) {
-        System.out.println("======================================================");
-        System.out.println("Player CO2 budget " + this.playerCo2Budget);
+        // System.out.println("======================================================");
+        // System.out.println("Player CO2 budget " + this.playerCo2Budget);
         this.playerCo2Budget = budget;
     }
 
@@ -110,7 +110,7 @@ public class Player {
         cityMapGrid.getChildren().remove(playerView);
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
 
-        SoundEffects.startGame();
+        // SoundEffects.startGame();
         ;
         animateMove(cityMapGrid, 2);
     }

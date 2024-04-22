@@ -63,7 +63,7 @@ public class Gem {
     private void startBounceAnimation(ImageView imageView) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(500), imageView);
         transition.setFromY(0);
-        transition.setToY(-20);
+        transition.setToY(-10);
         transition.setCycleCount(TranslateTransition.INDEFINITE);
         transition.setAutoReverse(true);
         transition.play();

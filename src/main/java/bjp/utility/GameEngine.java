@@ -38,9 +38,9 @@ public class GameEngine {
     // the key is level and the value s after how many gems level gets completed
     public static HashMap<Integer, Integer> levels = new HashMap<Integer, Integer>() {
         {
-            put(1, 2);
-            put(2, 4);
-            put(3, 6); // if added new level change exit condion as well in check gems collected
+            put(1, 5);
+            put(2, 11);
+            put(3, 20); // if added new level change exit condion as well in check gems collected
         }
     };
 
@@ -133,19 +133,19 @@ public class GameEngine {
                     && gem.getGemLocation().getY() == newPlayer.getPlayerLocation().getY()) {
                 gem.placeGem(cityMainStack, cityMapGrid);
                 gemCount = gemCount + 1;
-                SoundEffects.playGemCollectedSound();
+                // SoundEffects.playGemCollectedSound();
                 newPlayer.bouncePlayer();
                 PopupController.showPopupMessage(cityMainStack,
                         "You have collected " + String.valueOf(gemCount) + " Gems!");
             }
             if (gemCount == levels.get(current_level) && current_level < 2) {
                 current_level += 1;
-                SoundEffects.newLevel();
+                // SoundEffects.newLevel();
                 PopupController.showPopupMessage(cityMainStack, "Congratulations Level 2!");
             }
             if (gemCount == levels.get(current_level) && current_level < 3) {
                 current_level += 1;
-                SoundEffects.newLevel();
+                // SoundEffects.newLevel();
                 PopupController.showPopupMessage(cityMainStack, "Congratulations Level 3!");
             }
         }
@@ -159,53 +159,52 @@ public class GameEngine {
         atBus3 = false;
         atRedLuas = false;
 
-        if (StaticTransportConfig.isPlayerAtLuasStop(newPlayer.getPlayerLocation().getX(),
-                newPlayer.getPlayerLocation().getY())) {
+        if (StaticTransportConfig.isPlayerAtLuasStop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + "
             // is at Luas");
             foundTransport = true;
             atLuas = true;
             newPlayer.bouncePlayer();
-            SoundEffects.playTransportSound();
+            // SoundEffects.playTransportSound();
         }
 
-        if (StaticTransportConfig.isPlayerAtRedLuasStop(newPlayer.getPlayerLocation().getX(),
+        else if (StaticTransportConfig.isPlayerAtRedLuasStop(newPlayer.getPlayerLocation().getX(),
                 newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + "
             // is at Luas");
             foundTransport = true;
             atRedLuas = true;
             newPlayer.bouncePlayer();
-            SoundEffects.playTransportSound();
+            // SoundEffects.playTransportSound();
         }
 
-        if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.getPlayerLocation().getX(),
+        else if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.getPlayerLocation().getX(),
                 newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + "
             // is at a Bus");
             foundTransport = true;
             atBus1 = true;
-            SoundEffects.playTransportSound();
+            // SoundEffects.playTransportSound();
             newPlayer.bouncePlayer();
         }
 
-        if (StaticTransportConfig.isPlayerAtBus2Stop(newPlayer.getPlayerLocation().getX(),
+        else if (StaticTransportConfig.isPlayerAtBus2Stop(newPlayer.getPlayerLocation().getX(),
                 newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + "
             // is at a Bus");
             foundTransport = true;
             atBus2 = true;
-            SoundEffects.playTransportSound();
+            // SoundEffects.playTransportSound();
             newPlayer.bouncePlayer();
         }
 
-        if (StaticTransportConfig.isPlayerAtBus3Stop(newPlayer.getPlayerLocation().getX(),
+        else if (StaticTransportConfig.isPlayerAtBus3Stop(newPlayer.getPlayerLocation().getX(),
                 newPlayer.getPlayerLocation().getY())) {
             // PopupController.showPopupMessage(cityMainStack, newPlayer.getPlayerName() + "
             // is at a Bus");
             foundTransport = true;
             atBus3 = true;
-            SoundEffects.playTransportSound();
+            // SoundEffects.playTransportSound();
             newPlayer.bouncePlayer();
         }
     }
@@ -221,35 +220,40 @@ public class GameEngine {
 
         if (atLuas == true && (atRedLuas == false && atBus1 == false && atBus2 == false && atBus3 == false)) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS1_STOPS.keySet());
-            STOPS = StaticTransportConfig.LUAS1_STOPS;
+            // STOPS = StaticTransportConfig.LUAS1_STOPS;
+            STOPS = new HashMap<>(StaticTransportConfig.LUAS1_STOPS);
 
             // CO2 and Time reduction logic
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.LUAS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.LUAS_TIME_INCREMENT);
         } else if (atBus1 == true && (atRedLuas == false && atLuas == false && atBus2 == false && atBus3 == false)) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
-            STOPS = StaticTransportConfig.BUS1_STOPS;
+            // STOPS = StaticTransportConfig.BUS1_STOPS;
+            STOPS = new HashMap<>(StaticTransportConfig.BUS1_STOPS);
 
             // CO2 and Time reduction logic
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
         } else if (atBus2 == true && (atRedLuas == false && atLuas == false && atBus1 == false && atBus3 == false)) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS2_STOPS.keySet());
-            STOPS = StaticTransportConfig.BUS2_STOPS;
+            // STOPS = StaticTransportConfig.BUS2_STOPS;
+            STOPS = new HashMap<>(StaticTransportConfig.BUS2_STOPS);
 
             // CO2 and Time reduction logic
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
         } else if (atBus3 == true && (atRedLuas == false && atLuas == false && atBus1 == false && atBus2 == false)) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS3_STOPS.keySet());
-            STOPS = StaticTransportConfig.BUS3_STOPS;
+            // STOPS = StaticTransportConfig.BUS3_STOPS;
+            STOPS = new HashMap<>(StaticTransportConfig.BUS3_STOPS);
 
             // CO2 and Time reduction logic
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
         } else if (atRedLuas == true && (atLuas == false && atBus1 == false && atBus3 == false && atBus2 == false)) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS2_STOPS.keySet());
-            STOPS = StaticTransportConfig.LUAS2_STOPS;
+            // STOPS = StaticTransportConfig.LUAS2_STOPS;
+            STOPS = new HashMap<>(StaticTransportConfig.LUAS2_STOPS);
 
             // CO2 and Time reduction logic
             newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
@@ -279,17 +283,16 @@ public class GameEngine {
             System.out.println("Current Station: " + currentStation.getLocationName());
             if (nextStation != null) {
                 temp = " N - " + nextStation.getLocationName();
+                res.add(nextStation);
                 System.out.println("Press 'N' for Next Station: " + nextStation.getLocationName());
             }
             if (previousStation != null) {
                 temp = temp + "; P - " + previousStation.getLocationName();
+                res.add(previousStation);
                 System.out.println("Press 'P' for Previous Station: " + previousStation.getLocationName());
             }
             PopupController.showPopupMessage(cityMainStack, "Player is at " + currentStation.getLocationName() + temp);
         }
-
-        res.add(nextStation);
-        res.add(previousStation);
         return res;
     }
 
