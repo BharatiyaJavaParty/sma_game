@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalTime;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -36,6 +37,10 @@ public class ScoreBoardController {
 
     @FXML
     private TableColumn<ArrayList<String>, String> gems;
+    @FXML
+    private TableColumn<ArrayList<String>, String> TimeStamp;
+    
+
 
     public void initialize() throws FileNotFoundException {
         // Assuming you have data in an ArrayList of ArrayList of Strings called 'data'
@@ -49,6 +54,7 @@ public class ScoreBoardController {
         co2Budget.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(1)));
         time.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(2)));
         gems.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(3)));
+        TimeStamp.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(4)));
         // Add data to the table
         scoreboardTable.getItems().addAll(data);
     }
@@ -66,11 +72,15 @@ public class ScoreBoardController {
                 arrayNode = mapper.createArrayNode();
             }
 
+            LocalTime currentTime = LocalTime.now();
+            int hour = currentTime.getHour();
+            int minute = currentTime.getMinute();
             ObjectNode jsonObject = mapper.createObjectNode();
             jsonObject.put("playerName", GameEngine.newPlayer.getPlayerName());
             jsonObject.put("playerCO2Budget", GameEngine.newPlayer.getPlayerCo2Budget());
             jsonObject.put("playerTime", GameEngine.newPlayer.getPlayerTime());
             jsonObject.put("gems", gems);
+            jsonObject.put("TimeStamp", String.format("%02d:%02d", hour, minute));
             arrayNode.add(jsonObject);
 
             String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode);
@@ -102,6 +112,7 @@ public class ScoreBoardController {
                 temp.add(String.valueOf(rootNode.get("playerCO2Budget").asInt()));
                 temp.add(String.valueOf(rootNode.get("playerTime").asInt()));
                 temp.add(String.valueOf(rootNode.get("gems").asInt()));
+                temp.add(rootNode.get("TimeStamp").asText());
                 res.add(temp);
             }
         } catch (IOException e) {

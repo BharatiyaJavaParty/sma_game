@@ -35,4 +35,12 @@ public class SoundEffects {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
     }
+
+    public static MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public static void setMediaPlayer(MediaPlayer mediaPlayer) {
+        SoundEffects.mediaPlayer = mediaPlayer;
+    }
 }

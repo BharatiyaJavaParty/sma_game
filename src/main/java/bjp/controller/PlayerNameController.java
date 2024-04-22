@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 import bjp.utility.GameEngine;
+
+import java.io.IOException;
+
 import bjp.Main;
 
 public class PlayerNameController {
@@ -25,8 +28,11 @@ public class PlayerNameController {
 
     @FXML
     public void cancelButtonClicked() {
-        GameEngine.newPlayer.setPlayerName("Player1");
-        changeScene();
+        try {
+            Main.setRoot("launch-view");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void changeScene() {

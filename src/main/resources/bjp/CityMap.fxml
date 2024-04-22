@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjp.controller.CityMapController">
-    <VBox AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjp.controller.CityMapController" prefHeight="1600" prefWidth="900" stylesheets="@../styles/citymap.css">
+    <VBox  AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" >
         <!-- Scoreboard Pane with specified background color, height, and width -->
-        <Pane fx:id="scoreBoardPane" style="-fx-background-color: pink;" minHeight="0" prefHeight="50" minWidth="200" prefWidth="200">
+        <Pane fx:id="scoreBoardPane" style="-fx-background-color: #8bac0f; " AnchorPane.topAnchor="0">
             <!-- Scoreboard content goes here -->
+            <GridPane fx:id="scoreGrid" hgap="5" vgap="5">
+                <children>
+                    <Label text="CO2 Credits Spent: " GridPane.rowIndex="0" GridPane.columnIndex="4" styleClass="score-label"/>
+                    <Label fx:id="co2label" GridPane.rowIndex="0" GridPane.columnIndex="5" styleClass="score-label" />
+
+                    <Label text="Time: " GridPane.rowIndex="0" GridPane.columnIndex="7" styleClass="score-label" />
+                    <Label fx:id="timelabel" GridPane.rowIndex="0" GridPane.columnIndex="8" styleClass="score-label"/>
+
+                    <Label text="Gems Collected: " GridPane.rowIndex="0" GridPane.columnIndex="10" styleClass="score-label"/>
+                    <Label fx:id="gemslabel" GridPane.rowIndex="0" GridPane.columnIndex="11" styleClass="score-label"/>
+
+                    <Label text="Available Transport: " GridPane.rowIndex="0" GridPane.columnIndex="13" styleClass="score-label"/>
+                    <Label fx:id="transportlabel" GridPane.rowIndex="0" GridPane.columnIndex="14" styleClass="score-label"/>
+
+                    <!-- <Button fx:id="muteButton" onAction="#muteButtonClicked"  GridPane.rowIndex="0" GridPane.columnIndex="16" text="🔇" /> -->
+                </children>
+            </GridPane>
         </Pane>
         
         <!-- Main Game Area within a StackPane -->

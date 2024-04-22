@@ -5,15 +5,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="400" prefWidth="600" fx:controller="bjp.controller.ScoreBoardController" stylesheets="@../styles/scoreboard.css">
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="720" prefWidth="1280" fx:controller="bjp.controller.ScoreBoardController" stylesheets="@../styles/scoreboard.css">
     <ScrollPane>
         <content>
-            <TableView fx:id="scoreboardTable" prefHeight="400" prefWidth="600">
+            <TableView fx:id="scoreboardTable" prefHeight="720" prefWidth="1280">
                 <columns>
-                    <TableColumn fx:id="name" text="Player Name" prefWidth="150"/>
-                    <TableColumn fx:id="co2Budget" text="CO2 spent" prefWidth="150"/>
-                    <TableColumn fx:id="time" text="Player Time" prefWidth="150"/>
-                    <TableColumn fx:id="gems" text="Gems" prefWidth="150"/>
+                    <TableColumn fx:id="name" text="Player Name" prefWidth="256"/>
+                    <TableColumn fx:id="co2Budget" text="CO2 spent" prefWidth="256"/>
+                    <TableColumn fx:id="time" text="Player Time" prefWidth="256"/>
+                    <TableColumn fx:id="gems" text="Gems" prefWidth="256"/>
+                    <TableColumn fx:id="TimeStamp" text="TimeStamp" prefWidth="256"/>
                 </columns>
             </TableView>
         </content>

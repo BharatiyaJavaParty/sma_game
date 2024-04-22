@@ -2,6 +2,11 @@ package bjp.utility;
 
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.time.LocalTime;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -11,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+
 
 import bjp.constants.AppConstants;
 import bjp.controller.CityMapController;
@@ -26,10 +32,12 @@ public class Player {
     // setting time and co2emission
     private int playerTime;
     private int playerCo2Budget;
+    private int playerCo2Spent;
 
     public Player() {
         this.playerTime = 0;
         this.playerCo2Budget = AppConstants.CO2_BUDGET;
+        this.playerCo2Spent = 0;
     }
 
     // private static ImageView playerView;
@@ -87,6 +95,14 @@ public class Player {
 
     public void setPlayerName(String name) {
         this.playerName = name;
+    }
+
+    public int getPlayerCo2Spent() {
+        return playerCo2Spent;
+    }
+
+    public void setPlayerCo2Spent(int playerCo2Spent) {
+        this.playerCo2Spent = playerCo2Spent;
     }
 
     public void placePlayer(GridPane cityMapGrid) {

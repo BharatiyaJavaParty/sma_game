@@ -15,11 +15,11 @@ public class EnvironmentalPopup {
     private static int duration = 10;
 
     private static final String[] eduPopupStrings = {
-            "Whenever possible, choose walking or cycling for short distances. It's a zero-emission mode of transportation that also promotes physical activity.",
-            "Public transportation, such as buses, trains, and trams, emits lower emissions per passenger compared to individual car trips. Utilize public transport whenever feasible.",
-            "Consider working from home if your job allows it. Telecommuting reduces the need for daily commuting, thereby lowering carbon emissions from transportation.",
-            "Plan your trips efficiently to minimize distance and time spent on the road. Combine errands into a single trip to reduce fuel consumption and emissions.",
-            "Spread awareness about the environmental impact of transportation and encourage others to adopt eco-friendly transportation habits." };
+            "Tip: Whenever possible, choose walking or cycling for short distances. It's a zero-emission mode of transportation that also promotes physical activity.",
+            "Tip: Public transportation, such as buses, trains, and trams, emits lower emissions per passenger compared to individual car trips. Utilize public transport whenever feasible.",
+            "Tip: Consider working from home if your job allows it. Telecommuting reduces the need for daily commuting, thereby lowering carbon emissions from transportation.",
+            "Tip: Plan your trips efficiently to minimize distance and time spent on the road. Combine errands into a single trip to reduce fuel consumption and emissions.",
+            "Tip: Spread awareness about the environmental impact of transportation and encourage others to adopt eco-friendly transportation habits." };
 
     public static String selectMsg() {
         Random rand = new Random();
@@ -44,8 +44,7 @@ public class EnvironmentalPopup {
                         "-fx-padding: 10;" +
                         "-fx-text-fill: black;");
 
-        // Remove previous message labels if they exist
-        cityMainStack.getChildren().removeIf(node -> node instanceof Label);
+        cityMainStack.getChildren().removeIf(node -> node instanceof Label && ((Label) node).getText().contains("Tip:"));
 
         cityMainStack.getChildren().add(messageLabel);
         StackPane.setAlignment(messageLabel, Pos.BOTTOM_CENTER);

@@ -25,9 +25,9 @@ public class PopupController {
                         "-fx-padding: 10;" + // Padding inside the label
                         "-fx-text-fill: black;"); // Text color
 
-        // Remove previous message labels if they exist
-        cityMainStack.getChildren().removeIf(node -> node instanceof Label);
 
+        cityMainStack.getChildren().removeIf(node -> node instanceof Label && ((Label) node).getText().contains("Player"));
+        cityMainStack.getChildren().removeIf(node -> node instanceof Label && ((Label) node).getText().contains("Gems"));
         // Add the message label to the StackPane, overlaying the GridPane
         cityMainStack.getChildren().add(messageLabel);
         StackPane.setAlignment(messageLabel, Pos.TOP_CENTER); // Align the label at the top center of the StackPane
