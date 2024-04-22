@@ -29,6 +29,7 @@ public class ScoreBoardController {
 
     public void initialize() throws FileNotFoundException {
         // Assuming you have data in an ArrayList of ArrayList of Strings called 'data'
+
         ArrayList<ArrayList<String>> data = Player.getResults();
 
         System.out.println(data);
@@ -37,8 +38,7 @@ public class ScoreBoardController {
         name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(0)));
         co2Budget.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(1)));
         time.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(2)));
-        gems.setCellValueFactory(cellData ->new SimpleStringProperty(cellData.getValue().get(3)));
-
+        gems.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(3)));
         // Add data to the table
         scoreboardTable.getItems().addAll(data);
     }

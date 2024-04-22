@@ -13,26 +13,24 @@ public class Main extends Application {
     public static Scene scene;
 
     @Override
-    public void start (Stage primaryStage) throws IOException{
-        try
-        {
-            //loads the fmxl file containing the first screen/ main screen of the game 
-            //user has 2 options on this screen 
+    public void start(Stage primaryStage) throws IOException {
+        try {
+            // loads the fmxl file containing the first screen/ main screen of the game
+            // user has 2 options on this screen
             primaryStage.setTitle("GEM HUNTER");
             // primaryStage.setMaximized(true);
             scene = new Scene(loadFXML("launch-view"), 1280, 720);
-    
+
             primaryStage.setScene(scene);
             primaryStage.show();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void setRoot(String fxml) throws IOException {
-        // FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
+        // FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml +
+        // ".fxml"));
         scene.setRoot(loadFXML(fxml));
     }
 

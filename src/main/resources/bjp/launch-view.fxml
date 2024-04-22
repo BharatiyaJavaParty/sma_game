@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bjp.controller.LaunchController">
+<VBox alignment="CENTER" prefHeight="432.0" prefWidth="471.0" spacing="20" stylesheets="@../styles/launch_view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bjp.controller.LaunchController">
    <children>
-      <VBox spacing="20" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <children>
-            <Button fx:id="newGameButton" text="New Game" onAction="#newGameButtonClicked"/>
-            <Button fx:id="scoreboardButton" text="Scoreboard" onAction="#scoreboardButtonClicked"/>
-         </children>
-      </VBox>
+      <Button fx:id="newGameButton" onAction="#newGameButtonClicked" prefHeight="110.0" prefWidth="210.0" text="New Game" />
+      <Button fx:id="scoreboardButton" onAction="#scoreboardButtonClicked" prefHeight="110.0" prefWidth="210.0" text="Scoreboard" />
    </children>
-</GridPane>
+</VBox>

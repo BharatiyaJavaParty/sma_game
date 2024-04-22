@@ -13,9 +13,10 @@ public abstract class StaticTransport {
     private String transportName;
     private double co2Emissions;
     private long timeTakenPerGrid;
-    private HashMap<Location,Pair<Location, Location>> stops;
-    
-    public StaticTransport(String transportName, double co2Emissions, long timePerGrid, HashMap<Location,Pair<Location, Location>> stops) {
+    private HashMap<Location, Pair<Location, Location>> stops;
+
+    public StaticTransport(String transportName, double co2Emissions, long timePerGrid,
+            HashMap<Location, Pair<Location, Location>> stops) {
         this.transportName = transportName;
         this.co2Emissions = co2Emissions;
         this.timeTakenPerGrid = timePerGrid;

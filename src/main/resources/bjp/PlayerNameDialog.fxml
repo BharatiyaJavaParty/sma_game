@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="bjp.controller.PlayerNameController">
-    <columnConstraints>
-        <ColumnConstraints hgrow="NEVER" />
-        <ColumnConstraints hgrow="ALWAYS" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints vgrow="NEVER" />
-        <RowConstraints vgrow="ALWAYS" />
-        <RowConstraints vgrow="NEVER" />
-    </rowConstraints>
+<VBox spacing="15" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bjp.controller.PlayerNameController" stylesheets="@../styles/player_name_dialog.css">
     <children>
-        <Label text="Label:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="textField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Button text="OK" onAction="#okButtonClicked" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Button text="Cancel" onAction="#cancelButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Enter Your Name:"/>
+        <TextField fx:id="textField" maxWidth="200"/>
+        <Button text="OK" onAction="#okButtonClicked" styleClass="form-button"/>
+        <Button text="Cancel" onAction="#cancelButtonClicked" styleClass="form-button"/>
     </children>
-</GridPane>
+</VBox>

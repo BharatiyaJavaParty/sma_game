@@ -17,61 +17,60 @@ import bjp.utility.StaticTransportConfig;
 import bjp.Main;
 
 public class CityMapController {
-    public static final int WIDTH = ((int) Main.scene.getHeight() - 50)/20;
-    public static final int HEIGHT = ((int) Main.scene.getHeight() - 50)/20;
+    public static final int WIDTH = ((int) Main.scene.getHeight() - 50) / 20;
+    public static final int HEIGHT = ((int) Main.scene.getHeight() - 50) / 20;
+
     @FXML
     private GridPane cityMapGrid;
 
     @FXML
     private StackPane cityMainStack;
-    public static final int ROWS = (int) Main.scene.getHeight()/ (int) HEIGHT;
-    public static final int COLS = (int) Main.scene.getWidth()/ (int) WIDTH;
-    
+    public static final int ROWS = 21;
+    public static final int COLS = 38;
+
     @FXML
     private void initialize() {
         generateGrid(ROWS, COLS);
+        
         Bus.makeBusRoad(StaticTransportConfig.BUS2, StaticTransportConfig.BUS2_STOPS, cityMapGrid);
         Bus.makeBusRoad(StaticTransportConfig.BUS3, StaticTransportConfig.BUS3_STOPS, cityMapGrid);
         Bus.makeBusRoad(StaticTransportConfig.BUS1, StaticTransportConfig.BUS1_STOPS, cityMapGrid);
         Luas.makeLuasLane_green(StaticTransportConfig.LUAS1, StaticTransportConfig.LUAS1_STOPS, cityMapGrid);
-        Luas.makeLuasLane_red(StaticTransportConfig.LUAS2, StaticTransportConfig.LUAS2_STOPS, cityMapGrid);    
+        Luas.makeLuasLane_red(StaticTransportConfig.LUAS2, StaticTransportConfig.LUAS2_STOPS, cityMapGrid);
 
         GameEngine.newPlayer.placePlayer(cityMapGrid);
         Obstacles.placeTrees(cityMapGrid);
         Obstacles.placeHouses(cityMapGrid);
-    
+
         PopupController.showPopupMessage(cityMainStack, "Welcome to Gem World");
 
         Thread thread = new Thread(() -> {
             while (true) {
-                try
-                {
+                try {
                     Thread.sleep(10000);
                     Platform.runLater(() -> {
                         EnvironmentalPopup.showEduPopup(cityMainStack, EnvironmentalPopup.selectMsg());
                     });
-                } 
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
         thread.start();
         GameEngine.mainEventHandler(cityMainStack, cityMapGrid);
+
+        // cityMapGrid.setGridLinesVisible(true); 
     }
-    
+
     private void generateGrid(int rows, int cols) {
-        Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png")); // Replace with the correct path
+        Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png"));
         ImagePattern grassPattern = new ImagePattern(grassImage);
-                for (int row = 0; row < rows; row++) {
-                    for (int col = 0; col < cols; col++) {
-                        Rectangle rect = new Rectangle(WIDTH, HEIGHT);
-                        rect.setFill(grassPattern);
-                        cityMapGrid.add(rect, col, row);
-                    }
-                }
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                Rectangle rect = new Rectangle(WIDTH, HEIGHT);
+                rect.setFill(grassPattern);
+                cityMapGrid.add(rect, col, row);
             }
+        }
+    }
 }
-
-

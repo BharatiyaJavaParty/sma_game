@@ -21,6 +21,7 @@ public class SoundEffects {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
     }
+
     public static void newLevel() {
         URL resource = SoundEffects.class.getResource("/audio/level_completed.wav");
         Media media = new Media(resource.toString());
@@ -35,4 +36,3 @@ public class SoundEffects {
         mediaPlayer.play();
     }
 }
-

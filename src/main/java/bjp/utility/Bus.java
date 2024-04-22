@@ -12,13 +12,14 @@ import javafx.scene.image.ImageView;
 
 import bjp.controller.CityMapController;
 
-public class Bus extends StaticTransport{
+public class Bus extends StaticTransport {
     private static final Image roadHori = new Image(Luas.class.getResourceAsStream("/img/road-hori.png"));
     private static final Image roadConn = new Image(Luas.class.getResourceAsStream("/img/road-conn.png"));
     private static final Image roadVerti = new Image(Luas.class.getResourceAsStream("/img/road-verti.png"));
     private static final Image busStop = new Image(Luas.class.getResourceAsStream("/img/bus-stop.png"));
 
-    public Bus(String transportName, double co2Emissions, long timeTaken, HashMap<Location, Pair<Location, Location>> bus1Stops) {
+    public Bus(String transportName, double co2Emissions, long timeTaken,
+            HashMap<Location, Pair<Location, Location>> bus1Stops) {
         super(transportName, co2Emissions, timeTaken, bus1Stops);
     }
 
@@ -48,17 +49,15 @@ public class Bus extends StaticTransport{
         for (int x = minX; x <= maxX; x++) {
             if (x == minX || x == maxX) {
                 fillGridCellWithImage(grid, x, startY, roadConn);
-            }
-            else{
+            } else {
                 fillGridCellWithImage(grid, x, startY, roadHori);
             }
         }
 
         for (int y = minY; y <= maxY; y++) {
-            if (y == minY || y == maxY){
+            if (y == minY || y == maxY) {
                 fillGridCellWithImage(grid, endX, y, roadConn);
-            }
-            else{
+            } else {
                 fillGridCellWithImage(grid, endX, y, roadVerti);
             }
         }

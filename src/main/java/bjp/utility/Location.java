@@ -14,7 +14,7 @@ public class Location {
     }
 
     // public Location() {
-    //     System.out.println("Location object created successfully");
+    // System.out.println("Location object created successfully");
     // }
 
     public int getX() {
@@ -25,18 +25,15 @@ public class Location {
         return yOrdinate;
     }
 
-    public void setX(int xCoordinate)
-    {
-        this.xOrdinate = xCoordinate; 
+    public void setX(int xCoordinate) {
+        this.xOrdinate = xCoordinate;
     }
 
-    public void setY(int yCoordinate)
-    {
+    public void setY(int yCoordinate) {
         this.yOrdinate = yCoordinate;
     }
 
-    public void setLocationName(String yCoordinate)
-    {
+    public void setLocationName(String yCoordinate) {
         this.locationName = yCoordinate;
     }
 
@@ -46,8 +43,10 @@ public class Location {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Location location = (Location) o;
         return xOrdinate == location.xOrdinate && yOrdinate == location.yOrdinate;
     }
@@ -58,7 +57,7 @@ public class Location {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return locationName;
     }
 }

@@ -15,11 +15,10 @@ public class Gem {
     private Location gemLocation;
     private ImageView imageView;
     private static final Image redGem = new Image(Gem.class.getResourceAsStream("/img/red_gem.png"));
-    private static final Image orangeGem= new Image(Gem.class.getResourceAsStream("/img/orange_gem.png"));
+    private static final Image orangeGem = new Image(Gem.class.getResourceAsStream("/img/orange_gem.png"));
     private static final Image greenGem = new Image(Gem.class.getResourceAsStream("/img/green_gem.png"));
 
-
-    public Gem(String color){
+    public Gem(String color) {
         gemLocation = new Location("Gem", -1, -1);
         switch (color) {
             case "red":
@@ -32,19 +31,17 @@ public class Gem {
                 this.imageView = new ImageView(greenGem);
                 break;
         }
-        
+
         this.imageView.setFitWidth(CityMapController.WIDTH);
         this.imageView.setFitHeight(CityMapController.HEIGHT);
         this.imageView.setSmooth(true);
     }
 
-    public Location getGemLocation()
-    {
+    public Location getGemLocation() {
         return gemLocation;
     }
 
-    public void setGemLocation(Location newLocation)
-    {
+    public void setGemLocation(Location newLocation) {
         this.gemLocation = newLocation;
     }
 

@@ -1,0 +1,42 @@
+/* Basic setup for the GridPane */
+.grid-pane {
+    -fx-background-color: #0f380f; /* Dark green, resembling the old Game Boy screen */
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+
+/* Styling VBox for better alignment and padding */
+.vbox {
+    -fx-padding: 20;
+    -fx-spacing: 10; /* Space between buttons */
+    -fx-alignment: center;
+}
+
+/* Generic button styling */
+.button {
+    -fx-background-color: #306230;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: 'Press Start 2P', monospace;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Hover effects for buttons */
+.button:hover {
+    -fx-background-color: #8bac0f;
+    -fx-border-color: #ffff00;
+    -fx-scale-x: 1.1; /* Button grows slightly larger */
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand; /* Cursor changes to a hand to indicate interactiveness */
+}
+
+/* Press effect for buttons to give a tactile feedback */
+.button:pressed {
+    -fx-background-color: #729f3f;
+    -fx-border-color: #333333;
+    -fx-translate-y: 2px; /* Button moves slightly down to mimic pressing */
+}

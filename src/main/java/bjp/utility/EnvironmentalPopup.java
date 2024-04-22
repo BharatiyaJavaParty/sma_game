@@ -14,14 +14,14 @@ public class EnvironmentalPopup {
     private static String popupMessage;
     private static int duration = 10;
 
-    private static final String[] eduPopupStrings = {"Whenever possible, choose walking or cycling for short distances. It's a zero-emission mode of transportation that also promotes physical activity.",
-        "Public transportation, such as buses, trains, and trams, emits lower emissions per passenger compared to individual car trips. Utilize public transport whenever feasible.",
-        "Consider working from home if your job allows it. Telecommuting reduces the need for daily commuting, thereby lowering carbon emissions from transportation.",
-        "Plan your trips efficiently to minimize distance and time spent on the road. Combine errands into a single trip to reduce fuel consumption and emissions.",
-        "Spread awareness about the environmental impact of transportation and encourage others to adopt eco-friendly transportation habits."};
+    private static final String[] eduPopupStrings = {
+            "Whenever possible, choose walking or cycling for short distances. It's a zero-emission mode of transportation that also promotes physical activity.",
+            "Public transportation, such as buses, trains, and trams, emits lower emissions per passenger compared to individual car trips. Utilize public transport whenever feasible.",
+            "Consider working from home if your job allows it. Telecommuting reduces the need for daily commuting, thereby lowering carbon emissions from transportation.",
+            "Plan your trips efficiently to minimize distance and time spent on the road. Combine errands into a single trip to reduce fuel consumption and emissions.",
+            "Spread awareness about the environmental impact of transportation and encourage others to adopt eco-friendly transportation habits." };
 
-    public static String selectMsg()
-    {
+    public static String selectMsg() {
         Random rand = new Random();
         int randomIndex = rand.nextInt(eduPopupStrings.length);
 
@@ -29,13 +29,12 @@ public class EnvironmentalPopup {
         return message;
     }
 
-    public static void showEduPopup(StackPane cityMainStack, String message)
-    {
+    public static void showEduPopup(StackPane cityMainStack, String message) {
         Label messageLabel = new Label("");
-        messageLabel.setFont(new Font("Arial", 16)); 
+        messageLabel.setFont(new Font("Arial", 16));
         messageLabel.setAlignment(Pos.CENTER);
         messageLabel.setWrapText(true);
-        //keeping the pop up style same as player popup
+        // keeping the pop up style same as player popup
         messageLabel.setStyle(
                 "-fx-background-color: lightblue; " +
                         "-fx-background-radius: 10; " +
@@ -49,9 +48,9 @@ public class EnvironmentalPopup {
         cityMainStack.getChildren().removeIf(node -> node instanceof Label);
 
         cityMainStack.getChildren().add(messageLabel);
-        StackPane.setAlignment(messageLabel, Pos.BOTTOM_CENTER); 
+        StackPane.setAlignment(messageLabel, Pos.BOTTOM_CENTER);
 
-        final int[] charIndex = {0};
+        final int[] charIndex = { 0 };
         Timeline timeline = new Timeline(new KeyFrame(javafx.util.Duration.millis(50), event -> {
             if (charIndex[0] < message.length()) {
                 messageLabel.setText(messageLabel.getText() + message.charAt(charIndex[0]));

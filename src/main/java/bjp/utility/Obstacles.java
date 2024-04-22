@@ -13,28 +13,16 @@ public class Obstacles {
     public static Set<Location> Tree_SET = new HashSet<>();
     public static Set<Location> HOUSE_SET = new HashSet<>();
     public static Set<Location> ALL_OBSTACLES = new HashSet<>();
-    private static final Image treeImg = new Image(Obstacles.class.getResourceAsStream("/img/tree3.png"));
+    private static final Image treeImg = new Image(Obstacles.class.getResourceAsStream("/img/tree.png"));
     private static final Image houseImg = new Image(Obstacles.class.getResourceAsStream("/img/house1.png"));
     public static ImageView imageView;
 
-    
     static {
         // Adding elements to Tree_SET
-        Tree_SET.add(new Location("Tree1", 1, 1));
-        Tree_SET.add(new Location("Tree2", 2, 2));
-        Tree_SET.add(new Location("Tree2", 1, 2));
-        Tree_SET.add(new Location("Tree2", 2, 1));
-        Tree_SET.add(new Location("Tree2", 0, 0));
-        Tree_SET.add(new Location("Tree2", 0, 1));
-        Tree_SET.add(new Location("Tree2", 1, 0));
-        Tree_SET.add(new Location("Tree2", 18, 9));
-        Tree_SET.add(new Location("Tree2", 18, 10));
-        Tree_SET.add(new Location("Tree2", 18, 11));
-        Tree_SET.add(new Location("Tree2", 17, 9));
-        Tree_SET.add(new Location("Tree2", 16, 9));
-        Tree_SET.add(new Location("Tree2", 15, 9));
-        Tree_SET.add(new Location("Tree2", 15, 10));
-        Tree_SET.add(new Location("Tree2", 15, 11));
+
+        for (int i = 0; i < CityMapController.COLS; i++){
+            Tree_SET.add(new Location("Tree", i, 0));
+        }
 
         // Adding element to HOUSE_SET
         HOUSE_SET.add(new Location("House1", 16, 10));
@@ -72,11 +60,12 @@ public class Obstacles {
         }
 
         for (Location house : HOUSE_SET) {
-            if ((house.getX() == newX || house.getX() == newX - 1) && (house.getY() == newY || house.getY() == newY - 1)) {
+            if ((house.getX() == newX || house.getX() == newX - 1)
+                    && (house.getY() == newY || house.getY() == newY - 1)) {
                 return true; // House is an obstacle at the new position
             }
         }
-        
+
         return false; // No obstacles found, movement is possible
     }
 }

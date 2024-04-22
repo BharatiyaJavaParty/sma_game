@@ -15,33 +15,32 @@ import bjp.controller.CityMapController;
 public class Luas extends StaticTransport {
 
     // Assuming you have an image at "src/main/resources/bjp/img/roadTexture.jpg"
-    private static Image trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori-green.png"));
-    private static Image trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti-green.png"));
-    private static Image luasStop = new Image(Luas.class.getResourceAsStream("/img/luas-stop.png"));
-    private static Image trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join-green.png"));
+    private static Image trackHori;
+    private static Image trackVerti;
+    private static Image luasStop;
+    private static Image trackJoin;
 
     public Luas(String transportName, double co2Emissions, long timeTaken,
             HashMap<Location, Pair<Location, Location>> stops) {
         super(transportName, co2Emissions, timeTaken, stops);
     }
 
-    public static void makeLuasLane_green(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops,
-            GridPane grid) {
-        for (Location start : luasStops.keySet()) {
-            Location end = luasStops.get(start).getValue();
-            luas.drawRoad(start, end, grid);
-        }
-
-        for (Location stop : luasStops.keySet()) {
-            luas.fillGridCellWithImage(grid, stop.getX(), stop.getY(), luasStop);
-        }
+    public static void makeLuasLane_green(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) {
+        trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori-green.png"));
+        trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti-green.png"));
+        luasStop = new Image(Luas.class.getResourceAsStream("/img/luas-stop.png"));
+        trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join-green.png"));
+        luas.makeLane(luas, luasStops, grid);
     }
 
-    public static void makeLuasLane_red(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) 
-        {
+    public static void makeLuasLane_red(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) {
         trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori-red.png"));
         trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti-red.png"));
         trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join-red.png"));
+        luas.makeLane(luas, luasStops, grid);
+    }
+
+    public void makeLane(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) {
         for (Location start : luasStops.keySet()) {
             Location end = luasStops.get(start).getValue();
             luas.drawRoad(start, end, grid);

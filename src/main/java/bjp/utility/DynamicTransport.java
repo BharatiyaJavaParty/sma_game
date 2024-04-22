@@ -11,8 +11,8 @@ public abstract class DynamicTransport {
         this.transportName = transportName;
         this.co2Emissions = co2Emissions;
         this.speed = speed;
-    }; 
-    
+    };
+
     public abstract void getCurrentGridNode();
 
     public abstract int getManhattanDistance(Location l1, Location l2);
