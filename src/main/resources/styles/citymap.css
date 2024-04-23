@@ -1,0 +1,36 @@
+/* Overall background of the scoreboard pane to integrate with the game's UI */
+#scoreBoardPane {
+    -fx-background-color: #8bac0f; /* Green background color */
+}
+
+/* Styling for scoreboard labels */
+.score-label {
+    -fx-font-family: 'Pixelated';
+    -fx-font-size: 15px; /* Adjust size as needed for readability */
+    -fx-text-fill: white; /* White for high contrast and visibility */
+    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 ); /* Shadow for a lifted effect */
+}
+
+/* Hover effect for interactive elements, if any */
+.score-label:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+}
+
+/* Scoreboard grid pane settings */
+#scoreGrid {
+    -fx-hgap: 5; /* Horizontal gap between grid items */
+    -fx-vgap: 5; /* Vertical gap between grid items */
+    -fx-padding: 5; /* Padding around the grid */
+}
+
+/* Button styles, if you uncomment the mute button later */
+#muteButton {
+    -fx-background-radius: 15; /* Rounded corners */
+    -fx-background-color: #333; /* Dark background for the button */
+    -fx-font-family: 'Press Start 2P', monospace; /* Retro gaming font */
+    -fx-text-fill: #fff; /* White text color */
+}
+
+#muteButton:hover {
+    -fx-background-color: #555; /* Lighter background on hover */
+}
