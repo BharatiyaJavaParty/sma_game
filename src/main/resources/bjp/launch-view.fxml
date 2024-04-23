@@ -5,7 +5,7 @@
 
 <VBox alignment="CENTER" prefHeight="432.0" prefWidth="471.0" spacing="20" stylesheets="@../styles/launch_view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bjp.controller.LaunchController">
    <children>
-      <Button fx:id="newGameButton" onAction="#newGameButtonClicked" prefHeight="110.0" prefWidth="210.0" text="New Game" />
-      <Button fx:id="scoreboardButton" onAction="#scoreboardButtonClicked" prefHeight="110.0" prefWidth="210.0" text="Scoreboard" />
+      <Button fx:id="newGameButton" onAction="#newGameButtonClicked" prefHeight="60.0" prefWidth="300.0" text="PLAY" styleClass="button" />
+      <Button fx:id="scoreboardButton" onAction="#scoreboardButtonClicked" prefHeight="60.0" prefWidth="300.0" text="SCORE" styleClass="button"/>
    </children>
 </VBox>

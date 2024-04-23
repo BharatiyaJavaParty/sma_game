@@ -1,48 +1,42 @@
-/* VBox styles */
+.root {
+    -fx-background-image: url('https://cdn.wallpapersafari.com/11/43/EXVgK1.png'); /* replace with the path to your own background image */
+    -fx-background-size: cover;
+}
+
 .vbox {
-    -fx-padding: 20;
-    -fx-background-color: #fafafa; /* Light background for contrast */
+    -fx-background-color: transparent;
 }
 
-/* Label styles */
-.label {
-    -fx-text-fill: #333333; /* Dark text for readability */
-    -fx-font-size: 16px; /* Slightly larger font for labels */
+.game-label {
+    -fx-font-family: 'Pixelated';
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
 
-/* TextField styles */
-.text-field {
-    -fx-padding: 8;
-    -fx-background-color: white;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1;
-    -fx-border-radius: 5px;
+.game-text-field {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-font-family: 'Pixelated';
 }
 
-/* Button styles with hover effects */
-.button {
-    -fx-background-color: #4285F4; /* Bright blue background */
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-padding: 10 20;
-    -fx-cursor: hand; /* Cursor changes to hand when hovered */
+.game-button {
+    -fx-background-color: #ffaa00;
+    -fx-font-family: 'Pixelated';
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow( three-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
 
-.button:hover {
-    -fx-background-color: #357ae8; /* Slightly darker on hover for a tactile feel */
+.game-button:hover {
+    -fx-background-color: #ffca00;
 }
 
-.form-button {
-    -fx-background-color: #34a853; /* Google's Material Design green */
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
-
-.form-button:hover {
-    -fx-background-color: #2c7b45; /* Darker green when hovered */
+/* Include the path to your custom pixel font */
+@font-face {
+    font-family: 'Pixelated';
+    src: url('../fonts/pixelated_font.ttf');
 }
