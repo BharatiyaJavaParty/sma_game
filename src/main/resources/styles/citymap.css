@@ -1,36 +1,69 @@
-/* Overall background of the scoreboard pane to integrate with the game's UI */
-#scoreBoardPane {
-    -fx-background-color: #8bac0f; /* Green background color */
+/* General body and background styling */
+.root {
+    -fx-font-family: 'Arial', sans-serif; 
+    -fx-base: #202020;
+    -fx-background-color: #f0f0f0;
 }
 
-/* Styling for scoreboard labels */
+.vbox {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #1e5799 0%, #2989d8 50%, #207cca 100%);
+}
+
+/* Main Scoreboard HBox styling (updated with gradient background) */
+#scoreBoardHBox {
+    -fx-background-color: linear-gradient(to bottom, #8bac0f, #799b0c); 
+    -fx-padding: 20;
+    -fx-max-width: 1368px;
+    -fx-max-height: 100px;
+    -fx-background-radius: 10; 
+    -fx-background-insets: 5;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.6), 15, 0, 0, 0);  
+}
+
+/* Label styling in the Scoreboard */
 .score-label {
-    -fx-font-family: 'Pixelated';
-    -fx-font-size: 15px; /* Adjust size as needed for readability */
-    -fx-text-fill: white; /* White for high contrast and visibility */
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 ); /* Shadow for a lifted effect */
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-padding: 8px 12px;  
+    -fx-background-color: rgba(0, 0, 0, 0.2); 
+    -fx-background-radius: 8px; 
+    -fx-min-width: 70px;
+    -fx-min-height: 30px;
 }
 
-/* Hover effect for interactive elements, if any */
-.score-label:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+/* HBox styling for left alignment without affecting centering */
+.hbox1 {
+    -fx-alignment: baseline-left;
+    -fx-spacing: 10; 
 }
 
-/* Scoreboard grid pane settings */
-#scoreGrid {
-    -fx-hgap: 5; /* Horizontal gap between grid items */
-    -fx-vgap: 5; /* Vertical gap between grid items */
-    -fx-padding: 5; /* Padding around the grid */
+/* Label specific styles for different IDs with vivid colors */
+#co2label {
+    -fx-text-fill: #e57373; 
 }
 
-/* Button styles, if you uncomment the mute button later */
-#muteButton {
-    -fx-background-radius: 15; /* Rounded corners */
-    -fx-background-color: #333; /* Dark background for the button */
-    -fx-font-family: 'Press Start 2P', monospace; /* Retro gaming font */
-    -fx-text-fill: #fff; /* White text color */
+#timelabel {
+    -fx-text-fill: #64b5f6; 
 }
 
-#muteButton:hover {
-    -fx-background-color: #555; /* Lighter background on hover */
+#gemslabel {
+    -fx-text-fill: #81c784;  
+}
+
+#transportlabel {
+    -fx-text-fill: #fff176;  
+}
+
+/* StackPane and GridPane within the main game area */
+#cityMapGrid {
+    -fx-border-color: #333;
+    -fx-border-width: 2;
+    -fx-background-radius: 10;
+    -fx-max-width: 1370px;
+    -fx-background-insets: 5;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.6), 15, 0, 0, 0);  
 }

@@ -3,38 +3,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjp.controller.CityMapController" prefHeight="1600" prefWidth="900" stylesheets="@../styles/citymap.css">
-    <VBox  AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" >
-        <!-- Scoreboard Pane with specified background color, height, and width -->
-        <Pane fx:id="scoreBoardPane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
-    <!-- Scoreboard content goes here -->
-    <GridPane fx:id="scoreGrid" alignment="CENTER" hgap="5" vgap="5" styleClass="grid-pane">
-        <children>
-            <!-- Scoreboard labels and data fields -->
-            <Label text="CO2 Credits Spent: " GridPane.rowIndex="0" GridPane.columnIndex="4" styleClass="score-label"/>
-            <Label fx:id="co2label" GridPane.rowIndex="0" GridPane.columnIndex="5" styleClass="score-label" />
+<VBox alignment="CENTER" styleClass="vbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjp.controller.CityMapController" prefHeight="1600" prefWidth="900" stylesheets="@../styles/citymap.css">
+    <!-- Scoreboard directly using HBox with specified background color, height, and width -->
+    <HBox fx:id="scoreBoardHBox" alignment="CENTER_LEFT" spacing="10" styleClass="hbox1" fillHeight="true" style="-fx-background-color: #8bac0f; -fx-padding: 10; -fx-max-height: 100;" maxHeight="100.0">
+        <HBox alignment="CENTER" styleClass="hbox" spacing="5">
+            <Label text="CO2 Credits Spent: " styleClass="score-label"/>
+            <Label fx:id="co2label" text="0" styleClass="score-label"/>
+        </HBox>
+        <HBox alignment="CENTER" styleClass="hbox" spacing="5">
+            <Label text="Time: " styleClass="score-label"/>
+            <Label fx:id="timelabel" text="0" styleClass="score-label"/>
+        </HBox>
+        <HBox alignment="CENTER" styleClass="hbox" spacing="5">
+            <Label text="Gems Collected: " styleClass="score-label"/>
+            <Label fx:id="gemslabel" text="0" styleClass="score-label"/>
+        </HBox>
+        <HBox alignment="CENTER" styleClass="hbox" spacing="5">
+            <Label text="Available Transport: " styleClass="score-label"/>
+            <Label fx:id="transportlabel" text="Walking" styleClass="score-label"/>
+        </HBox>
+    </HBox>
 
-            <Label text="Time: " GridPane.rowIndex="0" GridPane.columnIndex="7" styleClass="score-label" />
-            <Label fx:id="timelabel" GridPane.rowIndex="0" GridPane.columnIndex="8" styleClass="score-label"/>
-
-            <Label text="Gems Collected: " GridPane.rowIndex="0" GridPane.columnIndex="10" styleClass="score-label"/>
-            <Label fx:id="gemslabel" GridPane.rowIndex="0" GridPane.columnIndex="11" styleClass="score-label"/>
-
-            <Label text="Available Transport: " GridPane.rowIndex="0" GridPane.columnIndex="13" styleClass="score-label"/>
-            <Label fx:id="transportlabel" GridPane.rowIndex="0" GridPane.columnIndex="14" styleClass="score-label"/>
-
-            <!-- Optional mute button -->
-            <!-- <Button fx:id="muteButton" onAction="#muteButtonClicked" GridPane.rowIndex="0" GridPane.columnIndex="16" text="🔇" styleClass="mute-button"/> -->
-        </children>
-    </GridPane>
-</Pane>
-
-        
-        <!-- Main Game Area within a StackPane -->
-        <StackPane fx:id="cityMainStack" alignment="CENTER">
-            <GridPane fx:id="cityMapGrid" alignment="CENTER" hgap="0" vgap="0">
-                <!-- Game grid/content goes here -->
-            </GridPane>
-        </StackPane>
-    </VBox>
-</AnchorPane>
+    <!-- Main Game Area within a StackPane -->
+    <StackPane fx:id="cityMainStack" alignment="CENTER">
+        <GridPane fx:id="cityMapGrid" alignment="CENTER" hgap="0" vgap="0">
+            <!-- Game grid/content goes here -->
+        </GridPane>
+    </StackPane>
+</VBox>

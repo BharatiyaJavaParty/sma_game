@@ -54,8 +54,14 @@ public class Player {
             Player.class.getResourceAsStream("/img/player_moments/walkdown1.png"));
     private static final Image PLAYER_IMAGE_DOWN2 = new Image(
             Player.class.getResourceAsStream("/img/player_moments/walkdown2.png"));
-    private static final Image VEHICLE_IMAGE = new Image(Player.class.getResourceAsStream("/img/luas-stop.png"));
+    
     // Existing left and right images
+
+    private static final Image BUS1_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus1.png"));
+    private static final Image BUS2_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus2.png"));
+    private static final Image BUS3_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus3.png"));
+    private static final Image LUAS_IMAGE = new Image(Player.class.getResourceAsStream("/img/greenLuas.png"));
+    private static final Image RED_LUAS_IMAGE = new Image(Player.class.getResourceAsStream("/img/redLuas.png"));
 
     private static ImageView playerView = new ImageView(PLAYER_IMAGE_DOWN1);
     private boolean isMoving = false;
@@ -117,8 +123,7 @@ public class Player {
         cityMapGrid.getChildren().remove(playerView);
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
 
-        // SoundEffects.startGame();
-        ;
+        SoundEffects.startGame();
         animateMove(cityMapGrid, 2);
     }
 
@@ -127,10 +132,11 @@ public class Player {
         for (int i = 1; i <= steps; i++) {
             int newY = playerLocation.getY() + i;
             KeyFrame keyFrame = new KeyFrame(
-                    MOVE_DURATION.multiply(i*5),
+                    MOVE_DURATION.multiply(i*3),
                     e -> {
                         cityMapGrid.getChildren().remove(playerView);
                         cityMapGrid.add(playerView, playerLocation.getX(), newY);
+                        bouncePlayer();
                     });
             timeline.getKeyFrames().add(keyFrame);
         }
@@ -226,7 +232,23 @@ public class Player {
         timeline.setCycleCount(1);
         timeline.setAutoReverse(false);
 
-        playerView.setImage(VEHICLE_IMAGE);
+        if(GameEngine.atBus1){
+            playerView.setImage(BUS1_IMAGE);
+        }
+        else if(GameEngine.atBus2){
+            playerView.setImage(BUS2_IMAGE);
+        }
+        else if(GameEngine.atBus3){
+            playerView.setImage(BUS3_IMAGE);
+        }
+        else if(GameEngine.atLuas){
+            playerView.setImage(LUAS_IMAGE);
+        }
+        else if (GameEngine.atRedLuas){
+            playerView.setImage(RED_LUAS_IMAGE);
+        }
+
+
         cityMapGrid.getChildren().remove(playerView);
         playerLocation = path.get(0);
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());

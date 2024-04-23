@@ -16,19 +16,30 @@ public class Bus extends StaticTransport {
     private static final Image roadHori = new Image(Luas.class.getResourceAsStream("/img/road-hori.png"));
     private static final Image roadConn = new Image(Luas.class.getResourceAsStream("/img/road-conn.png"));
     private static final Image roadVerti = new Image(Luas.class.getResourceAsStream("/img/road-verti.png"));
-    private static final Image busStop = new Image(Luas.class.getResourceAsStream("/img/bus-stop.png"));
+    private static final Image bus1Stop = new Image(Luas.class.getResourceAsStream("/img/bus1-stop.png"));
+    private static final Image bus2Stop = new Image(Luas.class.getResourceAsStream("/img/bus2-stop.png"));
+    private static final Image bus3Stop = new Image(Luas.class.getResourceAsStream("/img/bus3-stop.png"));
 
     public Bus(String transportName, double co2Emissions, long timeTaken,
             HashMap<Location, Pair<Location, Location>> bus1Stops) {
         super(transportName, co2Emissions, timeTaken, bus1Stops);
     }
 
-    public static void makeBusRoad(Bus bus, HashMap<Location, Pair<Location, Location>> busStops, GridPane grid) {
+    public static void makeBusRoad(Bus bus, HashMap<Location, Pair<Location, Location>> busStops, GridPane grid, int number) {
         for (Location start : busStops.keySet()) {
             Location end = busStops.get(start).getValue();
             bus.drawRoad(start, end, grid);
         }
-
+        Image busStop = bus1Stop;
+        if (number == 1){
+            busStop = bus1Stop;
+        }
+        else if (number == 2){
+            busStop = bus2Stop;
+        }
+        else if (number == 3){
+            busStop = bus3Stop;
+        }
         for (Location stop : busStops.keySet()) {
             bus.fillGridCellWithImage(grid, stop.getX(), stop.getY(), busStop);
         }

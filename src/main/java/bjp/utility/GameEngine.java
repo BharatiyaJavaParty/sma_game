@@ -34,6 +34,7 @@ public class GameEngine {
     public static boolean atBus1 = false;
     public static boolean atBus2 = false;
     public static boolean atBus3 = false;
+
     public static int maxLevel = 3;
     public static int current_level = 1;
     public static ArrayList<Gem> gems = new ArrayList<Gem>();
@@ -65,10 +66,10 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    sameStation = true;
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() - 1))
                     {
+                        sameStation = true;
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
                     }
@@ -79,10 +80,10 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    sameStation = true;
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() + 1))
                     {
+                        sameStation = true;
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
                     }                    break;
@@ -92,10 +93,10 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    sameStation = true;
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() - 1,newPlayer.getPlayerLocation().getY()))
                     {
+                        sameStation = true;
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
                     }                    break;
@@ -105,10 +106,10 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    sameStation = true;
                     newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() + 1,newPlayer.getPlayerLocation().getY()))
                     {
+                        sameStation = true;
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
                     }                    break;

@@ -28,7 +28,7 @@ public class Luas extends StaticTransport {
     public static void makeLuasLane_green(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) {
         trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori-green.png"));
         trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti-green.png"));
-        luasStop = new Image(Luas.class.getResourceAsStream("/img/luas-stop.png"));
+        luasStop = new Image(Luas.class.getResourceAsStream("/img/greenLuasStop.png"));
         trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join-green.png"));
         luas.makeLane(luas, luasStops, grid);
     }
@@ -36,6 +36,7 @@ public class Luas extends StaticTransport {
     public static void makeLuasLane_red(Luas luas, HashMap<Location, Pair<Location, Location>> luasStops, GridPane grid) {
         trackHori = new Image(Luas.class.getResourceAsStream("/img/train-hori-red.png"));
         trackVerti = new Image(Luas.class.getResourceAsStream("/img/train-verti-red.png"));
+        luasStop = new Image(Luas.class.getResourceAsStream("/img/redLuasStop.png"));
         trackJoin = new Image(Luas.class.getResourceAsStream("/img/train-join-red.png"));
         luas.makeLane(luas, luasStops, grid);
     }

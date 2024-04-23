@@ -421,11 +421,10 @@ public class Obstacles {
                 System.out.println("building"); // Checks if newY falls within the vertical span of the building
                 return true; // Building is an obstacle at the new position
             }
-        }
 
-        if((Entrance.getX() <= newX || Entrance.getX() + 2 >= newX)
-        && (Entrance.getY() <= newY && Entrance.getY() + 2 >= newY)){
-            return true;
+            if (newX >= Entrance.getX() && newX < Entrance.getX() + 3 && newY >= Entrance.getY() && newY < Entrance.getY() + 3){
+                return true;
+            }
         }
 
         return false; // No obstacles found, movement is possible

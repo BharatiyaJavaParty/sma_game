@@ -36,15 +36,15 @@ public class EnvironmentalPopup {
         messageLabel.setWrapText(true);
         // keeping the pop up style same as player popup
         messageLabel.setStyle(
-            "-fx-background-color: rgba(255, 105, 97, 0.7);" +
+            "-fx-background-color: rgba(234, 255, 208, 0.7);" +
             "-fx-background-radius: 15;" +
-            "-fx-border-color: rgba(178, 34, 34, 0.7);" +
+            "-fx-border-color: rgba(46, 139, 87, 0.7);" +
             "-fx-border-width: 3;" +
             "-fx-border-radius: 15;" +
             "-fx-padding: 10;" +
             "-fx-font-weight: bold;" +
             "-fx-font-size: 14;" +
-            "-fx-text-fill: #7c0a02;" +
+            "-fx-text-fill: #005f00;" +
             "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);"
         );
         
