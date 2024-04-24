@@ -1,14 +1,14 @@
-Display gem on the map
-display location pointers on the map
-display player location on the map
-add mouse click handlers to play the game
-implement scoreboard
-implement saving of score in separate file
-implement environmental popups
+Display gem on the map - Done
+display location pointers on the map - Done
+display player location on the map - Done
+add mouse click handlers to play the game - Done
+implement scoreboard - Done
+implement saving of score in separate file - Done
+implement environmental popups - Done
 improve appearance of overall game
 when the player leaves the station without selecting a stop the P and N icon still keeps blinking
 joel make buttons bigger
-reduce the volume of the initial bgm
+reduce the volume of the initial bgm - Done
 
 
 player will traverse using intermediate nodes(class:- Main.java)

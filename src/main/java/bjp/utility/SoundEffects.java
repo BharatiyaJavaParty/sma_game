@@ -33,8 +33,25 @@ public class SoundEffects {
         URL resource = SoundEffects.class.getResource("/audio/game-start.wav");
         Media media = new Media(resource.toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(0.3);  // Set volume to 30%
         mediaPlayer.play();
     }
+    public static void endGame() { // method to for adding the game end sound effect
+        URL resource = SoundEffects.class.getResource("/audio/game_end.mp3");
+        Media media = new Media(resource.toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(0.3);  // Set volume to 30%
+        mediaPlayer.play();
+    }
+
+    public static void bgmGame() { // method to for adding a background music
+        URL resource = SoundEffects.class.getResource("");
+        Media media = new Media(resource.toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(0.1);  // Set volume to 30%
+        mediaPlayer.play();
+    }
+
 
     public static MediaPlayer getMediaPlayer() {
         return mediaPlayer;
