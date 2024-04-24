@@ -12,14 +12,14 @@ import javafx.scene.text.Font;
 
 public class EnvironmentalPopup {
     private static String popupMessage;
-    private static int duration = 10;
+    private static int duration = 7;
 
     private static final String[] eduPopupStrings = {
-            "Tip: Whenever possible, choose walking or cycling for short distances. It's a zero-emission mode of transportation that also promotes physical activity.",
-            "Tip: Public transportation, such as buses, trains, and trams, emits lower emissions per passenger compared to individual car trips. Utilize public transport whenever feasible.",
-            "Tip: Consider working from home if your job allows it. Telecommuting reduces the need for daily commuting, thereby lowering carbon emissions from transportation.",
-            "Tip: Plan your trips efficiently to minimize distance and time spent on the road. Combine errands into a single trip to reduce fuel consumption and emissions.",
-            "Tip: Spread awareness about the environmental impact of transportation and encourage others to adopt eco-friendly transportation habits." };
+            "Environmental Tip: Whenever possible, choose walking or cycling for short distances. It's a zero-emission mode of transportation that also promotes physical activity.",
+            "Environmental Tip: Public transportation, such as buses, trains, and trams, emits lower emissions per passenger compared to individual car trips. Utilize public transport whenever feasible.",
+            "Environmental Tip: Consider working from home if your job allows it. Telecommuting reduces the need for daily commuting, thereby lowering carbon emissions from transportation.",
+            "Environmental Tip: Plan your trips efficiently to minimize distance and time spent on the road. Combine errands into a single trip to reduce fuel consumption and emissions.",
+            "Environmental Tip: Spread awareness about the environmental impact of transportation and encourage others to adopt eco-friendly transportation habits." };
 
     public static String selectMsg() {
         Random rand = new Random();
@@ -30,7 +30,8 @@ public class EnvironmentalPopup {
     }
 
     public static void showEduPopup(StackPane cityMainStack, String message) {
-        Label messageLabel = new Label("");
+//        Label messageLabel = new Label("");
+        Label messageLabel = new Label(message); // Directly set the message during label creation
         messageLabel.setFont(new Font("Arial", 16));
         messageLabel.setAlignment(Pos.CENTER);
         messageLabel.setWrapText(true);
@@ -55,21 +56,21 @@ public class EnvironmentalPopup {
         cityMainStack.getChildren().add(messageLabel);
         StackPane.setAlignment(messageLabel, Pos.BOTTOM_CENTER);
 
-        final int[] charIndex = { 0 };
-        Timeline timeline = new Timeline(new KeyFrame(javafx.util.Duration.millis(50), event -> {
-            if (charIndex[0] < message.length()) {
-                messageLabel.setText(messageLabel.getText() + message.charAt(charIndex[0]));
-                charIndex[0]++;
-            }
-        }));
-        timeline.setCycleCount(message.length());
-        timeline.setOnFinished(event -> {
+//        final int[] charIndex = { 0 };
+//        Timeline timeline = new Timeline(new KeyFrame(javafx.util.Duration.millis(50), event -> {
+//            if (charIndex[0] < message.length()) {
+//                messageLabel.setText(messageLabel.getText() + message.charAt(charIndex[0]));
+//                charIndex[0]++;
+//            }
+//        }));
+//        timeline.setCycleCount(message.length());
+//        timeline.setOnFinished(event -> {
             // Hide the message after 10 seconds
             PauseTransition delay = new PauseTransition(javafx.util.Duration.seconds(duration));
             delay.setOnFinished(delayEvent -> cityMainStack.getChildren().remove(messageLabel));
             delay.play();
-        });
-        timeline.play();
+//        });
+//        timeline.play();
     }
 
 }

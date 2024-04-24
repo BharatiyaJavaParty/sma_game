@@ -6,7 +6,9 @@ implement scoreboard
 implement saving of score in separate file
 implement environmental popups
 improve appearance of overall game
-
+when the player leaves the station without selecting a stop the P and N icon still keeps blinking
+joel make buttons bigger
+reduce the volume of the initial bgm
 
 
 player will traverse using intermediate nodes(class:- Main.java)

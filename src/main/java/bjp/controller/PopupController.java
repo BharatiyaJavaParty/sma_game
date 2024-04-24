@@ -12,7 +12,8 @@ import javafx.animation.PauseTransition;
 public class PopupController {
 
     public static void showPopupMessage(StackPane cityMainStack, String message) {
-        Label messageLabel = new Label("");
+//        Label messageLabel = new Label("");
+        Label messageLabel = new Label(message); // Directly set the message during label creation
         messageLabel.setFont(new Font("Arial", 16));
         messageLabel.setAlignment(Pos.CENTER);
         messageLabel.setWrapText(true);
@@ -35,20 +36,20 @@ public class PopupController {
         cityMainStack.getChildren().add(messageLabel);
         StackPane.setAlignment(messageLabel, Pos.TOP_CENTER); // Align the label at the top center of the StackPane
 
-        final int[] charIndex = { 0 };
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
-            if (charIndex[0] < message.length()) {
-                messageLabel.setText(messageLabel.getText() + message.charAt(charIndex[0]));
-                charIndex[0]++;
-            }
-        }));
-        timeline.setCycleCount(message.length());
-        timeline.setOnFinished(event -> {
-            // Hide the message after 2 seconds
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+//        final int[] charIndex = { 0 };
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
+//            if (charIndex[0] < message.length()) {
+//                messageLabel.setText(messageLabel.getText() + message.charAt(charIndex[0]));
+//                charIndex[0]++;
+//            }
+//        }));
+//        timeline.setCycleCount(message.length());
+//        timeline.setOnFinished(event -> {
+//            // Hide the message after 2 seconds
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(delayEvent -> cityMainStack.getChildren().remove(messageLabel));
             delay.play();
-        });
-        timeline.play();
+//        });
+//        timeline.play();
     }
 }
