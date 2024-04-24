@@ -9,7 +9,7 @@ public class AppConstants {
     public final static int BUS_CO2_REDUCTION = 20;
 
     //Time Increments
-    public final static int WALKING_TIME_INCREMENT = 15;
+    public final static int WALKING_TIME_INCREMENT = 150;
     public final static int LUAS_TIME_INCREMENT = 5;
     public final static int BUS_TIME_INCREMENT = 7;
 }

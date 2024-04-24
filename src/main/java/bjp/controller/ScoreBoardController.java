@@ -2,6 +2,7 @@ package bjp.controller;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -16,6 +17,7 @@ import javafx.scene.control.TableView;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import bjp.utility.GameEngine;
@@ -82,7 +84,7 @@ public class ScoreBoardController {
             jsonObject.put("TimeStamp", String.format("%02d:%02d", hour, minute));
             arrayNode.add(jsonObject);
 
-            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode);
+            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(sortResults(arrayNode));
             FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(jsonString);
@@ -127,5 +129,31 @@ public class ScoreBoardController {
             e.printStackTrace();
         }
         return res;
+    }
+
+    private static ArrayNode sortResults(ArrayNode arrayNode){
+        for(int i=0; i<arrayNode.size();i++){
+            //sorting according to time
+            for(int j = i; j<arrayNode.size(); j++){
+                if(arrayNode.get(i).get("playerCO2Budget").asInt()> arrayNode.get(j).get("playerCO2Budget").asInt()){
+                    JsonNode temp;
+                    temp = arrayNode.get(i);
+                    arrayNode.set(i, arrayNode.get(j));
+                    arrayNode.set(j, temp);
+                }
+                //if times are same then sorting by playerTime
+                else if(arrayNode.get(i).get("playerCO2Budget").asInt()== arrayNode.get(j).get("playerCO2Budget").asInt()){
+                    if(arrayNode.get(i).get("playerTime").asInt() > 
+                        arrayNode.get(j).get("playerTime").asInt()){
+                            JsonNode temp;
+                            temp = arrayNode.get(i);
+                            arrayNode.set(i, arrayNode.get(j));
+                            arrayNode.set(j, temp);
+                    }
+                }
+            }
+        }
+        System.out.println(arrayNode);
+        return arrayNode;
     }
 }
