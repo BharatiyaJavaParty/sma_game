@@ -106,14 +106,14 @@ public class PopupController {
         {
             popupTxt.setText(luasPopupStrings[n]);
         }
-        else if (GameEngine.newPlayer.getPlayerCo2Budget() - GameEngine.newPlayer.getPlayerCo2Spent() <= 100)
+        else if (message!="")
         {
             popupTxt.setText(message);
             popupTxt.setFill(javafx.scene.paint.Color.RED);
             FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), popupTxt);
             fadeTransition.setFromValue(1.0);
             fadeTransition.setToValue(0.0);
-            fadeTransition.setCycleCount(Animation.INDEFINITE);
+            fadeTransition.setCycleCount(3);
             fadeTransition.play();
         }
         popupTxt.setFont(Font.font("Verdana", FontWeight.BOLD, 20));

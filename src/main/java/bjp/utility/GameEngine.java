@@ -172,7 +172,18 @@ public class GameEngine {
                 PopupController.showPopupMessage(cityMainStack, "Press ENTER to travel");
             }
             updateGameLables(co2label, timelabel, gemslabel, transportlabel);
-            PopupController.ShowPopup(cityMainStack, "Warning! Low Carbon Points left");
+            if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 100)
+            {
+                PopupController.ShowPopup(cityMainStack, "Warning! 100 Carbon Points left");
+            }
+            else if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 250)
+            {
+                PopupController.ShowPopup(cityMainStack, "Warning! 250 Carbon Points left");
+            }
+            else if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 500)
+            {
+                PopupController.ShowPopup(cityMainStack, "Warning! 500 Carbon Points left");
+            }
             if(newPlayer.getPlayerCo2Spent() > newPlayer.getPlayerCo2Budget())
             {
                 try {
