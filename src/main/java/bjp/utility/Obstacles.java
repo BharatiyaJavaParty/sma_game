@@ -16,10 +16,12 @@ public class Obstacles {
     public static Set<Location> DOUBLE_TREE_SET = new HashSet<>();
     public static Set<Location> HOME_TREE_SET = new HashSet<>();
     public static Set<Location> BUSH_SET = new HashSet<>();
+    public static Set<Location> LAKE_SET = new HashSet<>();
     public static Set<Location> HOUSE_SET = new HashSet<>();
     public static Set<Location> BUILDING_SET = new HashSet<>();
     public static Set<Location> ALL_OBSTACLES = new HashSet<>();
     public static final Image MAIN_ENTRANCE = new Image(Obstacles.class.getResourceAsStream("/img/mainhouse.png"));
+    public static final Image LAKE = new Image(Obstacles.class.getResourceAsStream("/img/lake.png"));
     public static Location Entrance = new Location("Entrance", 19, 3);
 
     private static ArrayList<Image> houseList = new ArrayList<>();
@@ -97,6 +99,12 @@ public class Obstacles {
                 BUILDING_SET.add(new Location("Tree", coordinates[0], coordinates[1]));
             }
         }
+
+        for (int[] coordinates : Level1.lakes) {
+            if (coordinates.length == 2) {
+                LAKE_SET.add(new Location("Tree", coordinates[0], coordinates[1]));
+            }
+        }
     }
 
     public static void placeTrees(GridPane cityMapGrid) {
@@ -123,6 +131,15 @@ public class Obstacles {
             imageView.setSmooth(true);
             cityMapGrid.add(imageView, tree.getX(), tree.getY());
         }
+
+        for (Location lake : LAKE_SET) {
+            ImageView imageView = new ImageView(LAKE);
+            imageView.setFitWidth(CityMapController.WIDTH);
+            imageView.setFitHeight(CityMapController.HEIGHT);
+            imageView.setSmooth(true);
+            cityMapGrid.add(imageView, lake.getX(), lake.getY());
+        }
+
     }
 
     public static void placeBushes(GridPane cityMapGrid) {
@@ -183,6 +200,13 @@ public class Obstacles {
         for (Location tree : TREE_SET) {
             if (tree.getX() == newX && tree.getY() == newY) {
                 System.out.println("tree");
+                return true;
+            }
+        }
+
+        for (Location tree : LAKE_SET) {
+            if (tree.getX() == newX && tree.getY() == newY) {
+                System.out.println("lake");
                 return true;
             }
         }
