@@ -3,17 +3,31 @@ mvn clean javafx:run
 
 
 sma_game
-└── src
-    ├── main
-    │   ├── java
-    │   │   ├── bjp
-    │   │   │   ├── controller
-    │   │   │   ├── utility
-    │   │   │   └── main.java
-    │   │   └── module-info.java
-    │   └── resources
-    │       ├── bjp
-    │       └── img
+├── .idea
+├── .vscode
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   ├── bjp
+│   │   │   │   ├── constants
+│   │   │   │   ├── controller
+│   │   │   │   ├── utility
+│   │   │   │   └── Main.java
+│   │   │   └── module-info.java
+│   │   └── resources
+│   │       ├── audio
+│   │       ├── bip
+│   │       ├── img
+│   │       └── styles
+├── target
+├── .gitignore
+├── Notes.txt
+├── pending.txt
+├── pom.xml
+├── Score.json
+├── Score.txt
+└── scoring.txt
+
 
 
 Try to implemet key to pair of stops for luas and bus stops

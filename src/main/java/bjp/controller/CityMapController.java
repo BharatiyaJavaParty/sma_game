@@ -99,7 +99,7 @@ public class CityMapController {
 
         statsThread.start();
         GameEngine.mainEventHandler(cityMainStack, cityMapGrid); 
-        cityMapGrid.setGridLinesVisible(true);
+        // cityMapGrid.setGridLinesVisible(true);
 
     }
 

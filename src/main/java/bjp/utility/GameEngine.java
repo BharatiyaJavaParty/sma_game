@@ -11,12 +11,16 @@ import java.util.Comparator;
 import javafx.util.Duration;
 import javafx.util.Pair;
 import javafx.animation.PauseTransition;
+import javafx.animation.TranslateTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 import bjp.Main;
 import bjp.utility.Location;
 import bjp.constants.AppConstants;
+import bjp.controller.CityMapController;
 import bjp.controller.PopupController;
 import bjp.controller.ScoreBoardController;
 
@@ -35,6 +39,11 @@ public class GameEngine {
     public static boolean atBus2 = false;
     public static boolean atBus3 = false;
 
+    private static final Image NEXT = new Image(Player.class.getResourceAsStream("/img/N.png"));
+    private static final Image PREVIOUS = new Image(Player.class.getResourceAsStream("/img/P.png"));
+    private static ImageView nextView = new ImageView(NEXT);
+    private static ImageView prevView = new ImageView(PREVIOUS);
+
     public static int maxLevel = 3;
     public static int current_level = 1;
     public static ArrayList<Gem> gems = new ArrayList<Gem>();
@@ -43,15 +52,23 @@ public class GameEngine {
         gems.add(new Gem("red"));
         gems.add(new Gem("orange"));
         gems.add(new Gem("green"));
+
+        nextView.setFitWidth(CityMapController.WIDTH);
+        nextView.setFitHeight(CityMapController.HEIGHT);
+        nextView.setSmooth(true);
+
+        prevView.setFitWidth(CityMapController.WIDTH);
+        prevView.setFitHeight(CityMapController.HEIGHT);
+        prevView.setSmooth(true);
     }
 
     // the keys in levels hashmap represent the level
     // the key is level and the value s after how many gems level gets completed
     public static HashMap<Integer, Integer> levels = new HashMap<Integer, Integer>() {
         {
-            put(1, 2);
-            put(2, 4);
-            put(3, 7); // if added new level change exit condion as well in check gems collected
+            put(1, 4);
+            put(2, 12);
+            put(3, 24);
         }
     };
 
@@ -118,12 +135,15 @@ public class GameEngine {
                         sameStation = false;
                         res.clear();
                         checkTransportOptionsAndMoveUpdated(cityMainStack, cityMapGrid);
+                        showNextAndPrevious(cityMapGrid);
                     }
                     break;
                 case N:
                     if (!res.isEmpty() && res.get(0) != null) {
                         sameStation = true;
                         isAnimating = true;
+                        cityMapGrid.getChildren().removeIf(node -> node == prevView);
+                        cityMapGrid.getChildren().removeIf(node -> node == nextView);
                         newPlayer.movePlayerToStation(cityMapGrid, res.get(0), "N");
                         res.clear();
                     }
@@ -132,6 +152,8 @@ public class GameEngine {
                     if (res.size() > 1 && res.get(1) != null) {
                         sameStation = true;
                         isAnimating = true;
+                        cityMapGrid.getChildren().removeIf(node -> node == prevView);
+                        cityMapGrid.getChildren().removeIf(node -> node == nextView);
                         newPlayer.movePlayerToStation(cityMapGrid, res.get(1), "P");
                         res.clear();
                     }
@@ -309,22 +331,26 @@ public class GameEngine {
         }
     }
 
-}
+    public static void showNextAndPrevious(GridPane cityMapGrid){
 
-class locationComparator implements Comparator<Location> {
-    public int compare(Location l1, Location l2) {
-        if (l1.getX() > l2.getX()) {
-            return 1;
-        } else if (l1.getX() < l2.getX()) {
-            return -1;
-        } else {
-            if (l1.getY() > l2.getY()) {
-                return 1;
-            } else if (l1.getY() < l2.getY()) {
-                return -1;
-            } else {
-                return 0;
-            }
-        }
+        cityMapGrid.getChildren().removeIf(node -> node == nextView);
+        cityMapGrid.add(nextView, res.get(0).getX(), res.get(0).getY());
+        TranslateTransition transition1 = new TranslateTransition(Duration.millis(200), nextView);
+        transition1.setFromY(0);
+        transition1.setToY(-13);
+        transition1.setCycleCount(TranslateTransition.INDEFINITE);
+        transition1.setAutoReverse(true);
+        transition1.play();
+
+        cityMapGrid.getChildren().removeIf(node -> node == prevView);
+        cityMapGrid.add(prevView, res.get(1).getX(), res.get(1).getY());
+        TranslateTransition transition2 = new TranslateTransition(Duration.millis(200), prevView);
+        transition2.setFromY(0);
+        transition2.setToY(-13);
+        transition2.setCycleCount(TranslateTransition.INDEFINITE);
+        transition2.setAutoReverse(true);
+        transition2.play();
+
     }
+
 }
