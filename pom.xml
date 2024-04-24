@@ -177,7 +177,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>bjp.Main</mainClass>
+                            <mainClass>bjp.MainWithoutApplication</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
