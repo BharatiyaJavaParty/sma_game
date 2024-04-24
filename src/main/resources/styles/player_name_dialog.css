@@ -1,6 +1,7 @@
 .root {
     -fx-background-image: url('https://cdn.wallpapersafari.com/11/43/EXVgK1.png'); /* replace with the path to your own background image */
     -fx-background-size: cover;
+    -fx-font-family: 'Arial', sans-serif; 
 }
 
 .vbox {
@@ -8,35 +9,35 @@
 }
 
 .game-label {
-    -fx-font-family: 'Pixelated';
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+    -fx-text-fill: #000000;
 }
 
 .game-text-field {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #ffaa00;
     -fx-text-fill: #000000;
-    -fx-font-family: 'Pixelated';
+    -fx-border-color: #000000; /* Black border */
+    -fx-border-width: 2px; /* Specifies the width of the border */
+    -fx-border-style: solid; /* Solid border style */
+    -fx-text-fill: white;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
 }
 
 .game-button {
-    -fx-background-color: #ffaa00;
-    -fx-font-family: 'Pixelated';
-    -fx-text-fill: #ffffff;
-    -fx-border-color: #000000;
-    -fx-border-width: 2;
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
-    -fx-padding: 10;
-    -fx-effect: dropshadow( three-pass-box , black , 8 , 0.0 , 2 , 0 );
+    -fx-background-color: #ffaa00; /* Bright blue background */
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 10 20;
+    -fx-cursor: hand; /* Cursor changes to hand when hovered */
 }
 
 .game-button:hover {
-    -fx-background-color: #ffca00;
-}
-
-/* Include the path to your custom pixel font */
-@font-face {
-    font-family: 'Pixelated';
-    src: url('../fonts/pixelated_font.ttf');
+    -fx-background-color: #ffbf00; /* Lighter orange for hover */
+    -fx-border-color: #ffff00;
+    -fx-scale-x: 1.05; /* Slightly smaller growth on hover */
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
 }

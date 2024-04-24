@@ -2,7 +2,9 @@
 .root {
     -fx-background-image: url('https://cdn.wallpapersafari.com/11/43/EXVgK1.png'); /* replace with the path to your own background image */
     -fx-background-size: cover;
+    -fx-font-family: 'Arial', sans-serif; 
 }
+
 
 /* Styling VBox for better alignment and padding */
 .vbox {
@@ -15,7 +17,6 @@
 .button {
     -fx-background-color: #e68a00; /* Orange color for button */
     -fx-text-fill: #ffffff;
-    -fx-font-family: 'Comic Sans MS', cursive, sans-serif; /* Comic Sans is often used for a playful feel */
     -fx-font-size: 16px;
     -fx-padding: 20 40;
     -fx-border-color: #ffffff;
@@ -39,5 +40,11 @@
     -fx-background-color: #cc8400; /* Darker orange for pressed */
     -fx-border-color: #cccc00;
     -fx-translate-y: 4px; /* Button moves slightly down to mimic pressing */
+}
+
+#newGameButton
+{
+    -fx-border-radius: 100px; /* More rounded */
+    -fx-background-radius: 100px;
 }
 

@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" prefHeight="432.0" prefWidth="471.0" spacing="20" stylesheets="@../styles/launch_view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bjp.controller.LaunchController">
    <children>
-      <Button fx:id="newGameButton" onAction="#newGameButtonClicked" prefHeight="60.0" prefWidth="300.0" text="PLAY" styleClass="button" />
-      <Button fx:id="scoreboardButton" onAction="#scoreboardButtonClicked" prefHeight="60.0" prefWidth="300.0" text="SCORE" styleClass="button"/>
+      <Button fx:id="newGameButton" maxHeight="150.0" maxWidth="150.0" minHeight="140.0" minWidth="140.0" onAction="#newGameButtonClicked" prefHeight="100.0" prefWidth="100.0" styleClass="button">
+         <graphic>
+            <ImageView fitHeight="80.0" fitWidth="80.0" translateX="5.0" translateY="5.0">
+               <image>
+                  <Image url="@../img/play.png" /> <!-- Adjust the path as needed -->
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="scoreboardButton" onAction="#scoreboardButtonClicked" prefHeight="60.0" prefWidth="300.0" styleClass="button" text="SCORE" />
    </children>
 </VBox>

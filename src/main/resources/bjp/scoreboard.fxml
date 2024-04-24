@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Priority?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="720" prefWidth="1280" fx:controller="bjp.controller.ScoreBoardController" stylesheets="@../styles/scoreboard.css">
-    <ScrollPane>
+<VBox alignment="CENTER" fillWidth="true" stylesheets="@../styles/scoreboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bjp.controller.ScoreBoardController">
+    <ScrollPane fx:id="scoreboardScroll" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
         <content>
-            <TableView fx:id="scoreboardTable" prefHeight="720" prefWidth="1280">
+            <TableView fx:id="scoreboardTable" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="name" text="Player Name" prefWidth="256"/>
-                    <TableColumn fx:id="co2Budget" text="CO2 spent" prefWidth="256"/>
-                    <TableColumn fx:id="time" text="Player Time" prefWidth="256"/>
-                    <TableColumn fx:id="gems" text="Gems" prefWidth="256"/>
-                    <TableColumn fx:id="TimeStamp" text="TimeStamp" prefWidth="256"/>
+                    <TableColumn fx:id="name" minWidth="310" text="Player Name" styleClass="table-header-label" />
+                    <TableColumn fx:id="co2Budget" minWidth="310" text="CO2 spent" styleClass="table-header-label" />
+                    <TableColumn fx:id="time" minWidth="310" text="Player Time" styleClass="table-header-label" />
+                    <TableColumn fx:id="gems" minWidth="310" text="Gems" styleClass="table-header-label" />
+                    <TableColumn fx:id="TimeStamp" minWidth="300" text="TimeStamp" styleClass="table-header-label" />
                 </columns>
             </TableView>
         </content>
     </ScrollPane>
-
 </VBox>
+
