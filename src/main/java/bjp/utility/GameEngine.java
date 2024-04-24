@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import javafx.util.Pair;
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -72,12 +73,12 @@ public class GameEngine {
         }
     };
 
-    public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid) {
+    public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid, Label co2label, Label timelabel, Label gemslabel, Label transportlabel) {
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
         cityMapGrid.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case UP:
+                case W:
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, -1);
                     } catch (FileNotFoundException e) {
@@ -91,7 +92,7 @@ public class GameEngine {
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
                     }
                     break;
-                case DOWN:
+                case S:
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, 0, 1);
                     } catch (FileNotFoundException e) {
@@ -104,7 +105,7 @@ public class GameEngine {
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
                     }                    break;
-                case LEFT:
+                case A:
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, -1, 0);
                     } catch (FileNotFoundException e) {
@@ -117,7 +118,7 @@ public class GameEngine {
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
                     }                    break;
-                case RIGHT:
+                case D:
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, 1, 0);
                     } catch (FileNotFoundException e) {
@@ -167,8 +168,31 @@ public class GameEngine {
             if (sameStation && foundTransport){
                 PopupController.showPopupMessage(cityMainStack, "Press ENTER to travel");
             }
+            updateGameLables(co2label, timelabel, gemslabel, transportlabel);
             event.consume();
         });
+    }
+
+    public static void updateGameLables(Label co2label, Label timelabel, Label gemslabel, Label transportlabel){
+        co2label.setText(String.valueOf(GameEngine.newPlayer.getPlayerCo2Spent()));
+        timelabel.setText(String.valueOf(GameEngine.newPlayer.getPlayerTime()));
+        gemslabel.setText(String.valueOf(GameEngine.gemCount));
+        if(atBus1 || atBus2 || atBus3)
+        {
+            transportlabel.setText("Walking and Bus");
+        }
+        else if(atLuas)
+        {
+            transportlabel.setText("Walking and Green Luas");
+        }
+        else if(GameEngine.atRedLuas)
+        {
+            transportlabel.setText("Walking and Red luas");
+        }
+        else
+        {
+            transportlabel.setText("Walking");
+        }
     }
 
     public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid, Gem gem) throws FileNotFoundException {

@@ -23,6 +23,7 @@ public class CityMapController {
     public static final int WIDTH = ((int) 720) / 30;
     public static final int HEIGHT = ((int) 720) / 30;
 
+
     @FXML
     private GridPane cityMapGrid;
 
@@ -66,6 +67,8 @@ public class CityMapController {
         Obstacles.placeHomeTrees(cityMapGrid);
         PopupController.showPopupMessage(cityMainStack, "Welcome to Gem World");
 
+
+
         Thread thread = new Thread(() -> {
             while (true) {
                 try {
@@ -79,26 +82,7 @@ public class CityMapController {
             }
         });
         thread.start();
-
-        //Refreshes player stats on top of screen every 0.5 seconds
-        Thread statsThread = new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(500);
-                    Platform.runLater(() -> {
-                        co2label.setText(String.valueOf(GameEngine.newPlayer.getPlayerCo2Spent()));
-                        timelabel.setText(String.valueOf(GameEngine.newPlayer.getPlayerTime()));
-                        gemslabel.setText(String.valueOf(GameEngine.gemCount));
-                        setTransportLabel();
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        statsThread.start();
-        GameEngine.mainEventHandler(cityMainStack, cityMapGrid); 
+        GameEngine.mainEventHandler(cityMainStack, cityMapGrid, co2label, timelabel, gemslabel, transportlabel); 
         // cityMapGrid.setGridLinesVisible(true);
 
     }
@@ -150,24 +134,4 @@ public class CityMapController {
     //         }
     //     }
     // }
-
-    private void setTransportLabel()
-    {
-        if(GameEngine.atBus1 || GameEngine.atBus2 || GameEngine.atBus3)
-        {
-            transportlabel.setText("Walking and Bus");
-        }
-        else if(GameEngine.atLuas)
-        {
-            transportlabel.setText("Walking and Green Luas");
-        }
-        else if(GameEngine.atRedLuas)
-        {
-            transportlabel.setText("Walking and Red luas");
-        }
-        else
-        {
-            transportlabel.setText("Walking");
-        }
-    }
 }
