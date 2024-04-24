@@ -78,7 +78,7 @@ public class ScoreBoardController {
             int minute = currentTime.getMinute();
             ObjectNode jsonObject = mapper.createObjectNode();
             jsonObject.put("playerName", GameEngine.newPlayer.getPlayerName());
-            jsonObject.put("playerCO2Budget", GameEngine.newPlayer.getPlayerCo2Budget());
+            jsonObject.put("playerCO2Spent", GameEngine.newPlayer.getPlayerCo2Spent());
             jsonObject.put("playerTime", GameEngine.newPlayer.getPlayerTime());
             jsonObject.put("gems", gems);
             jsonObject.put("TimeStamp", String.format("%02d:%02d", hour, minute));

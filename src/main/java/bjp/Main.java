@@ -11,12 +11,15 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static Scene scene;
+    //using this in PopupController
+    public static Stage mainStage;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         try {
             // loads the fmxl file containing the first screen/ main screen of the game
             // user has 2 options on this screen
+            mainStage = primaryStage;
             primaryStage.setTitle("GEM HUNTER");
             primaryStage.setFullScreen(true);
             scene = new Scene(loadFXML("launch-view"), 1280, 720);

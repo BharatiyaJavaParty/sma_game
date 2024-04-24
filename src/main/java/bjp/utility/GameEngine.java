@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -36,6 +37,8 @@ public class GameEngine {
     public static boolean atBus1 = false;
     public static boolean atBus2 = false;
     public static boolean atBus3 = false;
+
+    private static Random rand = new Random();
 
     private static final Image NEXT = new Image(Player.class.getResourceAsStream("/img/N.png"));
     private static final Image PREVIOUS = new Image(Player.class.getResourceAsStream("/img/P.png"));
@@ -79,7 +82,7 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
+                    //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() - 1))
                     {
                         sameStation = true;
@@ -93,7 +96,7 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
+                    //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() + 1))
                     {
                         sameStation = true;
@@ -106,7 +109,7 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
+                    //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() - 1,newPlayer.getPlayerLocation().getY()))
                     {
                         sameStation = true;
@@ -119,7 +122,7 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
+                    //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() + 1,newPlayer.getPlayerLocation().getY()))
                     {
                         sameStation = true;
@@ -132,6 +135,11 @@ public class GameEngine {
                         res.clear();
                         checkTransportOptionsAndMoveUpdated(cityMainStack, cityMapGrid);
                         showNextAndPrevious(cityMapGrid);
+                        int randomNum = rand.nextInt(3) + 1;
+                        if(randomNum == 2)
+                        {
+                            PopupController.ShowPopup(cityMainStack,"");
+                        }        
                     }
                     break;
                 case N:
@@ -164,6 +172,19 @@ public class GameEngine {
                 PopupController.showPopupMessage(cityMainStack, "Press ENTER to travel");
             }
             updateGameLables(co2label, timelabel, gemslabel, transportlabel);
+            PopupController.ShowPopup(cityMainStack, "Warning! Low Carbon Points left");
+            if(newPlayer.getPlayerCo2Spent() > newPlayer.getPlayerCo2Budget())
+            {
+                try {
+                    Main.setRoot("gameover");
+                    newPlayer.setPlayerCo2Spent(0);
+                    newPlayer.setPlayerTime(0);
+                    gemCount = 0;
+                    System.gc();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             event.consume();
         });
     }
@@ -198,7 +219,10 @@ public class GameEngine {
             ScoreBoardController.getResults();
             pause.play();
             try {
-                Main.setRoot("scoreboard");
+                Main.setRoot("gameover");
+                newPlayer.setPlayerCo2Spent(0);
+                newPlayer.setPlayerTime(0);
+                gemCount = 0;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -224,6 +248,7 @@ public class GameEngine {
             if (gemCount == levels.get(current_level) && current_level < 3) {
                 current_level += 1;
                 SoundEffects.newLevel();
+                newPlayer.setPlayerCo2Budget(1000);
                 PopupController.showPopupMessage(cityMainStack, "Congratulations Level 3!");
             }
         }
@@ -284,35 +309,35 @@ public class GameEngine {
             KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS1_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.LUAS1_STOPS);
 
-            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.LUAS_CO2_REDUCTION);
+            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.LUAS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.LUAS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.LUAS_CO2_REDUCTION);
         } else if (atBus1) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.BUS1_STOPS);
 
-            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
+            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.BUS_CO2_REDUCTION);
         } else if (atBus2) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS2_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.BUS2_STOPS);
 
-            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
+            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.BUS_CO2_REDUCTION);
         } else if (atBus3) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS3_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.BUS3_STOPS);
 
-            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
+            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.BUS_CO2_REDUCTION);
         } else if (atRedLuas) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS2_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.LUAS2_STOPS);
 
-            newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
+            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.LUAS_CO2_REDUCTION);
 

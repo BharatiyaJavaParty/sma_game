@@ -37,7 +37,7 @@ public class Player {
 
     public Player() {
         this.playerTime = 0;
-        this.playerCo2Budget = AppConstants.CO2_BUDGET;
+        this.playerCo2Budget = AppConstants.CO2_BUDGET_L1;
         this.playerCo2Spent = 0;
     }
 
