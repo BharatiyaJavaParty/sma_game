@@ -44,6 +44,7 @@ public class GameEngine {
 
     public static boolean WIN = false;
     public static boolean NEWGAME = false;
+    public static boolean NOGEM = false;
 
     private static Random rand = new Random();
 
@@ -203,34 +204,63 @@ public class GameEngine {
                 PopupController.ShowPopup(cityMainStack, "Warning! 500 Carbon Points left");
                 isWarning500Shown = true;
             }
-            if(newPlayer.getPlayerCo2Spent() > newPlayer.getPlayerCo2Budget())
+            // System.out.println(newPlayer.getPlayerCo2Spent() >= newPlayer.getPlayerCo2Budget());
+            System.out.println("\n");
+            System.out.println(newPlayer.getPlayerCo2Spent());
+            System.out.println(newPlayer.getPlayerCo2Budget());
+
+            if(newPlayer.getPlayerCo2Spent() >= newPlayer.getPlayerCo2Budget())
             {
+                SoundEffects.endbgmGame();
+                WIN = false;
+                ScoreBoardController.saveResults(gemCount);
+                ScoreBoardController.getResults();
+                SoundEffects.endGame();
+                NEWGAME = false;
+                isWarning100Shown = false;
+                isWarning250Shown = false;
+                isWarning500Shown = false;
+                NOGEM = false;
+                current_level = 1;
+                newPlayer.setPlayerTime(0);
+                gemCount = 0;
+                GameEngine.gems.get(0).getGemLocation().xOrdinate = -1;
+                GameEngine.gems.get(0).getGemLocation().yOrdinate = -1;
+                GameEngine.gems.get(1).getGemLocation().xOrdinate = -1;
+                GameEngine.gems.get(1).getGemLocation().yOrdinate = -1;
+                GameEngine.gems.get(2).getGemLocation().xOrdinate = -1;
+                GameEngine.gems.get(2).getGemLocation().yOrdinate = -1;
+                System.gc();
                 try {
-                    SoundEffects.endbgmGame();
-                    WIN = false;
-                    ScoreBoardController.saveResults(gemCount);
-                    ScoreBoardController.getResults();
-                    SoundEffects.endGame();
                     Main.setRoot("gameover");
                     newPlayer.setPlayerCo2Spent(0);
-                    newPlayer.setPlayerTime(0);
-                    gemCount = 0;
-                    System.gc();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if (gemCount == levels.get(3) && NEWGAME){
+            if (gemCount == levels.get(3) && GameEngine.NEWGAME){
+                PauseTransition pause = new PauseTransition(Duration.millis(1000));
+                pause.play();
+                WIN = true;
+                SoundEffects.endbgmGame();
+                SoundEffects.endGame();
+                NEWGAME = false;
+                isWarning100Shown = false;
+                isWarning250Shown = false;
+                isWarning500Shown = false;
+                current_level = 1;
+                newPlayer.setPlayerTime(0);
+                gemCount = 0;
+                GameEngine.gems.get(0).getGemLocation().xOrdinate = -1;
+                GameEngine.gems.get(0).getGemLocation().yOrdinate = -1;
+                GameEngine.gems.get(1).getGemLocation().xOrdinate = -1;
+                GameEngine.gems.get(1).getGemLocation().yOrdinate = -1;
+                GameEngine.gems.get(2).getGemLocation().xOrdinate = -1;
+                GameEngine.gems.get(2).getGemLocation().yOrdinate = -1;
+                System.gc();
                 try {
-                    PauseTransition pause = new PauseTransition(Duration.millis(1000));
-                    pause.play();
-                    WIN = true;
-                    SoundEffects.endbgmGame();
-                    SoundEffects.endGame();
                     Main.setRoot("gameover");
                     newPlayer.setPlayerCo2Spent(0);
-                    newPlayer.setPlayerTime(0);
-                    gemCount = 0;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -289,7 +319,6 @@ public class GameEngine {
             if (gemCount == levels.get(current_level) && current_level < 3) {
                 current_level += 1;
                 SoundEffects.newLevel();
-                newPlayer.setPlayerCo2Budget(1000);
                 PopupController.showPopupMessage(cityMainStack, "Congratulations Level 3!");
             }
         }
