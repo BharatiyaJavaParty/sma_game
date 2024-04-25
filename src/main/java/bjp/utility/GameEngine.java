@@ -72,9 +72,9 @@ public class GameEngine {
 
     public static HashMap<Integer, Integer> levels = new HashMap<Integer, Integer>() {
         {
-            put(1, 1);
-            put(2, 2);
-            put(3, 3);
+            put(1, 4);
+            put(2, 12);
+            put(3, 24);
         }
     };
 
