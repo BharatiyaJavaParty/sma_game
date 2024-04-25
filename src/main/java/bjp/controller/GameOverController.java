@@ -40,11 +40,7 @@ public class GameOverController {
    @FXML
    public void scoreButtonClicked() {
       try {
-         Stage scoreStage = new Stage();
-         scoreStage.setTitle("SCOREBOARD");
-         Scene scoreScene = new Scene(Main.loadFXML("scoreboard"));
-         scoreStage.setScene(scoreScene);
-         scoreStage.show();
+         Main.setRoot("scoreboard");
       } catch (Exception e) {
          e.printStackTrace();
       }

@@ -17,7 +17,7 @@
             <TableView fx:id="scoreboardTable" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="nameColumn" styleClass="cloumn" text="Player Name" />
-                    <TableColumn fx:id="co2BudgetColumn" styleClass="cloumn" text="CO2 spent" />
+                    <TableColumn fx:id="co2SpentColumn" styleClass="cloumn" text="CO2 spent" />
                     <TableColumn fx:id="timeColumn" styleClass="cloumn" text="Player Time" />
                     <TableColumn fx:id="gemsColumn" styleClass="cloumn" text="Gems" />
                     <TableColumn fx:id="timeStampColumn" styleClass="cloumn" text="TimeStamp" />

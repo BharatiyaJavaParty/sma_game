@@ -37,7 +37,7 @@ public class ScoreBoardController {
     private TableView<ArrayList<String>> scoreboardTable;
     
     @FXML
-    private TableColumn<ArrayList<String>, String> nameColumn, co2BudgetColumn, timeColumn, gemsColumn, timeStampColumn;
+    private TableColumn<ArrayList<String>, String> nameColumn, co2SpentColumn, timeColumn, gemsColumn, timeStampColumn;
 
     @FXML
     public void homeButtonClicked() {
@@ -53,17 +53,17 @@ public class ScoreBoardController {
 
         scoreboardTable.widthProperty().addListener((obs, oldVal, newVal) -> {
             double tableWidth = newVal.doubleValue();
-            nameColumn.setPrefWidth(tableWidth / 5);
-            co2BudgetColumn.setPrefWidth(tableWidth / 5);
-            timeColumn.setPrefWidth(tableWidth / 5);
-            gemsColumn.setPrefWidth(tableWidth / 5);
-            timeStampColumn.setPrefWidth(tableWidth / 5);
+            nameColumn.setMinWidth(tableWidth / 5);
+            co2SpentColumn.setMinWidth(tableWidth / 5);
+            timeColumn.setMinWidth(tableWidth / 5);
+            gemsColumn.setMinWidth(tableWidth / 5);
+            timeStampColumn.setMinWidth(tableWidth / 5);
         });
     
         ArrayList<ArrayList<String>> data = getResults();
     
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(0)));
-        co2BudgetColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(1)));
+        co2SpentColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(1)));
         timeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(2)));
         gemsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(3)));
         timeStampColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(4)));
@@ -87,10 +87,10 @@ public class ScoreBoardController {
             LocalTime currentTime = LocalTime.now();
             ObjectNode jsonObject = mapper.createObjectNode();
             jsonObject.put("playerName", GameEngine.newPlayer.getPlayerName());
-            jsonObject.put("playerCO2Budget", GameEngine.newPlayer.getPlayerCo2Budget());
+            jsonObject.put("playerCO2Spent", GameEngine.newPlayer.getPlayerCo2Spent());
             jsonObject.put("playerTime", GameEngine.newPlayer.getPlayerTime());
             jsonObject.put("gems", gems);
-            jsonObject.put("TimeStamp", currentTime.toString());
+            jsonObject.put("TimeStamp", currentTime.getHour() + ":" + currentTime.getMinute());
             arrayNode.add(jsonObject);
     
             BufferedWriter bw = new BufferedWriter(new FileWriter(file, false));
@@ -122,7 +122,7 @@ public class ScoreBoardController {
             for (JsonNode rootNode : arrayNode) {
                 ArrayList<String> temp = new ArrayList<>();
                 temp.add(rootNode.get("playerName").asText());
-                temp.add(String.valueOf(rootNode.get("playerCO2Budget").asInt()));
+                temp.add(String.valueOf(rootNode.get("playerCO2Spent").asInt()));
                 temp.add(String.valueOf(rootNode.get("playerTime").asInt()));
                 temp.add(String.valueOf(rootNode.get("gems").asInt()));
                 temp.add(rootNode.get("TimeStamp").asText());

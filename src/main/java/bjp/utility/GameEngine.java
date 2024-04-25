@@ -208,6 +208,8 @@ public class GameEngine {
                 try {
                     SoundEffects.endbgmGame();
                     WIN = false;
+                    ScoreBoardController.saveResults(gemCount);
+                    ScoreBoardController.getResults();
                     SoundEffects.endGame();
                     Main.setRoot("gameover");
                     newPlayer.setPlayerCo2Spent(0);
@@ -223,6 +225,8 @@ public class GameEngine {
                     PauseTransition pause = new PauseTransition(Duration.millis(1000));
                     pause.play();
                     WIN = true;
+                    SoundEffects.endbgmGame();
+                    SoundEffects.endGame();
                     Main.setRoot("gameover");
                     newPlayer.setPlayerCo2Spent(0);
                     newPlayer.setPlayerTime(0);
