@@ -3,17 +3,14 @@ package bjp.controller;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 import bjp.utility.GameEngine;
 import bjp.utility.Bus;
-import bjp.utility.EnvironmentalPopup;
 import bjp.utility.Luas;
 import bjp.utility.Obstacles;
 import bjp.utility.SoundEffects;
@@ -29,9 +26,6 @@ public class CityMapController {
 
     @FXML
     private StackPane cityMainStack;
-
-    // @FXML
-    // private Button muteButton;
 
     @FXML 
     private Label co2label;
@@ -50,6 +44,7 @@ public class CityMapController {
 
     @FXML
     private void initialize() {
+        SoundEffects.bgmGame();
         generateGrid(ROWS, COLS);
         transportlabel.setText("Walking");
         Bus.makeBusRoad(StaticTransportConfig.BUS2, StaticTransportConfig.BUS2_STOPS, cityMapGrid, 2);
@@ -86,16 +81,6 @@ public class CityMapController {
         // cityMapGrid.setGridLinesVisible(true);
 
     }
-
-    //not working
-    // @FXML
-    // public void muteButtonClicked() {
-    //     if (SoundEffects.getMediaPlayer().isMute()) {
-    //         SoundEffects.getMediaPlayer().setMute(false);
-    //     } else {
-    //         SoundEffects.getMediaPlayer().setMute(true);
-    //     }
-    // }
 
     private void generateGrid(int rows, int cols) {
         Image grassImage = new Image(Obstacles.class.getResourceAsStream("/img/grass.png"));

@@ -1,17 +1,14 @@
-package bjp.utility;
+package bjp.controller;
 
 import java.util.Random;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 
 public class EnvironmentalPopup {
-    private static String popupMessage;
     private static int duration = 7;
 
     private static final String[] eduPopupStrings = {
@@ -37,7 +34,7 @@ public class EnvironmentalPopup {
         messageLabel.setWrapText(true);
         // keeping the pop up style same as player popup
         messageLabel.setStyle(
-            "-fx-background-color: rgba(234, 255, 208, 0.7);" +
+            "-fx-background-color: rgba(234, 255, 208, 0.4);" +
             "-fx-background-radius: 15;" +
             "-fx-border-color: rgba(46, 139, 87, 0.7);" +
             "-fx-border-width: 3;" +
@@ -48,29 +45,15 @@ public class EnvironmentalPopup {
             "-fx-text-fill: #005f00;" +
             "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);"
         );
-        
-        
 
         cityMainStack.getChildren().removeIf(node -> node instanceof Label && ((Label) node).getText().contains("Tip:"));
 
         cityMainStack.getChildren().add(messageLabel);
         StackPane.setAlignment(messageLabel, Pos.BOTTOM_CENTER);
 
-//        final int[] charIndex = { 0 };
-//        Timeline timeline = new Timeline(new KeyFrame(javafx.util.Duration.millis(50), event -> {
-//            if (charIndex[0] < message.length()) {
-//                messageLabel.setText(messageLabel.getText() + message.charAt(charIndex[0]));
-//                charIndex[0]++;
-//            }
-//        }));
-//        timeline.setCycleCount(message.length());
-//        timeline.setOnFinished(event -> {
-            // Hide the message after 10 seconds
             PauseTransition delay = new PauseTransition(javafx.util.Duration.seconds(duration));
             delay.setOnFinished(delayEvent -> cityMainStack.getChildren().remove(messageLabel));
             delay.play();
-//        });
-//        timeline.play();
     }
 
 }

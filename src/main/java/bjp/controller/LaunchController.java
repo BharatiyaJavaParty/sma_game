@@ -1,9 +1,7 @@
 package bjp.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import bjp.Main;
 
@@ -27,12 +25,6 @@ public class LaunchController {
    public void scoreboardButtonClicked() {
       try {
          Main.setRoot("scoreboard");
-
-         // Stage scoreStage = new Stage();
-         // scoreStage.setTitle("SCOREBOARD");
-         // Scene scoreScene = new Scene(Main.loadFXML("scoreboard"));
-         // scoreStage.setScene(scoreScene);
-         // scoreStage.show();
       } catch (Exception e) {
          e.printStackTrace();
       }

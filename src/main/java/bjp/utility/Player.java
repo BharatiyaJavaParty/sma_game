@@ -2,11 +2,6 @@ package bjp.utility;
 
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.time.LocalTime;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -22,15 +17,9 @@ import bjp.constants.AppConstants;
 import bjp.controller.CityMapController;
 
 public class Player {
-    // player properties
-    // ideally player should have object and not all fucntions should not be called
-    // using class name
-
     private String playerName;
     private Location playerLocation;
 
-
-    // setting time and co2emission
     private int playerTime;
     private int playerCo2Budget;
     private int playerCo2Spent;
@@ -41,7 +30,6 @@ public class Player {
         this.playerCo2Spent = 0;
     }
 
-    // private static ImageView playerView;
     private static final Image PLAYER_IMAGE_STILL = new Image(
             Gem.class.getResourceAsStream("/img/player_moments/walk1.png"));
     private static final Image PLAYER_IMAGE_MOVE = new Image(
@@ -55,8 +43,6 @@ public class Player {
     private static final Image PLAYER_IMAGE_DOWN2 = new Image(
             Player.class.getResourceAsStream("/img/player_moments/walkdown2.png"));
     
-    // Existing left and right images
-
     private static final Image BUS1_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus1.png"));
     private static final Image BUS2_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus2.png"));
     private static final Image BUS3_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus3.png"));
@@ -65,7 +51,7 @@ public class Player {
 
     private static ImageView playerView = new ImageView(PLAYER_IMAGE_DOWN1);
     private boolean isMoving = false;
-    private int lastDirection = 0; // 0 = up, 1 = down, 2 = left, 3 = right
+    private int lastDirection = 0;
     private static final Duration MOVE_DURATION = Duration.millis(200);
 
     public int getPlayerTime() {
@@ -73,8 +59,6 @@ public class Player {
     }
 
     public void setPlayerTime(int time) {
-        // System.out.println("Player Time " + this.playerTime);
-        // System.out.println("======================================================");
         this.playerTime = time;
     }
 
@@ -83,8 +67,6 @@ public class Player {
     }
 
     public void setPlayerCo2Budget(int budget) {
-        // System.out.println("======================================================");
-        // System.out.println("Player CO2 budget " + this.playerCo2Budget);
         this.playerCo2Budget = budget;
     }
 
@@ -190,7 +172,6 @@ public class Player {
     public void movePlayerToStation(GridPane cityMapGrid, Location station, String direction) {
         ArrayList<Location> path = calculatePath(playerLocation, station, direction);
         animatePath(cityMapGrid, path);
-        System.out.println(station.getLocationName() + ": (" + station.getX() + "," + station.getY() + ")");
     }
 
     private ArrayList<Location> calculatePath(Location start, Location end, String direction) {

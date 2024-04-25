@@ -59,7 +59,7 @@ public class Level1 {
             new int[]{1, 2}, new int[]{2, 1},
             new int[]{46, 25}, new int[]{47, 25}, new int[]{46, 24}, new int[]{48, 25},
             new int[]{48, 26}, new int[]{49, 26}, new int[]{50, 24}, new int[]{49, 26},
-            new int[]{4, 28}, new int[]{1, 28}, new int[]{3, 28},
+            new int[]{4, 29}, new int[]{1, 28}, new int[]{3, 28},
             new int[]{49, 11}, new int[]{51, 10}, new int[]{50, 12}, new int[]{50, 16},
             new int[]{52, 12}, new int[]{49, 13}, new int[]{49, 17}, new int[]{52, 18},
             new int[]{53, 14}, new int[]{53, 17}, new int[]{54, 13}, new int[]{54, 16},

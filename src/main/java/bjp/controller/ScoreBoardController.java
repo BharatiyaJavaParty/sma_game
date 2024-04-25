@@ -1,7 +1,9 @@
 package bjp.controller;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -60,16 +62,12 @@ public class ScoreBoardController {
     
         ArrayList<ArrayList<String>> data = getResults();
     
-        System.out.println(data);
-    
-        // Set cell value factories to populate table columns
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(0)));
         co2BudgetColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(1)));
         timeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(2)));
         gemsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(3)));
         timeStampColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(4)));
     
-        // Add data to the table
         scoreboardTable.getItems().addAll(data);
     }
 
@@ -78,29 +76,25 @@ public class ScoreBoardController {
             File file = new File("Score.json");
             ObjectMapper mapper = new ObjectMapper();
             ArrayNode arrayNode;
-
+    
             if (file.exists() && file.length() != 0) {
                 arrayNode = (ArrayNode) mapper.readTree(file);
             } else {
                 file.createNewFile();
                 arrayNode = mapper.createArrayNode();
             }
-
+    
             LocalTime currentTime = LocalTime.now();
-            int hour = currentTime.getHour();
-            int minute = currentTime.getMinute();
             ObjectNode jsonObject = mapper.createObjectNode();
             jsonObject.put("playerName", GameEngine.newPlayer.getPlayerName());
-            jsonObject.put("playerCO2Spent", GameEngine.newPlayer.getPlayerCo2Spent());
+            jsonObject.put("playerCO2Budget", GameEngine.newPlayer.getPlayerCo2Budget());
             jsonObject.put("playerTime", GameEngine.newPlayer.getPlayerTime());
             jsonObject.put("gems", gems);
-            jsonObject.put("TimeStamp", String.format("%02d:%02d", hour, minute));
+            jsonObject.put("TimeStamp", currentTime.toString());
             arrayNode.add(jsonObject);
-
-            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(sortResults(arrayNode));
-            FileWriter fw = new FileWriter(file, false);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(jsonString);
+    
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file, false));
+            bw.write(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode));
             bw.close();
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file");
@@ -110,7 +104,6 @@ public class ScoreBoardController {
 
     public static ArrayList<ArrayList<String>> getResults() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
-        ArrayNode arrayNode;
         File file = new File("Score.json");
         if (!file.exists()) {
             System.out.println("Score.json file not found");
@@ -120,12 +113,10 @@ public class ScoreBoardController {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            if(file.length() == 0)
-            {
+            ArrayNode arrayNode;
+            if (file.length() == 0) {
                 arrayNode = mapper.createArrayNode();
-            }
-            else
-            {
+            } else {
                 arrayNode = (ArrayNode) mapper.readTree(file);
             }
             for (JsonNode rootNode : arrayNode) {
@@ -140,33 +131,21 @@ public class ScoreBoardController {
         } catch (IOException e) {
             System.out.println("An error occurred while reading the JSON file");
             e.printStackTrace();
+            return res;
         }
-        return res;
-    }
+        Collections.sort(res, new Comparator<ArrayList<String>>() {
+            @Override
+            public int compare(ArrayList<String> o1, ArrayList<String> o2) {
+                int gemsResult = Integer.compare(Integer.parseInt(o2.get(3)), Integer.parseInt(o1.get(3)));
+                if (gemsResult != 0) return gemsResult;
 
-    private static ArrayNode sortResults(ArrayNode arrayNode){
-        for(int i=0; i<arrayNode.size();i++){
-            //sorting according to time
-            for(int j = i; j<arrayNode.size(); j++){
-                if(arrayNode.get(i).get("playerCO2Budget").asInt()> arrayNode.get(j).get("playerCO2Budget").asInt()){
-                    JsonNode temp;
-                    temp = arrayNode.get(i);
-                    arrayNode.set(i, arrayNode.get(j));
-                    arrayNode.set(j, temp);
-                }
-                //if times are same then sorting by playerTime
-                else if(arrayNode.get(i).get("playerCO2Budget").asInt()== arrayNode.get(j).get("playerCO2Budget").asInt()){
-                    if(arrayNode.get(i).get("playerTime").asInt() > 
-                        arrayNode.get(j).get("playerTime").asInt()){
-                            JsonNode temp;
-                            temp = arrayNode.get(i);
-                            arrayNode.set(i, arrayNode.get(j));
-                            arrayNode.set(j, temp);
-                    }
-                }
+                int co2Result = Integer.compare(Integer.parseInt(o1.get(1)), Integer.parseInt(o2.get(1)));
+                if (co2Result != 0) return co2Result;
+
+                return Integer.compare(Integer.parseInt(o1.get(2)), Integer.parseInt(o2.get(2)));
             }
-        }
-        System.out.println(arrayNode);
-        return arrayNode;
+        });
+
+        return res;
     }
 }

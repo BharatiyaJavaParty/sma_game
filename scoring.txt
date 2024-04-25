@@ -1,5 +1,0 @@
-[{(1,2),environment points - 40, time taken - 10s},{(2,5,3),environment points - 40, time taken - 20s}]
-
-priority 1 - More levels cleared
-priority 2 - less environment points spent 
-priority 3 - less time taken

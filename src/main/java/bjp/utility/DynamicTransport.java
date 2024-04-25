@@ -4,8 +4,6 @@ public abstract class DynamicTransport {
     private String transportName;
     private double co2Emissions;
     private double speed;
-    // private Location currentLocation;
-    // private int gridsTraversed;
 
     public DynamicTransport(String transportName, double co2Emissions, double speed) {
         this.transportName = transportName;

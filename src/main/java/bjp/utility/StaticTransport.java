@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 
-//abstract class which serves as parent for Bus, Luas, Dart etc
 public abstract class StaticTransport {
     private String transportName;
     private double co2Emissions;

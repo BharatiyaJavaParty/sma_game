@@ -19,10 +19,6 @@ public class Location {
         this.yOrdinate = other.getY();
     }
 
-    // public Location() {
-    // System.out.println("Location object created successfully");
-    // }
-
     public int getX() {
         return xOrdinate;
     }

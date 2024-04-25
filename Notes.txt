@@ -6,28 +6,43 @@ sma_game
 ├── .idea
 ├── .vscode
 ├── src
-│   ├── main
-│   │   ├── java
-│   │   │   ├── bjp
-│   │   │   │   ├── constants
-│   │   │   │   ├── controller
-│   │   │   │   ├── utility
-│   │   │   │   └── Main.java
-│   │   │   └── module-info.java
-│   │   └── resources
-│   │       ├── audio
-│   │       ├── bip
-│   │       ├── img
-│   │       └── styles
+│   └── main
+│       ├── java
+│       │   ├── bjp
+│       │   │   ├── constants
+│       │   │   │    ├── AppConstants.java
+│       │   │   │    ├── 
+│       │   │   │    └── Level1.java
+│       │   │   ├── controller
+│       │   │   │    ├── CityMapController.java
+│       │   │   │    ├── GameOverController.java
+│       │   │   │    ├── LaunchController.java
+│       │   │   │    ├── PlayerNameController.java
+│       │   │   │    ├── PopupController.java
+│       │   │   │    └── ScoreBoardController.java
+│       │   │   ├── utility
+│       │   │   │    ├── Bike.java
+│       │   │   │    ├── Bus.java
+│       │   │   │    ├── Luas.java
+│       │   │   │    ├── StaticTransport.java
+│       │   │   │    ├── StaticTransportConfig.java
+│       │   │   │    ├── Player.java
+│       │   │   │    ├── Gem.java
+│       │   │   │    ├── Obstacles.java
+│       │   │   │    ├── SoundEffects.java
+│       │   │   │    ├── Location.java
+│       │   │   │    ├── DynamicTransport.java
+│       │   │   │    └── GameEngine.java
+│       │   │   ├── Main.java
+│       │   │   └── MainWithoutApplication.java
+│       │   └── module-info.java
+│       └── resources
+│           ├── audio // contains audio files
+│           ├── bip // contains fxml files
+│           ├── img // contains image files
+│           └── styles // contains css files
 ├── target
 ├── .gitignore
 ├── Notes.txt
-├── pending.txt
 ├── pom.xml
-├── Score.json
-├── Score.txt
-└── scoring.txt
-
-
-
-Try to implemet key to pair of stops for luas and bus stops
+└── Score.json

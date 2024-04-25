@@ -43,6 +43,7 @@ public class GameEngine {
     private static boolean isWarning500Shown = false;
 
     public static boolean WIN = false;
+    public static boolean NEWGAME = false;
 
     private static Random rand = new Random();
 
@@ -71,9 +72,9 @@ public class GameEngine {
 
     public static HashMap<Integer, Integer> levels = new HashMap<Integer, Integer>() {
         {
-            put(1, 4);
-            put(2, 12);
-            put(3, 24);
+            put(1, 1);
+            put(2, 2);
+            put(3, 3);
         }
     };
 
@@ -91,7 +92,6 @@ public class GameEngine {
                     cityMapGrid.getChildren().removeIf(node -> node == prevView);
                     cityMapGrid.getChildren().removeIf(node -> node == nextView);
                     res.clear();
-                    //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() - 1))
                     {
                         sameStation = true;
@@ -108,7 +108,6 @@ public class GameEngine {
                     cityMapGrid.getChildren().removeIf(node -> node == prevView);
                     cityMapGrid.getChildren().removeIf(node -> node == nextView);
                     res.clear();
-                    //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() + 1))
                     {
                         sameStation = true;
@@ -124,7 +123,6 @@ public class GameEngine {
                     cityMapGrid.getChildren().removeIf(node -> node == prevView);
                     cityMapGrid.getChildren().removeIf(node -> node == nextView);
                     res.clear();
-                    //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() - 1,newPlayer.getPlayerLocation().getY()))
                     {
                         sameStation = true;
@@ -137,7 +135,6 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     cityMapGrid.getChildren().removeIf(node -> node == prevView);
                     cityMapGrid.getChildren().removeIf(node -> node == nextView);
                     res.clear();
@@ -209,12 +206,27 @@ public class GameEngine {
             if(newPlayer.getPlayerCo2Spent() > newPlayer.getPlayerCo2Budget())
             {
                 try {
+                    SoundEffects.endbgmGame();
                     WIN = false;
+                    SoundEffects.endGame();
                     Main.setRoot("gameover");
                     newPlayer.setPlayerCo2Spent(0);
                     newPlayer.setPlayerTime(0);
                     gemCount = 0;
                     System.gc();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (gemCount == levels.get(3) && NEWGAME){
+                try {
+                    PauseTransition pause = new PauseTransition(Duration.millis(1000));
+                    pause.play();
+                    WIN = true;
+                    Main.setRoot("gameover");
+                    newPlayer.setPlayerCo2Spent(0);
+                    newPlayer.setPlayerTime(0);
+                    gemCount = 0;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -249,18 +261,8 @@ public class GameEngine {
         if (gemCount == levels.get(3)) {
             PopupController.showPopupMessage(cityMainStack, "You Win!!");
             ScoreBoardController.saveResults(gemCount);
-            PauseTransition pause = new PauseTransition(Duration.millis(1000));
             ScoreBoardController.getResults();
-            pause.play();
-            try {
-                WIN = true;
-                Main.setRoot("gameover");
-                newPlayer.setPlayerCo2Spent(0);
-                newPlayer.setPlayerTime(0);
-                gemCount = 0;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            NEWGAME = true;
         }
 
         if (gem.getGemLocation().getX() == -1) {

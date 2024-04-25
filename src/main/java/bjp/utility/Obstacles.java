@@ -199,21 +199,18 @@ public class Obstacles {
     public static boolean checkObstacles(int newX, int newY) {
         for (Location tree : TREE_SET) {
             if (tree.getX() == newX && tree.getY() == newY) {
-                System.out.println("tree");
                 return true;
             }
         }
 
         for (Location tree : LAKE_SET) {
             if (tree.getX() == newX && tree.getY() == newY) {
-                System.out.println("lake");
                 return true;
             }
         }
 
         for (Location bush : BUSH_SET) {
             if (bush.getX() == newX && bush.getY() == newY) {
-                System.out.println("bush");
                 return true;
             }
         }
@@ -221,14 +218,12 @@ public class Obstacles {
         for (Location house : HOUSE_SET) {
             if ((house.getX() == newX || house.getX() == newX - 1)
                     && (house.getY() == newY || house.getY() == newY - 1)) {
-                System.out.println("house");
                 return true;
             }
         }
 
         for (Location house : HOME_TREE_SET) {
             if (house.getX() == newX && house.getY() == newY) {
-                System.out.println("house tree");
                 return true;
             }
         }
@@ -236,7 +231,6 @@ public class Obstacles {
         for (Location tree : DOUBLE_TREE_SET) {
             if ((tree.getX() == newX)
                     && (tree.getY() <= newY && tree.getY() + 1 >= newY)) {
-                System.out.println("house tree");
                 return true;
             }
         }
@@ -244,7 +238,6 @@ public class Obstacles {
         for (Location building : BUILDING_SET) {
             if ((building.getX() == newX || building.getX() == newX - 1)
                     && (building.getY() <= newY && building.getY() + 2 >= newY)) {
-                System.out.println("building");
                 return true;
             }
 
