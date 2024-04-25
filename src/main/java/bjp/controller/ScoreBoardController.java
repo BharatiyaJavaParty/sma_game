@@ -2,7 +2,6 @@ package bjp.controller;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,51 +10,65 @@ import java.time.LocalTime;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import bjp.Main;
 import bjp.utility.GameEngine;
 
 public class ScoreBoardController {
 
     @FXML
+    private Button homeButton;
+
+    @FXML
+    private VBox rootVBox;
+
+    @FXML
     private TableView<ArrayList<String>> scoreboardTable;
-
-    @FXML
-    private TableColumn<ArrayList<String>, String> name;
-
-    @FXML
-    private TableColumn<ArrayList<String>, String> co2Budget;
-
-    @FXML
-    private TableColumn<ArrayList<String>, String> time;
-
-    @FXML
-    private TableColumn<ArrayList<String>, String> gems;
-    @FXML
-    private TableColumn<ArrayList<String>, String> TimeStamp;
     
+    @FXML
+    private TableColumn<ArrayList<String>, String> nameColumn, co2BudgetColumn, timeColumn, gemsColumn, timeStampColumn;
 
-
+    @FXML
+    public void homeButtonClicked() {
+       try {
+          Main.setRoot("launch-view");
+       } catch (Exception e) {
+          e.printStackTrace();
+       }
+    }
+    
+    @FXML
     public void initialize() throws FileNotFoundException {
-        // Assuming you have data in an ArrayList of ArrayList of Strings called 'data'
 
+        scoreboardTable.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double tableWidth = newVal.doubleValue();
+            nameColumn.setPrefWidth(tableWidth / 5);
+            co2BudgetColumn.setPrefWidth(tableWidth / 5);
+            timeColumn.setPrefWidth(tableWidth / 5);
+            gemsColumn.setPrefWidth(tableWidth / 5);
+            timeStampColumn.setPrefWidth(tableWidth / 5);
+        });
+    
         ArrayList<ArrayList<String>> data = getResults();
-
+    
         System.out.println(data);
-
+    
         // Set cell value factories to populate table columns
-        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(0)));
-        co2Budget.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(1)));
-        time.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(2)));
-        gems.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(3)));
-        TimeStamp.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(4)));
+        nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(0)));
+        co2BudgetColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(1)));
+        timeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(2)));
+        gemsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(3)));
+        timeStampColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(4)));
+    
         // Add data to the table
         scoreboardTable.getItems().addAll(data);
     }

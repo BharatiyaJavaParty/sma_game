@@ -1,50 +1,43 @@
-/* Basic setup for the GridPane */
 .root {
-    -fx-background-image: url('https://cdn.wallpapersafari.com/11/43/EXVgK1.png'); /* replace with the path to your own background image */
-    -fx-background-size: cover;
-    -fx-font-family: 'Arial', sans-serif; 
+    -fx-background-color: linear-gradient(to bottom, #1E90FF, #87CEEB);
+    -fx-font-family: 'Arial', sans-serif;
 }
 
-
-/* Styling VBox for better alignment and padding */
 .vbox {
     -fx-padding: 20;
-    -fx-spacing: 15; /* Space between buttons */
+    -fx-spacing: 15;
     -fx-alignment: center;
 }
 
-/* Generic button styling */
 .button {
-    -fx-background-color: #e68a00; /* Orange color for button */
-    -fx-text-fill: #ffffff;
+    -fx-pref-width: 200.0;
+    -fx-pref-height: 100.0;
+    -fx-alignment: center;
+    -fx-background-color: linear-gradient(to bottom, #4e78f4, rgb(12, 53, 176));
+    -fx-text-fill: aliceblue;
     -fx-font-size: 16px;
-    -fx-padding: 20 40;
-    -fx-border-color: #ffffff;
-    -fx-border-width: 3px;
-    -fx-border-radius: 15px; /* More rounded */
-    -fx-background-radius: 15px; /* Match border radius */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-padding: 10;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 10, 0, 0, 0),
+                innershadow(gaussian, white, 10, 0.7, 4, 4),
+                innershadow(gaussian, black, 10, 0.7, -4, -4);
 }
 
-/* Hover effects for buttons */
 .button:hover {
-    -fx-background-color: #ffbf00; /* Lighter orange for hover */
-    -fx-border-color: #ffff00;
-    -fx-scale-x: 1.05; /* Slightly smaller growth on hover */
-    -fx-scale-y: 1.05;
-    -fx-cursor: hand; /* Cursor changes to a hand to indicate interactiveness */
+    -fx-background-color: linear-gradient(to bottom, #6495ED, lightblue);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 15, 0, 0, 0),
+                innershadow(gaussian, white, 12, 0.7, 6, 6),
+                innershadow(gaussian, black, 12, 0.7, -6, -6);
 }
 
-/* Press effect for buttons to give tactile feedback */
 .button:pressed {
-    -fx-background-color: #cc8400; /* Darker orange for pressed */
-    -fx-border-color: #cccc00;
-    -fx-translate-y: 4px; /* Button moves slightly down to mimic pressing */
+    -fx-background-color: linear-gradient(to bottom, #107be5, #87CEEB);
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0),
+                innershadow(gaussian, white, 8, 0.7, 2, 2),
+                innershadow(gaussian, black, 8, 0.7, -2, -2);
 }
-
-#newGameButton
-{
-    -fx-border-radius: 100px; /* More rounded */
-    -fx-background-radius: 100px;
-}
-

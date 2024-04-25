@@ -1,56 +1,37 @@
 .root {
-    -fx-background-image: url('https://cdn.wallpapersafari.com/11/43/EXVgK1.png'); /* replace with the path to your own background image */
-    -fx-background-size: cover;
-    -fx-font-family: 'Arial', sans-serif; 
+    -fx-background-color: #2556e6be;
+    -fx-font-family: 'Arial', sans-serif;
 }
 
-/* Styling for the table columns to center text and use pixelated font */
 .table-column {
     -fx-alignment: CENTER;
-    -fx-font-size: 12px; /* Appropriate size for readability */
-}
-
-/* Row styling to enhance the classic video game feel */
-.table-row-cell {
-    -fx-padding: 5px;
-    -fx-border-insets: 0;
-    -fx-border-width: 0 0 1 0; /* Only bottom border to separate rows */
-    -fx-text-fill: green; /* Set text color to white */
-    -fx-cursor: hand; /* Changes cursor to a hand when hovering over rows */
-    -fx-background-color: #ffaa00; /* Set cell background color */
-}
-
-/* Hover effect for table rows */
-.table-row-cell:hover {
-    -fx-background-color: #e6a100; /* Manually chosen darker shade for hover effect */
-}
-
-/* Header styling to distinguish from the data rows */
-.table-view .column-header-background {
-}
-
-.table-view .column-header {
-    -fx-text-fill: red; /* White text for contrast */
-    -fx-font-weight: bold;
     -fx-font-size: 12px;
-    -fx-border-width: 0 0 2 0; /* Thicker bottom border for emphasis */
 }
 
-/* ScrollPane styling for a cohesive look and hiding scroll bars */
+.table-row-cell {
+    -fx-border-insets: 0;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-cursor: hand;
+    -fx-background-color: #164df019;
+    -fx-font-size: 15px;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #164df0bd;
+}
+
 .scroll-pane {
-    -fx-hbar-policy: never; /* Horizontal scroll bar never displayed */
-    -fx-vbar-policy: never; /* Vertical scroll bar never displayed */
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never; 
 }
 
-/* Apply styles directly to table headers */
 .table-view .column-header .label {
-    -fx-background-color: linear-gradient(to bottom, #8bac0f, #799b0c);
     -fx-padding: 20px;
-    -fx-max-width: 1368px;
     -fx-max-height: 100px;
     -fx-background-radius: 10px;
     -fx-background-insets: 5;
-    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.6), 15, 0, 0, 0);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.6), 20, 0, 0, 0);
+    -fx-background-color: linear-gradient(to bottom, #4e78f4, rgb(12, 53, 176));
 }
 
 /* Label styling */
@@ -62,17 +43,58 @@
     -fx-padding: 8px 12px;
     -fx-background-color: rgba(0, 0, 0, 0.2);
     -fx-background-radius: 8px;
-    -fx-min-width: 70px;
+    -fx-min-width: 50px;
     -fx-min-height: 30px;
+}
+
+
+#scoreboardTable {
+    -fx-background-color: linear-gradient(to bottom, #1E90FF, #87CEEB);
+}
+
+.table-view .column-header{
+    -fx-background-color: #1E90FF;
 }
 
 #scoreboardScroll {
     -fx-background-color: transparent;
-    -fx-control-inner-background: transparent; /* Ensure inner background is also transparent */
+    -fx-control-inner-background: transparent;
 }
 
-/* CSS for table column header labels */
 .table-header-label {
-    -fx-font-size: 15px; /* Set font size */
-    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.8), 5, 0.0, 0, 1); /* Example label effect */
+    -fx-font-size: 15px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.8), 5, 0.0, 0, 1);
+}
+
+.button {
+    -fx-pref-width: 200.0;
+    -fx-pref-height: 100.0;
+    -fx-alignment: center;
+    -fx-background-color: linear-gradient(to bottom, #4e78f4, rgb(12, 53, 176));
+    -fx-text-fill: aliceblue;
+    -fx-font-size: 16px;
+    -fx-padding: 10;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 10, 0, 0, 0),
+                innershadow(gaussian, white, 10, 0.7, 4, 4),
+                innershadow(gaussian, black, 10, 0.7, -4, -4);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #6495ED, lightblue);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 15, 0, 0, 0),
+                innershadow(gaussian, white, 12, 0.7, 6, 6),
+                innershadow(gaussian, black, 12, 0.7, -6, -6);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #107be5, #87CEEB);
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0),
+                innershadow(gaussian, white, 8, 0.7, 2, 2),
+                innershadow(gaussian, black, 8, 0.7, -2, -2);
 }

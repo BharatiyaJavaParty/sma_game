@@ -101,10 +101,12 @@ public class PopupController {
         if((GameEngine.atBus1 || GameEngine.atBus2 || GameEngine.atBus3) && message=="")
         {
             popupTxt.setText(busPopupStrings[n]);
+            popupTxt.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         }
         else if((GameEngine.atLuas || GameEngine.atRedLuas) && message=="")
         {
             popupTxt.setText(luasPopupStrings[n]);
+            popupTxt.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         }
         else if (message!="")
         {
@@ -113,10 +115,10 @@ public class PopupController {
             FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), popupTxt);
             fadeTransition.setFromValue(1.0);
             fadeTransition.setToValue(0.0);
-            fadeTransition.setCycleCount(3);
+            fadeTransition.setCycleCount(5);
             fadeTransition.play();
+            popupTxt.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
         }
-        popupTxt.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 
         double textWidth = popupTxt.getLayoutBounds().getWidth();
         double textHeight = popupTxt.getLayoutBounds().getHeight();

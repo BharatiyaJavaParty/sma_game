@@ -38,6 +38,12 @@ public class GameEngine {
     public static boolean atBus2 = false;
     public static boolean atBus3 = false;
 
+    private static boolean isWarning100Shown = false;
+    private static boolean isWarning250Shown = false;
+    private static boolean isWarning500Shown = false;
+
+    public static boolean WIN = false;
+
     private static Random rand = new Random();
 
     private static final Image NEXT = new Image(Player.class.getResourceAsStream("/img/N.png"));
@@ -82,6 +88,9 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    cityMapGrid.getChildren().removeIf(node -> node == prevView);
+                    cityMapGrid.getChildren().removeIf(node -> node == nextView);
+                    res.clear();
                     //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() - 1))
                     {
@@ -96,6 +105,9 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    cityMapGrid.getChildren().removeIf(node -> node == prevView);
+                    cityMapGrid.getChildren().removeIf(node -> node == nextView);
+                    res.clear();
                     //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() + 1))
                     {
@@ -109,6 +121,9 @@ public class GameEngine {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    cityMapGrid.getChildren().removeIf(node -> node == prevView);
+                    cityMapGrid.getChildren().removeIf(node -> node == nextView);
+                    res.clear();
                     //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() - 1,newPlayer.getPlayerLocation().getY()))
                     {
@@ -123,6 +138,9 @@ public class GameEngine {
                         e.printStackTrace();
                     }
                     //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.WALKING_CO2_REDUCTION);
+                    cityMapGrid.getChildren().removeIf(node -> node == prevView);
+                    cityMapGrid.getChildren().removeIf(node -> node == nextView);
+                    res.clear();
                     if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() + 1,newPlayer.getPlayerLocation().getY()))
                     {
                         sameStation = true;
@@ -172,21 +190,26 @@ public class GameEngine {
                 PopupController.showPopupMessage(cityMainStack, "Press ENTER to travel");
             }
             updateGameLables(co2label, timelabel, gemslabel, transportlabel);
-            if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 100)
+
+            if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 100 && !isWarning100Shown)
             {
                 PopupController.ShowPopup(cityMainStack, "Warning! 100 Carbon Points left");
+                isWarning100Shown = true;
             }
-            else if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 250)
+            else if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 250 && !isWarning250Shown)
             {
                 PopupController.ShowPopup(cityMainStack, "Warning! 250 Carbon Points left");
+                isWarning250Shown = true;
             }
-            else if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 500)
+            else if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 500 && !isWarning500Shown)
             {
                 PopupController.ShowPopup(cityMainStack, "Warning! 500 Carbon Points left");
+                isWarning500Shown = true;
             }
             if(newPlayer.getPlayerCo2Spent() > newPlayer.getPlayerCo2Budget())
             {
                 try {
+                    WIN = false;
                     Main.setRoot("gameover");
                     newPlayer.setPlayerCo2Spent(0);
                     newPlayer.setPlayerTime(0);
@@ -230,6 +253,7 @@ public class GameEngine {
             ScoreBoardController.getResults();
             pause.play();
             try {
+                WIN = true;
                 Main.setRoot("gameover");
                 newPlayer.setPlayerCo2Spent(0);
                 newPlayer.setPlayerTime(0);

@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Priority?>
 
-<VBox alignment="CENTER" fillWidth="true" stylesheets="@../styles/scoreboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bjp.controller.ScoreBoardController">
-    <ScrollPane fx:id="scoreboardScroll" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
+<VBox fx:id="rootVBox" alignment="CENTER" fillWidth="true" stylesheets="@../styles/scoreboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bjp.controller.ScoreBoardController">
+    <Button fx:id="homeButton" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" onAction="#homeButtonClicked" prefHeight="50.0" prefWidth="100.0" styleClass="button" text="Home">
+      <VBox.margin>
+         <Insets bottom="10.0" top="10.0" />
+      </VBox.margin></Button>
+    <ScrollPane fx:id="scoreboardScroll" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
         <content>
             <TableView fx:id="scoreboardTable" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="name" minWidth="310" text="Player Name" styleClass="table-header-label" />
-                    <TableColumn fx:id="co2Budget" minWidth="310" text="CO2 spent" styleClass="table-header-label" />
-                    <TableColumn fx:id="time" minWidth="310" text="Player Time" styleClass="table-header-label" />
-                    <TableColumn fx:id="gems" minWidth="310" text="Gems" styleClass="table-header-label" />
-                    <TableColumn fx:id="TimeStamp" minWidth="300" text="TimeStamp" styleClass="table-header-label" />
+                    <TableColumn fx:id="nameColumn" styleClass="cloumn" text="Player Name" />
+                    <TableColumn fx:id="co2BudgetColumn" styleClass="cloumn" text="CO2 spent" />
+                    <TableColumn fx:id="timeColumn" styleClass="cloumn" text="Player Time" />
+                    <TableColumn fx:id="gemsColumn" styleClass="cloumn" text="Gems" />
+                    <TableColumn fx:id="timeStampColumn" styleClass="cloumn" text="TimeStamp" />
                 </columns>
             </TableView>
         </content>
     </ScrollPane>
 </VBox>
-
