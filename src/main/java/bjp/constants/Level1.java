@@ -48,7 +48,8 @@ public class Level1 {
             new int[]{52, 18}, new int[]{53, 14}, new int[]{53, 17}, new int[]{54, 13},
             new int[]{54, 16}, new int[]{51, 13}, new int[]{51, 16}, new int[]{17, 11},
             new int[]{22, 11}, new int[]{46, 16}, new int[]{40, 16}, new int[]{39, 16},
-            new int[]{22, 27}, new int[]{27, 27}
+            new int[]{22, 27}, new int[]{27, 27}, new int[]{1, 30}, new int[]{3, 30},
+            new int[]{2, 29}, new int[]{1, 28}
         ));
 
         doubleTrees.addAll(Arrays.asList(
