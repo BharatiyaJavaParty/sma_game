@@ -1,5 +1,7 @@
 # SMA Game - A JavaFX Adventure
-
+<p align="center">
+  <img src="game_splash.png" alt="SMA Game Splash Image" title="SMA Game"/>
+</p>
 SMA Game is an engaging JavaFX-based desktop adventure game that runs on Windows, macOS, and Linux. It utilizes Maven for dependency management and build processes. The game features various levels of play, incorporating dynamic and static transportation means, obstacles, and power-ups in a rich graphical environment.
 
 ## Prerequisites
@@ -37,10 +39,10 @@ This command will download all dependencies, compile the project, and create an 
 After building the project, you can run the game using:
 
 ```bash
-java -jar target/sma_game-1.0-SNAPSHOT.jar
+java -jar out/artifacts/sma_game_jar/sma_game.jar
 ```
 
-Replace `sma_game-1.0.jar` with the actual name of the jar file generated in the `target` directory.
+Replace `sma_game.jar` with the actual name of the jar file generated in the `out` directory.
 
 ## Features
 
@@ -97,7 +99,6 @@ sma_game
 │       │   ├── bjp
 │       │   │   ├── constants
 │       │   │   │    ├── AppConstants.java
-│       │   │   │    ├── 
 │       │   │   │    └── Level1.java
 │       │   │   ├── controller
 │       │   │   │    ├── CityMapController.java
@@ -110,6 +111,7 @@ sma_game
 │       │   │   │    ├── Bike.java
 │       │   │   │    ├── Bus.java
 │       │   │   │    ├── Luas.java
+│       │   │   │    ├── Point.java
 │       │   │   │    ├── StaticTransport.java
 │       │   │   │    ├── StaticTransportConfig.java
 │       │   │   │    ├── Player.java
