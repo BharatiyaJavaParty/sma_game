@@ -79,7 +79,8 @@ public class GameEngine {
         }
     };
 
-    public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid, Label co2label, Label timelabel, Label gemslabel, Label transportlabel) {
+    public static void mainEventHandler(StackPane cityMainStack, GridPane cityMapGrid, GridPane miniMapGrid, Label co2label, Label timelabel,
+            Label gemslabel, Label transportlabel) {
         cityMapGrid.setFocusTraversable(true);
         cityMapGrid.requestFocus();
         cityMapGrid.setOnKeyPressed(event -> {
@@ -93,8 +94,8 @@ public class GameEngine {
                     cityMapGrid.getChildren().removeIf(node -> node == prevView);
                     cityMapGrid.getChildren().removeIf(node -> node == nextView);
                     res.clear();
-                    if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() - 1))
-                    {
+                    if (!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),
+                            newPlayer.getPlayerLocation().getY() - 1)) {
                         sameStation = true;
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
@@ -109,12 +110,13 @@ public class GameEngine {
                     cityMapGrid.getChildren().removeIf(node -> node == prevView);
                     cityMapGrid.getChildren().removeIf(node -> node == nextView);
                     res.clear();
-                    if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),newPlayer.getPlayerLocation().getY() + 1))
-                    {
+                    if (!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX(),
+                            newPlayer.getPlayerLocation().getY() + 1)) {
                         sameStation = true;
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
-                    }                    break;
+                    }
+                    break;
                 case A:
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, -1, 0);
@@ -124,12 +126,13 @@ public class GameEngine {
                     cityMapGrid.getChildren().removeIf(node -> node == prevView);
                     cityMapGrid.getChildren().removeIf(node -> node == nextView);
                     res.clear();
-                    if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() - 1,newPlayer.getPlayerLocation().getY()))
-                    {
+                    if (!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() - 1,
+                            newPlayer.getPlayerLocation().getY())) {
                         sameStation = true;
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
-                    }                    break;
+                    }
+                    break;
                 case D:
                     try {
                         newPlayer.movePlayer(cityMainStack, cityMapGrid, 1, 0);
@@ -139,23 +142,23 @@ public class GameEngine {
                     cityMapGrid.getChildren().removeIf(node -> node == prevView);
                     cityMapGrid.getChildren().removeIf(node -> node == nextView);
                     res.clear();
-                    if(!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() + 1,newPlayer.getPlayerLocation().getY()))
-                    {
+                    if (!Obstacles.checkObstacles(newPlayer.getPlayerLocation().getX() + 1,
+                            newPlayer.getPlayerLocation().getY())) {
                         sameStation = true;
                         newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.WALKING_TIME_INCREMENT);
                         newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.WALKING_CO2_REDUCTION);
-                    }                    break;
+                    }
+                    break;
                 case ENTER:
-                    if (foundTransport && sameStation) {
+                    if (foundTransport && sameStation && !isAnimating) {
                         sameStation = false;
                         res.clear();
                         checkTransportOptionsAndMoveUpdated(cityMainStack, cityMapGrid);
                         showNextAndPrevious(cityMapGrid);
                         int randomNum = rand.nextInt(3) + 1;
-                        if(randomNum == 2)
-                        {
-                            PopupController.ShowPopup(cityMainStack,"");
-                        }        
+                        if (randomNum == 2) {
+                            PopupController.ShowPopup(cityMainStack, "");
+                        }
                     }
                     break;
                 case N:
@@ -181,36 +184,26 @@ public class GameEngine {
                 default:
                     break;
             }
-            if (!isAnimating){
+            if (!isAnimating) {
                 checkTransportOptions(cityMainStack, cityMapGrid);
             }
-            if (sameStation && foundTransport){
+            if (sameStation && foundTransport) {
                 PopupController.showPopupMessage(cityMainStack, "Press ENTER to travel");
             }
             updateGameLables(co2label, timelabel, gemslabel, transportlabel);
 
-            if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 100 && !isWarning100Shown)
-            {
+            if (newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 100 && !isWarning100Shown) {
                 PopupController.ShowPopup(cityMainStack, "Warning! 100 Carbon Points left");
                 isWarning100Shown = true;
-            }
-            else if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 250 && !isWarning250Shown)
-            {
+            } else if (newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 250 && !isWarning250Shown) {
                 PopupController.ShowPopup(cityMainStack, "Warning! 250 Carbon Points left");
                 isWarning250Shown = true;
-            }
-            else if(newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 500 && !isWarning500Shown)
-            {
+            } else if (newPlayer.getPlayerCo2Budget() - newPlayer.getPlayerCo2Spent() <= 500 && !isWarning500Shown) {
                 PopupController.ShowPopup(cityMainStack, "Warning! 500 Carbon Points left");
                 isWarning500Shown = true;
             }
-            // System.out.println(newPlayer.getPlayerCo2Spent() >= newPlayer.getPlayerCo2Budget());
-            System.out.println("\n");
-            System.out.println(newPlayer.getPlayerCo2Spent());
-            System.out.println(newPlayer.getPlayerCo2Budget());
 
-            if(newPlayer.getPlayerCo2Spent() >= newPlayer.getPlayerCo2Budget())
-            {
+            if (newPlayer.getPlayerCo2Spent() >= newPlayer.getPlayerCo2Budget()) {
                 SoundEffects.endbgmGame();
                 WIN = false;
                 ScoreBoardController.saveResults(gemCount);
@@ -238,7 +231,7 @@ public class GameEngine {
                     e.printStackTrace();
                 }
             }
-            if (gemCount == levels.get(3) && GameEngine.NEWGAME){
+            if (gemCount == levels.get(3) && GameEngine.NEWGAME) {
                 PauseTransition pause = new PauseTransition(Duration.millis(1000));
                 pause.play();
                 WIN = true;
@@ -266,32 +259,27 @@ public class GameEngine {
                 }
             }
             event.consume();
+            CityMapController.updateMiniMap(cityMapGrid, miniMapGrid);
         });
     }
 
-    public static void updateGameLables(Label co2label, Label timelabel, Label gemslabel, Label transportlabel){
+    public static void updateGameLables(Label co2label, Label timelabel, Label gemslabel, Label transportlabel) {
         co2label.setText(String.valueOf(GameEngine.newPlayer.getPlayerCo2Spent()));
         timelabel.setText(String.valueOf(GameEngine.newPlayer.getPlayerTime()));
         gemslabel.setText(String.valueOf(GameEngine.gemCount));
-        if(atBus1 || atBus2 || atBus3)
-        {
+        if (atBus1 || atBus2 || atBus3) {
             transportlabel.setText("Walking and Bus");
-        }
-        else if(atLuas)
-        {
+        } else if (atLuas) {
             transportlabel.setText("Walking and Green Luas");
-        }
-        else if(GameEngine.atRedLuas)
-        {
+        } else if (GameEngine.atRedLuas) {
             transportlabel.setText("Walking and Red luas");
-        }
-        else
-        {
+        } else {
             transportlabel.setText("Walking");
         }
     }
 
-    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid, Gem gem) throws FileNotFoundException {
+    public static void checkGemCollected(StackPane cityMainStack, GridPane cityMapGrid, Gem gem)
+            throws FileNotFoundException {
         if (gemCount == levels.get(3)) {
             PopupController.showPopupMessage(cityMainStack, "You Win!!");
             ScoreBoardController.saveResults(gemCount);
@@ -332,35 +320,40 @@ public class GameEngine {
         atBus3 = false;
         atRedLuas = false;
 
-        if (StaticTransportConfig.isPlayerAtLuasStop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+        if (StaticTransportConfig.isPlayerAtLuasStop(newPlayer.getPlayerLocation().getX(),
+                newPlayer.getPlayerLocation().getY())) {
             foundTransport = true;
             atLuas = true;
             newPlayer.bouncePlayer();
             SoundEffects.playTransportSound();
         }
 
-        if (StaticTransportConfig.isPlayerAtRedLuasStop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+        if (StaticTransportConfig.isPlayerAtRedLuasStop(newPlayer.getPlayerLocation().getX(),
+                newPlayer.getPlayerLocation().getY())) {
             foundTransport = true;
             atRedLuas = true;
             newPlayer.bouncePlayer();
             SoundEffects.playTransportSound();
         }
 
-        if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+        if (StaticTransportConfig.isPlayerAtBus1Stop(newPlayer.getPlayerLocation().getX(),
+                newPlayer.getPlayerLocation().getY())) {
             foundTransport = true;
             atBus1 = true;
             SoundEffects.playTransportSound();
             newPlayer.bouncePlayer();
         }
 
-        if (StaticTransportConfig.isPlayerAtBus2Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+        if (StaticTransportConfig.isPlayerAtBus2Stop(newPlayer.getPlayerLocation().getX(),
+                newPlayer.getPlayerLocation().getY())) {
             foundTransport = true;
             atBus2 = true;
             SoundEffects.playTransportSound();
             newPlayer.bouncePlayer();
         }
 
-        if (StaticTransportConfig.isPlayerAtBus3Stop(newPlayer.getPlayerLocation().getX(), newPlayer.getPlayerLocation().getY())) {
+        if (StaticTransportConfig.isPlayerAtBus3Stop(newPlayer.getPlayerLocation().getX(),
+                newPlayer.getPlayerLocation().getY())) {
             foundTransport = true;
             atBus3 = true;
             SoundEffects.playTransportSound();
@@ -379,35 +372,40 @@ public class GameEngine {
             KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS1_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.LUAS1_STOPS);
 
-            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.LUAS_CO2_REDUCTION);
+            // newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() -
+            // AppConstants.LUAS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.LUAS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.LUAS_CO2_REDUCTION);
         } else if (atBus1) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS1_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.BUS1_STOPS);
 
-            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
+            // newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() -
+            // AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.BUS_CO2_REDUCTION);
         } else if (atBus2) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS2_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.BUS2_STOPS);
 
-            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
+            // newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() -
+            // AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.BUS_CO2_REDUCTION);
         } else if (atBus3) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.BUS3_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.BUS3_STOPS);
 
-            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
+            // newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() -
+            // AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.BUS_CO2_REDUCTION);
         } else if (atRedLuas) {
             KeysAsList = new ArrayList<>(StaticTransportConfig.LUAS2_STOPS.keySet());
             STOPS = new HashMap<>(StaticTransportConfig.LUAS2_STOPS);
 
-            //newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() - AppConstants.BUS_CO2_REDUCTION);
+            // newPlayer.setPlayerCo2Budget(newPlayer.getPlayerCo2Budget() -
+            // AppConstants.BUS_CO2_REDUCTION);
             newPlayer.setPlayerTime(newPlayer.getPlayerTime() + AppConstants.BUS_TIME_INCREMENT);
             newPlayer.setPlayerCo2Spent(newPlayer.getPlayerCo2Spent() + AppConstants.LUAS_CO2_REDUCTION);
 
@@ -415,7 +413,8 @@ public class GameEngine {
 
         for (int i = 0; i < KeysAsList.size(); i++) {
             Location key = KeysAsList.get(i);
-            if (key.getX() == newPlayer.getPlayerLocation().getX() && key.getY() == newPlayer.getPlayerLocation().getY()) {
+            if (key.getX() == newPlayer.getPlayerLocation().getX()
+                    && key.getY() == newPlayer.getPlayerLocation().getY()) {
                 currentStation = new Location(key);
                 if (i + 1 <= KeysAsList.size()) {
                     nextStation = new Location(STOPS.get(key).getValue());
@@ -426,17 +425,17 @@ public class GameEngine {
                 break;
             }
         }
-        
+
         String temp = " Press ";
         if (currentStation != null) {
             if (nextStation != null) {
-                if (currentStation.getLocationName() != nextStation.getLocationName()){
+                if (currentStation.getLocationName() != nextStation.getLocationName()) {
                     temp = temp + " N - " + nextStation.getLocationName();
                 }
                 res.add(nextStation);
             }
             if (previousStation != null) {
-                if (currentStation.getLocationName() != previousStation.getLocationName()){
+                if (currentStation.getLocationName() != previousStation.getLocationName()) {
                     temp = temp + "      P - " + previousStation.getLocationName();
                 }
                 res.add(previousStation);
@@ -445,9 +444,9 @@ public class GameEngine {
         }
     }
 
-    public static void showNextAndPrevious(GridPane cityMapGrid){
+    public static void showNextAndPrevious(GridPane cityMapGrid) {
 
-        if (!res.get(0).equals(newPlayer.getPlayerLocation())){
+        if (!res.get(0).equals(newPlayer.getPlayerLocation())) {
             cityMapGrid.getChildren().removeIf(node -> node == nextView);
             cityMapGrid.add(nextView, res.get(0).getX(), res.get(0).getY());
             TranslateTransition transition1 = new TranslateTransition(Duration.millis(200), nextView);
@@ -458,7 +457,7 @@ public class GameEngine {
             transition1.play();
         }
 
-        if (!res.get(1).equals(newPlayer.getPlayerLocation())){
+        if (!res.get(1).equals(newPlayer.getPlayerLocation())) {
             cityMapGrid.getChildren().removeIf(node -> node == prevView);
             cityMapGrid.add(prevView, res.get(1).getX(), res.get(1).getY());
             TranslateTransition transition2 = new TranslateTransition(Duration.millis(200), prevView);

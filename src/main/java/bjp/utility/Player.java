@@ -6,12 +6,14 @@ import java.io.FileNotFoundException;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
-
 
 import bjp.constants.AppConstants;
 import bjp.controller.CityMapController;
@@ -30,19 +32,19 @@ public class Player {
         this.playerCo2Spent = 0;
     }
 
-    private static final Image PLAYER_IMAGE_STILL = new Image(
+    public static final Image PLAYER_IMAGE_STILL = new Image(
             Gem.class.getResourceAsStream("/img/player_moments/walk1.png"));
-    private static final Image PLAYER_IMAGE_MOVE = new Image(
+    public static final Image PLAYER_IMAGE_MOVE = new Image(
             Gem.class.getResourceAsStream("/img/player_moments/walk2.png"));
-    private static final Image PLAYER_IMAGE_UP1 = new Image(
+    public static final Image PLAYER_IMAGE_UP1 = new Image(
             Player.class.getResourceAsStream("/img/player_moments/walkup1.png"));
-    private static final Image PLAYER_IMAGE_UP2 = new Image(
+    public static final Image PLAYER_IMAGE_UP2 = new Image(
             Player.class.getResourceAsStream("/img/player_moments/walkup2.png"));
-    private static final Image PLAYER_IMAGE_DOWN1 = new Image(
+    public static final Image PLAYER_IMAGE_DOWN1 = new Image(
             Player.class.getResourceAsStream("/img/player_moments/walkdown1.png"));
-    private static final Image PLAYER_IMAGE_DOWN2 = new Image(
+    public static final Image PLAYER_IMAGE_DOWN2 = new Image(
             Player.class.getResourceAsStream("/img/player_moments/walkdown2.png"));
-    
+
     private static final Image BUS1_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus1.png"));
     private static final Image BUS2_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus2.png"));
     private static final Image BUS3_IMAGE = new Image(Player.class.getResourceAsStream("/img/bus3.png"));
@@ -95,7 +97,7 @@ public class Player {
     }
 
     public void placePlayer(GridPane cityMapGrid) {
-        Location startLocation = new Location("House1", 20, 4);
+        Location startLocation = new Location("House1", 28, 16);
         this.setPlayerLocation(startLocation);
 
         playerView.setFitWidth(CityMapController.WIDTH);
@@ -106,6 +108,7 @@ public class Player {
         cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
 
         SoundEffects.startGame();
+        centerViewOnPlayer(cityMapGrid, GameEngine.newPlayer.getPlayerLocation());
         animateMove(cityMapGrid, 2);
     }
 
@@ -114,7 +117,7 @@ public class Player {
         for (int i = 1; i <= steps; i++) {
             int newY = playerLocation.getY() + i;
             KeyFrame keyFrame = new KeyFrame(
-                    MOVE_DURATION.multiply(i*3),
+                    MOVE_DURATION.multiply(i * 3),
                     e -> {
                         cityMapGrid.getChildren().remove(playerView);
                         cityMapGrid.add(playerView, playerLocation.getX(), newY);
@@ -131,7 +134,7 @@ public class Player {
     }
 
     public void movePlayer(StackPane cityMainStack, GridPane cityMapGrid, int deltaX, int deltaY)
-        throws FileNotFoundException {
+            throws FileNotFoundException {
         int proposedX = Math.min(Math.max(playerLocation.getX() + deltaX, 0), CityMapController.COLS - 1);
         int proposedY = Math.min(Math.max(playerLocation.getY() + deltaY, 0), CityMapController.ROWS - 1);
 
@@ -166,7 +169,38 @@ public class Player {
             isMoving = !isMoving;
 
             cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+            centerViewOnPlayer(cityMapGrid, GameEngine.newPlayer.getPlayerLocation());
         }
+    }
+
+    private void centerViewOnPlayer(GridPane cityMapGrid, Location playerLocation) {
+        // Constants for zoom and smoothness of transition
+        final double zoomFactor = 6;
+        final double transitionDuration = 200;
+
+        // Calculate the center of the screen
+        double screenCenterX = 1280 * zoomFactor / 2;
+        double screenCenterY = 720 * zoomFactor / 2;
+
+        // Calculate the offset needed to center the player, adjusted for zoom
+        double offsetX = screenCenterX - (playerLocation.getX() * CityMapController.WIDTH * zoomFactor);
+        double offsetY = screenCenterY - (playerLocation.getY() * CityMapController.HEIGHT * zoomFactor);
+
+        // Create and configure the translate transition
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(transitionDuration),
+                cityMapGrid);
+        translateTransition.setToX(offsetX);
+        translateTransition.setToY(offsetY);
+
+        // Set up the scale transformation
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(transitionDuration), cityMapGrid);
+        scaleTransition.setToX(zoomFactor);
+        scaleTransition.setToY(zoomFactor);
+
+        // Use a ParallelTransition to perform both transformations simultaneously
+        ParallelTransition parallelTransition = new ParallelTransition(cityMapGrid, translateTransition,
+                scaleTransition);
+        parallelTransition.play();
     }
 
     public void movePlayerToStation(GridPane cityMapGrid, Location station, String direction) {
@@ -207,32 +241,13 @@ public class Player {
         if (path.isEmpty())
             return;
 
-        double stepDuration = 100;
-
+        double stepDuration = 200;
         Timeline timeline = new Timeline();
         timeline.setCycleCount(1);
         timeline.setAutoReverse(false);
 
-        if(GameEngine.atBus1){
-            playerView.setImage(BUS1_IMAGE);
-        }
-        else if(GameEngine.atBus2){
-            playerView.setImage(BUS2_IMAGE);
-        }
-        else if(GameEngine.atBus3){
-            playerView.setImage(BUS3_IMAGE);
-        }
-        else if(GameEngine.atLuas){
-            playerView.setImage(LUAS_IMAGE);
-        }
-        else if (GameEngine.atRedLuas){
-            playerView.setImage(RED_LUAS_IMAGE);
-        }
-
-
-        cityMapGrid.getChildren().remove(playerView);
-        playerLocation = path.get(0);
-        cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+        // Set appropriate transport image
+        updatePlayerTransportImage();
 
         for (int i = 0; i < path.size(); i++) {
             Location loc = path.get(i);
@@ -241,19 +256,37 @@ public class Player {
                     e -> {
                         cityMapGrid.getChildren().remove(playerView);
                         cityMapGrid.add(playerView, loc.getX(), loc.getY());
+                        playerLocation = loc;
+                        Platform.runLater(() -> centerViewOnPlayer(cityMapGrid, loc));
                     });
             timeline.getKeyFrames().add(keyFrame);
         }
 
         timeline.setOnFinished(e -> {
+            // Final update to ensure everything is in place after animation
             playerLocation = path.get(path.size() - 1);
             playerView.setImage(PLAYER_IMAGE_DOWN1);
             cityMapGrid.getChildren().remove(playerView);
             cityMapGrid.add(playerView, playerLocation.getX(), playerLocation.getY());
+            centerViewOnPlayer(cityMapGrid, playerLocation);
             GameEngine.isAnimating = false;
         });
 
         timeline.play();
+    }
+
+    private void updatePlayerTransportImage() {
+        if (GameEngine.atBus1) {
+            playerView.setImage(BUS1_IMAGE);
+        } else if (GameEngine.atBus2) {
+            playerView.setImage(BUS2_IMAGE);
+        } else if (GameEngine.atBus3) {
+            playerView.setImage(BUS3_IMAGE);
+        } else if (GameEngine.atLuas) {
+            playerView.setImage(LUAS_IMAGE);
+        } else if (GameEngine.atRedLuas) {
+            playerView.setImage(RED_LUAS_IMAGE);
+        }
     }
 
     public void bouncePlayer() {

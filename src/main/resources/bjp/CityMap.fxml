@@ -5,7 +5,18 @@
 
 <VBox alignment="CENTER" styleClass="vbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="bjp.controller.CityMapController" prefHeight="1600" prefWidth="900" stylesheets="@../styles/citymap.css">
     <!-- Scoreboard directly using HBox with specified background color, height, and width -->
-    <HBox fx:id="scoreBoardHBox" alignment="CENTER_LEFT" spacing="10" styleClass="hbox1" fillHeight="true" style="-fx-background-color: #8bac0f; -fx-padding: 10; -fx-max-height: 100;" maxHeight="100.0">
+
+    <!-- Main Game Area within a StackPane -->
+    <StackPane fx:id="cityMainStack" alignment="CENTER">
+        <GridPane fx:id="cityMapGrid" alignment="CENTER" hgap="0" vgap="0">
+            <!-- Game grid/content goes here -->
+        </GridPane>
+        <GridPane fx:id="miniMapGrid" hgap="0" vgap="0">
+        </GridPane>
+
+    </StackPane>
+
+        <HBox fx:id="scoreBoardHBox" alignment="CENTER_LEFT" spacing="10" styleClass="hbox1" fillHeight="true" style="-fx-background-color: #8bac0f; -fx-padding: 10; -fx-max-height: 100;" maxHeight="100.0">
         <HBox alignment="CENTER" styleClass="hbox" spacing="5">
             <Label text="CO2 Credits Spent: " styleClass="score-label"/>
             <Label fx:id="co2label" text="0" styleClass="score-label"/>
@@ -23,11 +34,4 @@
             <Label fx:id="transportlabel" text="Walking" styleClass="score-label"/>
         </HBox>
     </HBox>
-
-    <!-- Main Game Area within a StackPane -->
-    <StackPane fx:id="cityMainStack" alignment="CENTER">
-        <GridPane fx:id="cityMapGrid" alignment="CENTER" hgap="0" vgap="0">
-            <!-- Game grid/content goes here -->
-        </GridPane>
-    </StackPane>
 </VBox>

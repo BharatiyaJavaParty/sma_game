@@ -14,9 +14,9 @@ import bjp.controller.CityMapController;
 public class Gem {
     private Location gemLocation;
     private ImageView imageView;
-    private static final Image redGem = new Image(Gem.class.getResourceAsStream("/img/red_gem.png"));
-    private static final Image orangeGem = new Image(Gem.class.getResourceAsStream("/img/orange_gem.png"));
-    private static final Image greenGem = new Image(Gem.class.getResourceAsStream("/img/green_gem.png"));
+    public static final Image redGem = new Image(Gem.class.getResourceAsStream("/img/red_gem.png"));
+    public static final Image orangeGem = new Image(Gem.class.getResourceAsStream("/img/orange_gem.png"));
+    public static final Image greenGem = new Image(Gem.class.getResourceAsStream("/img/green_gem.png"));
 
     public Gem(String color) {
         gemLocation = new Location("Gem", -1, -1);
