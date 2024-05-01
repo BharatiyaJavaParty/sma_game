@@ -10,6 +10,16 @@ Before you begin, ensure you have the following installed:
 - Java JDK 11 or later
 - Maven 3.6.0 or later
 
+## Game Controls
+
+- <img width="30" height="30" src="https://img.icons8.com/arcade/64/w-key.png" alt="w-key"/>: Move up.
+- <img width="30" height="30" src="https://img.icons8.com/arcade/64/a-key.png" alt="a-key"/>: Move left.
+- <img width="30" height="30" src="https://img.icons8.com/arcade/64/s-key.png" alt="s-key"/>: Move down.
+- <img width="30" height="30" src="https://img.icons8.com/arcade/64/d-key.png" alt="d-key"/>: Move right.
+- <img width="30" height="30" src="https://img.icons8.com/arcade/64/enter-key.png" alt="enter-key"/>: Interact with transports when on a platform.
+- <img width="30" height="30" src="https://img.icons8.com/arcade/64/p-key.png" alt="p-key"/>: Move to the previous station.
+- <img width="30" height="30" src="https://img.icons8.com/arcade/64/n-key.png" alt="n-key"/>: Move to the next station.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -49,11 +59,6 @@ Replace `sma_game.jar` with the actual name of the jar file generated in the `ou
 - Multiple transport types including bikes, buses, and Luas.
 - Engaging obstacles and gems collection.
 - Rich graphical interfaces with custom audio and image assets.
-
-## Game Controls
-
-- **Arrow keys**: Move the player around the map.
-- **Space**: Interact with transports and collect gems.
 
 ## Development
 
